@@ -67,32 +67,31 @@ create table personne(
     sexe char(1),
     adresse varchar(30),
     distance float,
-    matrimonial varchar(10),
+    matrimonial varchar(20),
     idContact int,
     foreign key (idContact) references contact(idContact) on delete cascade on update cascade
 );
-INSERT INTO `personne` (`idPersonne`,`nom`,`prenom`,`dtn`,`sexe`,`adresse`,`distance`,`matrimonial`,`idContact`)
-VALUES
-  (1,"Lillith", "Pope","Jul 18, 1981","F","970-3240 Nec Rd.",1,"Mariée",1),
-  (2,"Kim", "Baxter","Jun 30, 2003","F","Ap #862-3446 Phasellus Ave",6,"Celibataire",2),
-  (3,"Tyrone", "Love","Mar 23, 1987","M","1704 Purus, Av.",5,"Marié",3),
-  (4,"Philip", "West","Feb 22, 1980","M","8340 Nisl. Street",9,"Marié",4),
-  (5,"Lance", "Crane","Sep 23, 2001","F","335-3726 Malesuada Rd.",0,"Mariée",5),
-  (6,"Dahlia", "Olsen","May 4, 1991","F","466-9537 Nec, St.",7,"Veuve",6),
-  (7,"Amethyst", "Patterson","Apr 7, 1982","M","999-6773 Aliquam Av.",10,"Veuf",7),
-  (8,"Frances", "Cleveland","Jan 19, 1987","M","Ap #236-4383 In St.",1,"Celibataire",8),
-  (9,"Odessa", "Leach","Dec 27, 1992","F","Ap #580-7936 Malesuada Avenue",5,"Mariée",9),
-  (10,"Wilma", "Rivera","Oct 1, 1980","F","Ap #271-6542 Est. St.",2,"Veuve",10),
-  (11,"Maggy", "Lindsey","Oct 19, 1990","M","857-2139 Dolor Avenue",4,"Marié",11),
-  (12,"Daria", "Roth","May 12, 2001","F","174-8534 Enim. Road",4,"Celibataire",12),
-  (13,"Ursa", "Jenkins","Mar 14, 1987","M","481-6744 Pellentesque Av.",2,"Marié",13),
-  (14,"Kiona", "Kirby","Jun 29, 1960","M","P.O. Box 525, 8563 Auctor Street",4,"Veuf",14),
-  (15,"Thomas", "Middleton","Jun 11, 1988","M","571-530 Nec Rd.",10,"Marié",15),
-  (16,"Marshall", "Juarez","May 2, 1996","M","758-9471 Mus. Av.",4,"Celibataire",16),
-  (17,"Signe", "Bartlett","Aug 23, 1982","F","8706 Dui. Av.",1,"Mariée",17),
-  (18,"Fatima", "Mccray","Nov 26, 1986","M","857-2340 Non, Rd.",4,"Veuf",18),
-  (19,"Gage", "Norman","Mar 8, 1995","M","6895 Orci St.",8,"Celibataire",19),
-  (20,"Angela", "Gomez","Apr 27, 1980","F","207-4603 Tellus, Ave",7,"Mariée",20);
+INSERT INTO personne (idPersonne,`nom`,`prenom`,`dtn`,`sexe`,`adresse`,`distance`,`matrimonial`,`idContact`)VALUES
+  (1,"Lillith", "Pope","1981-03-12","F","970-3240 Nec Rd.",1,"Mariée",1),
+  (2,"Kim", "Baxter","1981-03-12","F","Ap #862-3446 Phasellus Ave",6,"Celibataire",2),
+  (3,"Tyrone", "Love","1981-03-12","M","1704 Purus, Av.",5,"Marié",3),
+  (4,"Philip", "West","1981-03-12","M","8340 Nisl. Street",9,"Marié",4),
+  (5,"Lance", "Crane","1981-03-12","F","335-3726 Malesuada Rd.",0,"Mariée",5),
+  (6,"Dahlia", "Olsen","1981-03-12","F","466-9537 Nec, St.",7,"Veuve",6),
+  (7,"Amethyst", "Patterson","1981-03-12","M","999-6773 Aliquam Av.",10,"Veuf",7),
+  (8,"Frances", "Cleveland","1981-03-12","M","Ap #236-4383 In St.",1,"Celibataire",8),
+  (9,"Odessa", "Leach","1981-03-12","F","Ap #580-7936 Malesuada Avenue",5,"Mariée",9),
+  (10,"Wilma", "Rivera","1981-03-12","F","Ap #271-6542 Est. St.",2,"Veuve",10),
+  (11,"Maggy", "Lindsey","1981-03-12","M","857-2139 Dolor Avenue",4,"Marié",11),
+  (12,"Daria", "Roth","1981-03-12","F","174-8534 Enim. Road",4,"Celibataire",12),
+  (13,"Ursa", "Jenkins","1981-03-12","M","481-6744 Pellentesque Av.",2,"Marié",13),
+  (14,"Kiona", "Kirby","1981-03-12","M","P.O. Box 525, 8563 Auctor Street",4,"Veuf",14),
+  (15,"Thomas", "Middleton","1981-03-12","M","571-530 Nec Rd.",10,"Marié",15),
+  (16,"Marshall", "Juarez","1981-03-12","M","758-9471 Mus. Av.",4,"Celibataire",16),
+  (17,"Signe", "Bartlett","1981-03-12","F","8706 Dui. Av.",1,"Mariée",17),
+  (18,"Fatima", "Mccray","1981-03-12","M","857-2340 Non, Rd.",4,"Veuf",18),
+  (19,"Gage", "Norman","1981-03-12","M","6895 Orci St.",8,"Celibataire",19),
+  (20,"Angela", "Gomez","1981-03-12","F","207-4603 Tellus, Ave",7,"Mariée",20);
 
 ---misy departement satria le poste anatinle orinasa manaraka organigramme
 

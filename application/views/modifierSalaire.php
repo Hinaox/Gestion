@@ -47,38 +47,31 @@
         <p class="lead">Formulaire de Modification Salaire</p>
       </div>
 
-      <form action="?" method="post">
+      <form action="<?php echo site_url('ModifierSalaire/modification'); ?>" method="get">
+          <input type="hidden" name="idEmploye" value="<?php echo $employe[0]['idEmploye'];?>">
           <div class="col-md-7 col-lg-8">
-            <p class="mb-4"><b>Employer : </b> employer </p>
+            <p class="mb-4"><b>Employer : </b> <?php echo $employe[0]['nom'];?> </p>
           </div>
           <div class="col-md-7 col-lg-8">
-            <p class="mb-4"><b>Matricule : </b> 0007 </p>
+            <p class="mb-4"><b>Matricule : </b> <?php echo $employe[0]['idEmploye'];?> </p>
           </div>
           <div class="col-md-7 col-lg-8">
-            <p class="mb-4"><b>Departement : </b> developper </p>
+            <p class="mb-4"><b>Departement : </b> <?php echo $employe[0]['nomDepartement'];?> </p>
           </div>
           <div class="col-md-7 col-lg-8">
-            <p class="mb-4"><b>Ancien Salaire : </b> developper </p>
+            <p class="mb-4"><b>Ancien Salaire : </b> <?php echo $montant[0]['montant'];?> <b>Ar</b></p>
           </div>
           <div class="col-md-7 col-lg-8">
           <label for="min" class="form-label"><b>Nouveau Salaire</b></label>  
-                <input type="number" min="0" style="width: 80px;" class="form-control"  placeholder="" value="" name="taux1">
+                <input type="number" min="0" style="width: 120px;border:8px;" b  placeholder="" value="" name="montant">
             </p>
           </div>
-          </div>
+         
           <button class="w-100 btn btn-success btn-lg" type="submit">Modifier</button>
           <hr class="my-4">
-
-        </div>
-
-
       </form>
-
-
-  </div>
-  </div>
   </main>
-
+  </div>
   <footer class="my-5 pt-5 text-muted text-center text-small">
     <p class="mb-1">&copy; 2017–2020 Company Name</p>
     <ul class="list-inline">

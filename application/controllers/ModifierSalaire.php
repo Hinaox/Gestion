@@ -7,8 +7,26 @@ class ModifierSalaire extends CI_Controller {
 		parent::__construct();
 
 	}
+    public function afficher(){
+        $this->load->model('modifierSal');
 
+        $data['employe']= $this->modifierSal->getEmploye($this->session->userdata('idEmploye'));
+        $data['montant']= $this->modifierSal->getSalaire($this->session->userdata('idEmploye'));
+        $this->load->view('modifierSalaire',$data);
+    }
     public function index(){
-            $this->load->view('modifierSalaire');
+        $this->load->model('modifierSal');
+        $idEmploye = $this->input->get('idEmploye');
+        $this->session->set_userdata('idEmploye',$idEmploye);
+        var_dump($this->session->userdata('idEmploye'));
+        $this->afficher();
+    }
+    public function modification(){
+        $this->load->model('modifierSal');
+        $montant = $this->input->get('montant');
+        $data['idEmploye']= $this->modifierSal->getEmploye($this->session->userdata('idEmploye'));
+        $data['montant']= $this->modifierSal->getSalaire($this->session->userdata('idEmploye'));
+        $this->modifierSal->modifierSalaire($this->session->userdata('idEmploye'),$montant);
+        $this->afficher();
     }
 }
