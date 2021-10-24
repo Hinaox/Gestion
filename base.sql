@@ -112,7 +112,7 @@ VALUES
 create table poste(
     idPoste int not null auto_increment primary key,
     idDepartement int,
-    nom varchar(30),
+    nom varchar(50),
     descri text,
     constraint fk_poste_idDepartement foreign key (idDepartement) references departement(idDepartement)on delete cascade on update cascade
 );
