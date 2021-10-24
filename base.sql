@@ -199,6 +199,8 @@ create table fichePaie(
     idFichePaie int not null auto_increment primary key,
     idEmploye int,
     dateMiseEnPlace date,
+    irsa float,
+    pc float,
     net float,
     foreign key (idEmploye) references employe(idEmploye) on delete cascade on update cascade
 );
