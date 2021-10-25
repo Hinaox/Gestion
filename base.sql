@@ -54,12 +54,12 @@ create table langue(
 create table cv(
     idCV int not null auto_increment primary key,
     idPersonne int,
-    constraint fk_cv_idPersonne foreign key (idPersonne) references personne(idPersonne)
+    constraint fk_cv_idPersonne foreign key (idPersonne) references personne(idPersonne),
     descriProfile text
 );
 -- ity ilay grade anle diplome anle olona anaty cv
 create table grade(
-    idGrade int not nul auto_increment primary key,
+    idGrade int not null auto_increment primary key,
     titre varchar(20)
 );
 create table diplome(
@@ -142,7 +142,7 @@ create table cv_poste(
     idCV int,
     idPoste int,
     foreign key (idCV) references cv(idCV) on delete cascade on update cascade,
-    foreign key (idPost) references poste(idPoste) on delete cascade on update cascade
+    foreign key (idPoste) references poste(idPoste) on delete cascade on update cascade
 );
 
 ---------------------------
