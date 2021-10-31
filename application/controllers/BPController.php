@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class BulletinPaie extends CI_Controller {
+class BPController extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,7 +20,24 @@ class BulletinPaie extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$this->load->view('welcom_message');
 		
-	}		
+	}
+	
+	public function listeBP()
+	{
+		$this->load->model('BPModel');
+		$data['listeBP'] = $this->BPModel->getListeBP();
+		$this->load->view('listeBP',$data);
+		
+	}	
+
+	public function getBP()
+	{
+		$this->load->model('BPModel');
+		$idFichePaie = $this->input->get('idFichePaie');
+		$data['listeBP'] = $this->BPModel->getBulletinDePaie($idFichePaie);
+
+	
+	}
 }

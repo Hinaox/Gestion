@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="<?php echo site_url("bootstrap/css/bootstrap.css")?> rel="stylesheet">
-    <title>Bootstrap</title>
+    <!-- <link href="<?php echo site_url("application/bootstrap/css/bootstrap.css")?> rel="stylesheet"> -->
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <title>Bulletin De Paie</title>
 </head>
 
 <body>
@@ -27,14 +28,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Jean Jean</td>
-                    <td>52582</td>
-                    <td>12/12/12</td>
-                    <td>.....Ar</td>
-                    <td><a class="btn btn-info" href="bulletin.html" role="button">INFO</a></td>
-                </tr>
+                <?php for($i=0;$i<count($listeBP);$i++) {?>
+                    <tr>
+                        <th scope="row"><?php echo $i+1 ;?></th>
+                        <td><?php echo $listeBP[$i]['nom']." ".$listeBP[$i]['prenom'] ;?></td>
+                        <td><?php echo $listeBP[$i]['idFichePaie'] ;?></td>
+                        <td><?php echo $listeBP[$i]['dateMiseEnPlace'] ;?></td>
+                        <td><?php echo $listeBP[$i]['net'] ;?>AR</td>
+                        <td><a class="btn btn-info" href=<?php echo site_url("BPController/getBP?idFichePai=".$listeBP[$i]['idFichePaie']);?> role="button">INFO</a></td>                    </tr>
+                <?php }?>
             </tbody>
         </table>
         <a href="#" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">Retour</a>

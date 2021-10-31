@@ -302,3 +302,11 @@ create view employe_view as
         join departement on departement.idDepartement = poste.idDepartement
         join salaire on salaire.idEmploye = employe.idSalaire
 ;
+
+Create view ListeBulletin AS
+    Select 
+        e.idEmploye,p.nom,p.prenom,f.idFichePaie,f.dateMiseEnPlace,f.net 
+    from Employe e 
+        Join Personne p on e.idPersonne=p.idPersonne 
+        Join fichePaie f on e.idEmploye=f.idEmploye;
+
