@@ -352,7 +352,7 @@ create table employe (
     constraint fk_employe_idSalaire foreign key (idSalaire) references salaire(idSalaire)on delete cascade on update cascade
 );
 
-INSERT INTO `employe` (`idEmploye`,`idPersonne`,`idPoste`,`idSalaire`,`dateEmbauche`)
+INSERT INTO `employe` (`idEmploye`,`idPersonne` ,`idPoste`,`idSalaire`,`dateEmbauche`)
 VALUES
   (1,3,4,1,"2021-02-15");
 
