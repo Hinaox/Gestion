@@ -542,8 +542,49 @@ create view employe_view as
         poste.nom as nomPoste, poste.idPoste, poste.descri as descriPoste
     from
         personne
-        join employe on employe.idPersonne = personne.idPersonne
+        join employe on employe.idPersonne = personne.idPerzsonne
         join poste on employe.idPoste = poste.idPoste
         join departement on departement.idDepartement = poste.idDepartement
         join salaire on salaire.idEmploye = employe.idSalaire
 ;
+
+create view filtre_view as 
+    select 
+        personne.idPersonne,personne.nom as nomPersonne,(YEAR(NOW())-substring(personne.dtn,1,4)) as age,personne.sexe,personne.distance,personne.matrimonial,
+        cv_langue.niveau,
+        langue.titre as titreLangue,
+        diplome.titre as titreDiplome,
+        grade.titre as titreGrade,
+        domaine.titre as titreDomaine,
+        experience.poste as nomPosteExperience,experience.dateEntre as dateEntreExperience, experience.dateSortie as dateSortieExperience,
+        poste.nom as nomPoste,
+        departement.nom as nomDepartement
+    from
+        cv
+        join personne on personne.idPersonne=cv.idPersonne
+        join cv_langue on cv_langue.idCV=cv.idCV
+        join langue on langue.idLangue=cv_langue.idLangue
+        join diplome on diplome.idCV=cv.idCV
+        join grade on diplome.idGrade=grade.idGrade
+        join experience on experience.idCV=cv.idCV
+        join experience_domaine on experience_domaine.idExperience=experience.idExperience
+        join domaine on domaine.idDomaine=experience_domaine.idDomaine
+        join cv_poste on cv_poste.idCV=cv.idCV
+        join poste on poste.idPoste=cv_poste.idPoste
+        join departement on departement.idDepartement=poste.idDepartement
+    ;
+
+    select nomPersonne,sexe,matrimonial,niveau,titreDiplome from filtre_view where titreLangue='Malgache' group by  idpersonne
+
+    select * from filtre_view whrere matrimonial='Marié' and age<=40 and distance=1 
+
+        select * from filtre_view 
+            where   matrimonial='Mariée',
+                    age>=40, 
+                    distance>=1, 
+                    titreLangue='Anglais',
+                    sexe='F' ,
+                    nomPosteExperience='caissier', 
+                    titreDomaine='financier', 
+                    titreDiplome='Bacc'
+                    ;
