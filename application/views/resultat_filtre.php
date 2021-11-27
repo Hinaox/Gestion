@@ -22,8 +22,8 @@
                         <th>Situation Matrimoniale</th>
                         <th>Grade</th>
                         <th>Diplome</th>
-                        <th>Langue</th>
-
+                        <th>Langue</th>  
+                        <th>Action</th>  
                         
                     </tr>
                 </thead>
@@ -37,7 +37,8 @@
                     <td><?php echo $filtre[$i]['matrimonial'] ?></td>
                     <td><?php echo $filtre[$i]['titreGrade'] ?></td>
                     <td><?php echo $filtre[$i]['titreDiplome'] ?></td>
-                    <td><?php echo $filtre[$i]['titreLangue'] ?></td>
+                    <td><?php echo $filtre[$i]['AllLangue'] ?></td>
+                    <td><a href="#" class="btn btn-success">Envoyer vers Test</a></td>
                 </tr>
                 <?php } ?>
             </table>

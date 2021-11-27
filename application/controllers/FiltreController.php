@@ -35,19 +35,19 @@ class FiltreController extends CI_Controller {
 		$matrimoniale = $this->input->post('matrimoniale');
 		$ageMin = $this->input->post('ageMin');
 		$distanceMax = $this->input->post('distanceMax');
-		// $langue = $this->input->post('langue');
+		$langue = $this->input->post('langue');
 		$sexe = $this->input->post('sexe');
 		$poste = $this->input->post('poste');
 		$domaine = $this->input->post('domaine');
-		$diplome = $this->input->post('diplome');
-		$grade = $this->input->post('grade');
+		$diplome = $this->input->post('titreDiplome');
+		$grade = $this->input->post('titreGrade');
 		// $annee = $this->input->post('annee');
 
 
 		// $matrimoniale ='Mariée';
 		// $ageMin =20;
 		// $distanceMax =1;
-		$langue ='';
+		// $langue ='';
 		// $sexe = 'F';
 		// $poste = "caissier";
 		// $domaine = 'financier';

@@ -40,7 +40,7 @@
 						  	<div class="form-group row">
 						    	<label for="inputEmail3" class="col-sm-2 col-form-label">Diplome</label>
 							    <div class="col">
-							    	<select id="inputEmail3" class="form-control" name="diplome">
+							    	<select id="inputEmail3" class="form-control" name="titreDiplome">
 							      		<option value="">Tous</option>
 							        	<option value="BACC">Bac</option>
 							        	<option value="License">License</option>
@@ -48,7 +48,7 @@
 							      	</select>
 						      	</div>
 						      	<div class="col">
-							    	<select id="inputEmail3" class="form-control" name="diplome">
+							    	<select id="inputEmail3" class="form-control" name="titreGrade">
 						      		<option value="">Tous</option>
 							        	<option value="1e annee">1e annee</option>
 							        	<option value="2e annee">2e annee</option>
@@ -94,7 +94,7 @@
 						        </div>
 						        <div class="form-check">
 						        	
-						          	<input class="form-check-input" type="radio" name="sexe" id="gridRadios1" value="H" >
+						          	<input class="form-check-input" type="radio" name="sexe" id="gridRadios1" value="M" >
 						          	<label class="form-check-label" for="gridRadios1">Homme</label>
 						        </div>
 						        <div class="form-check">
@@ -107,14 +107,17 @@
 
 
 				  	<div class="form-group row">
-				    	<label for="inputPassword3" class="col-sm-2 col-form-label">Langue</label>
-				    	<div class="form-group col-md">
-						      <button class="btn btn-secondary" id="ajouterLangue">Ajouter Langue</button>
-						    </div>
+				  		<label for="inputPassword3" class="col-sm-2 col-form-label">Langue</label>
+				  		<div class="col">
+				  			<select class="form-control" name="langue">
+				    		<option value="">Tous</option>
+				    		<option value="Anglais">Anglais</option>
+				    		<option value="Francais ">Francais</option>
+				    		<option value="Malgache">Malgache</option>
+				    	</select>
+				  		</div>
 				  	</div>
-				  	<div  id="langue_ajout">
-				  		
-				    </div>
+
 
 
 				  	<div class="form-group row">
@@ -132,7 +135,7 @@
 						<div class="col">
 							<div class="col">
 						      	<select id="inputEmail3" class="form-control" name="domaine">
-						        	<option value="">Domaine</option>
+						        	<option value="">Tous</option>
 						        	<option value="financier">financier</option>
 						        	<option value="communication">communication</option>
 						        	<option value="science">science</option>

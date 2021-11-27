@@ -578,13 +578,80 @@ create view filtre_view as
 
     select * from filtre_view whrere matrimonial='Marié' and age<=40 and distance=1 
 
-        select * from filtre_view 
-            where   matrimonial='Mariée',
-                    age>=40, 
-                    distance>=1, 
-                    titreLangue='Anglais',
-                    sexe='F' ,
-                    nomPosteExperience='caissier', 
-                    titreDomaine='financier', 
+
+                nomPersonne,
+                age,
+                sexe,
+                distance,
+                matrimonial,
+                titrediplome,
+                titregrade,
+                titredomaine,
+                nomposteexperience,
+                dateentreexperience,
+                datesortieexperience,
+                nomposte,
+                nomdepartement,
+
+        select  idPersonne,
+                age,
+                sexe,
+                distance,
+                matrimonial,
+                titrediplome,
+                titregrade,
+                titredomaine,
+                CONCAT(
+                        (IF(idPersonne in (select idPersonne from filtre_view where nomposteexperience='caissier'),'Caissier','')),',',
+                        (IF(idPersonne in (select idPersonne from filtre_view where nomposteexperience='Comptable'),'Comptable','')),',',
+                        (IF(idPersonne in (select idPersonne from filtre_view where nomposteexperience='infirmiere'),'Infirmiere','')),',',
+                        (IF(idPersonne in (select idPersonne from filtre_view where nomposteexperience='responsable marketing'),' Responsable marketing','')) 
+                        ) as nomposteexperience,
+                dateentreexperience,
+                datesortieexperience,
+                nomposte,
+                nomdepartement,
+                CONCAT(
+                        (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Anglais'),'Anglais','')),',',
+                        (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Francais'),'Francais','')),',',
+                        (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Espagnol'),'Espagnol','')),',',
+                        (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Malgache'),'Malgache',''))
+                        ) as AllLangue
+        from filtre_view
+        where titreLangue='Anglais' 
+        group by idPersonne,
+                age,
+                sexe,
+                distance,
+                matrimonial,
+                titrediplome,
+                titregrade,
+                titredomaine,
+                nomposteexperience,
+                dateentreexperience,
+                datesortieexperience,
+                nomposte,
+                nomdepartement;
+
+
+        where   matrimonial='Mariée' and
+                    age>=40 and 
+                    distance>=1 and 
+                    sexe='F'  and
+                    nomPosteExperience='caissier' and 
+                    titreDomaine='financier' and 
                     titreDiplome='Bacc'
-                    ;
+        group by idPersonne;
+
+select idPersonne,(select IF(idPersonne in 
+    select idPersonne from filtre_view where titreLangue='Anglais',1,0)) as Anglais
+from filtre_view 
+
+select idPersonne,if(idPersonne in 
+    (select idPersonne 
+    from filtre_view 
+    where titreLangue='Anglais'),1,0) as Anglais
+from filtre_view f
+group by idpersonne;
+
+select idPersonne from filtre_view
