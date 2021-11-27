@@ -26,6 +26,12 @@
             au <input type="date" class="form-control" id="dateFin" name="dateFin">
           </div>
 
+            <?php if(isset($erreur)){ ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><?php echo $erreur;?></strong>
+                </div>
+            <?php } ?>
+
           <div class="col-md-7 col-lg-8">
             <div class="row g-3">
                 <div class="col-sm-3">
