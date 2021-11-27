@@ -9,9 +9,9 @@
       <th scope="col">ID </th>
       <th scope="col">date d'embauche</th>
       <th scope="col">nb années de travail</th>
-      <th scope="col">cumulés</th>
-      <th scope="col">pris</th>
-      <th scope="col">restants</th>
+      <th scope="col">congés cumulés</th>
+      <th scope="col">congés pris</th>
+      <th scope="col">congés restants</th>
       <th scope="col">remarque</th>
     </tr>
   </thead>

@@ -2,16 +2,11 @@
     <main>
       <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-        <h2>Formulaire de demande de congé</h2>
-        <?php if(isset($succes)){ ?>
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong><?php echo $succes;?></strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php } ?>
+        <h2>Justificatif de congé</h2>
+        <h3>non deductible sur congé</h3>
       </div>
 
-      <form action="<?php echo site_url('DemandeCongeCtrl/envoiDemande'); ?>" method="post">
+      <form action="<?php echo site_url('DemandeCongeCtrl/accepterNonDeductible'); ?>" method="post">
         <div class="row g-3">
           <div class="col-md-7 col-lg-8">
           <p class="lead">L'employé(e) avec le matricule</p>
@@ -21,7 +16,7 @@
                 <input type="number" min="0" class="form-control" id="id" name="idEmploye">
               </div>
             </div>
-            * souhaite faire une demande de congé</br>
+            * souhaite justifier son congé</br>
             Du <input type="date" class="form-control" id="dateDebut" name="dateDebut"> 
             au <input type="date" class="form-control" id="dateFin" name="dateFin">
           </div>
@@ -45,7 +40,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php } ?>
-
+            <?php if(isset($send)){ ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong><?php echo $send;?></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php } ?>
           <button class="w-100 btn btn-success btn-lg" type="submit">Demander</button>
           <a href = "#"> Voir son état de congé </a>
           <hr class="my-4">

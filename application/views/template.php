@@ -44,7 +44,7 @@ if (empty($view)){
 
 <body class="bg-light">
 <header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-success">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="#">Gestion RH</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -55,7 +55,10 @@ if (empty($view)){
           <a class="nav-link" href="<?php echo site_url('DemandeCongeCtrl/'); ?>">Liste des demandes <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo site_url('DemandeCongeCtrl/demander'); ?>">Demander</a>
+          <a class="nav-link" href="<?php echo site_url('DemandeCongeCtrl/demanderDeductible'); ?>">Demande deductible</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo site_url('DemandeCongeCtrl/demanderNonDeductible'); ?>">Demande non deductible</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo site_url('EtatCongeCtrl/'); ?>">Etats de congé</a>

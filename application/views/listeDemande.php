@@ -2,6 +2,7 @@
     <?php for($i=0; $i<3; $i++){ ?>   
         </br>
     <?php } ?>
+    <h1>Liste des demandes en cours</h1>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -9,10 +10,10 @@
       <th scope="col">Motif</th>
       <th scope="col">debut</th>
       <th scope="col">fin</th>
-      <th scope="col">demandés</th>
-      <th scope="col">cumulés</th>
-      <th scope="col">pris</th>
-      <th scope="col">restants</th>
+      <th scope="col">nb congés demandés</th>
+      <th scope="col">congés cumulés</th>
+      <th scope="col">congés pris</th>
+      <th scope="col">congés restants</th>
       <th scope="col">remarque</th>
     </tr>
   </thead>
@@ -40,4 +41,10 @@
     <?php } ?>
   </tbody>
 </table>
+<?php if(isset($reponse)){ ?>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong><?php echo $reponse;?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
 </div>
