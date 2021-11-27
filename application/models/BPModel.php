@@ -26,12 +26,14 @@ class BPModel extends CI_Model
 		// $bulletinDePaie=array();
         
         foreach($query->result_array() as $row)
-		
+        {
             $ligne=array();
             foreach($row as $key => $value){
                 $ligne[$key]=$value;
             }
-            $bp=$ligne;
+            $bp=$ligne;          
+        }
+
 		
 		return $bp;
     }

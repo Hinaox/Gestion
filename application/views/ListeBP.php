@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="<?php echo site_url("application/bootstrap/css/bootstrap.css")?> rel="stylesheet"> -->
-    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php echo site_url("assets/css/bootstrap.min.css")?>" rel="stylesheet">
     <title>Bulletin De Paie</title>
 </head>
 
@@ -42,8 +41,8 @@
         <a href="#" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">Retour</a>
     </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="<?php echo site_url("application/bootstrap/js/jquery.js")?>"></script>
+    <script src="<?php echo site_url("application/bootstrap/js/bootstrap.min.js")?>"></script>
 </body>
 
 </html>
