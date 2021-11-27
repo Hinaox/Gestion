@@ -46,9 +46,13 @@ create table historiqueConge(
 -- insert into historiqueConge values (null,1,null,'2021-11-17','2021-11-18',0);
 -- insert into historiqueConge values (null,6,null,'2021-11-17','2021-11-18',0);
 
+<<<<<<< Updated upstream
 -- create view empAnciente as select e.*,DATEDIFF(year,dateEmbauche,NOW()) as years from employe e;
+=======
+--create view empAnciente as select e.*,DATEDIFF(year,dateEmbauche,NOW()) as years from employe e;
+>>>>>>> Stashed changes
 
--- create view empAnciente as select e.*,TIMESTAMPDIFF(year,dateEmbauche,NOW()) as years from employe e
+create view empAnciente as select e.*,TIMESTAMPDIFF(year,dateEmbauche,NOW()) as years from employe e
 
 insert into motifConge values ('M1','evenement familial','ND');
 insert into motifConge values ('M2','conge parental','ND');
@@ -80,6 +84,7 @@ insert into motifConge values ('M3','autre','D');
 --     from empAnciente ea left join congePris cp on ea.idEmploye=cp.idEmp
 -- );
 
+<<<<<<< Updated upstream
 -- create view demandeEnCours as (
 --     select hc.id,idEmp,mc.description,DATE(dateDebut) as dateDebut,DATE(dateFin) as dateFin,TIMESTAMPDIFF(day,dateDebut,dateFin) as demande,
 --     cumule,pris,restant,remarque
@@ -87,3 +92,47 @@ insert into motifConge values ('M3','autre','D');
 --     left join motifConge mc on mc.id=hc.motif
 --     where hc.etat=0
 -- );
+=======
+create view demandeEnCours as (
+    select hc.id,idEmp,mc.description,DATE(dateDebut) as dateDebut,DATE(dateFin) as dateFin,TIMESTAMPDIFF(day,dateDebut,dateFin) as demande,
+    cumule,pris,restant,remarque
+    from historiqueConge hc inner join etatConge ec on hc.idEmp=ec.idEmploye
+    left join motifConge mc on mc.id=hc.motif
+    where hc.etat=0
+);
+
+
+
+-- Controles SQL Date 
+
+-- si < 0 : donc la date entrée est antérieure à la date du jour
+
+select 
+    case
+    when DATEDIFF("2021-11-02 12:10:21",NOW())<0 THEN "Date antérieure à la date du jour"
+    when DATEDIFF("2021-11-02 12:10:21","2021-11-04 12:10:21")<0 THEN "Date Fin antérieure à date fin "
+    when DATEDIFF("2021-11-29 12:10:21",NOW())>0 AND DATEDIFF("2021-11-29 12:10:21",NOW())<5 THEN "Il faut au moins 5 jours d'avance pour demander un congé"
+    else "Date Congé Valide"
+    end as Controle
+
+    
+
+DELIMITER $$
+CREATE FUNCTION controleDate ( dateDebut DATETIME ,dateFin DATETIME)
+RETURNS varchar(50)
+BEGIN
+   DECLARE val varchar(50);
+    IF DATEDIFF(dateDebut,NOW())<0 THEN
+		SET val = "Date antérieure à la date du jour";
+    ELSEIF DATEDIFF(dateDebut,dateFin)<0 THEN
+        SET val = "Date Fin antérieure à date fin ";
+    ELSEIF DATEDIFF(dateDebut,NOW())>0 AND DATEDIFF(dateDebut,NOW())<5 THEN
+        SET val = "Il faut au moins 5 jours d'avance pour demander un congé";
+    ELSE
+        SET val = "Date Congé Valide";
+    END IF;
+   RETURN (val);
+END$$
+DELIMITER ;
+
+>>>>>>> Stashed changes
