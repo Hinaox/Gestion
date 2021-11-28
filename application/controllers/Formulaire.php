@@ -46,7 +46,7 @@ class Formulaire extends CI_Controller
         $grade = new grade();
         $data['listeGrade'] = $grade->find($connexion);
 
-        $this->load->view('index', $data);
+        $this->load->view('formulaireCV', $data);
     }
 
     public function traiteCV()
