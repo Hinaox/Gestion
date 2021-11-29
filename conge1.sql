@@ -122,17 +122,29 @@ BEGIN
 END$$ 
 DELIMITER ;
 
+DELIMITER $$
+CREATE FUNCTION countCongeParDeptMoisAnnee( idDept varchar(10), ladate DATETIME)
+RETURNS int
+BEGIN
+    DECLARE val int;
+    SET val = (select count(*) from congeParMoisParEmploye
+    where idDepartement=idDept and mois=MONTH(ladate) and annee=YEAR(ladate));
+    RETURN (val);
+END$$
+DELIMITER ;
 
 create view congeParMoisParEmploye as(
 select hc.*,
     nomDepartement,
     idDepartement,
-    nomPoste
+    nomPoste,
+    Month(dateDebut) as mois,
+    Year(dateDebut) as annee
 from historiqueConge hc  
     join employe_view e on e.idEmploye = hc.idEmp
 where etat = 1
     and (dateDebut>=NOW() or dateFin>=NOW())
-group by Month(dateDebut),e.idEmploye);
+group by Month(dateDebut),Year(dateDebut),e.idEmploye);
 
 
 

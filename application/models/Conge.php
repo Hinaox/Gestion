@@ -74,7 +74,7 @@ class Conge extends CI_Model{
         return $val;
     }
     public function nombreCongeParDepartement($idDepartement,$dateDebut){
-        $sql = "select count(*) from congeParMoisParEmploye where idDepartement=".$idDepartement." and MONTH(dateDebut)=MONTH('".$dateDebut."')";
+        $sql = "select countCongeParDeptMoisAnnee(".$idDepartement.",'".$dateDebut."') as nb";
         $query = $this->db->query($sql);
         $val = null;
         foreach($query -> result_array() as $row)
