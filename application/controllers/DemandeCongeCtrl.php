@@ -68,15 +68,31 @@ class DemandeCongeCtrl extends CI_Controller {
     public function accepter()
     {
         $this->load->model('conge');
-        $succes = $this->conge->accepterDemande($this->input->post('idDemande'));
+        $reponse = null;
 
-        $demandes = $this->conge->getDemandeEnCours();
-        $data = array(
-            "view" => 'listeDemande',
-            "demandes" =>$demandes,
-            "reponse" => $succes
-        );
-        $this->load->view ('template',$data);
+        if (!empty($this->input->post('confirmation'))){
+            $reponse = $this->conge->accepterDemande($this->input->post('idDemande'),$this->input->post('confirmation'));
+        }else{
+            $reponse = $this->conge->accepterDemande($this->input->post('idDemande'),null);
+        }
+
+        if ($reponse != "Demande Acceptée"){
+            $data = array(
+                "view" => 'confirmation',
+                "reponse" => $reponse,
+                "idDemande" => $this->input->post('idDemande')
+            );
+            $this->load->view ('template',$data);
+        }else{
+            $demandes = $this->conge->getDemandeEnCours();
+            $data = array(
+                "view" => 'listeDemande',
+                "demandes" =>$demandes,
+                "reponse" => $reponse
+            );
+            $this->load->view ('template',$data);
+        }
+        
     }
     public function accepterNonDeductible()
     {

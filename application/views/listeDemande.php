@@ -31,7 +31,7 @@
         <td><?php echo $demandes[$i]['remarque']; ?></td>
         <form action="DemandeCongeCtrl/accepter" method="post">
             <input type="hidden" name="idDemande" value="<?php echo $demandes[$i]['id']; ?>" />
-            <td><button class="w-100 btn btn-success btn-lg" type="submit" id="accepter" onclick="accepter()">Accepter</button></td>
+            <td><button class="w-100 btn btn-success btn-lg" type="submit" >Accepter</button></td>
         </form>
         <form action="DemandeCongeCtrl/refuser" method="post">
             <input type="hidden" name="idDemande" value="<?php echo $demandes[$i]['id']; ?>" />

@@ -73,10 +73,21 @@ class Conge extends CI_Model{
         }
         return $val;
     }
-    public function accepterDemande ($idDemande){
-        $query = "update historiqueConge set etat=1 where id='".$idDemande."'";
-		$this->db->query($query);
-        return "Demande Acceptée";
+    public function accepterDemande ($idDemande,$conf){
+        if ($conf != null){
+            $query = "update historiqueConge set etat=1 where id='".$idDemande."'";
+            $this->db->query($query);
+            return "Demande Acceptée";  
+        }
+
+        if ($idDemande==20){
+            return "Voulez-vous vraiment continuer? ";
+        }else{
+            // $query = "update historiqueConge set etat=1 where id='".$idDemande."'";
+            // $this->db->query($query);
+            return "Demande Acceptée";    
+        }
+        
     }
     public function refuserDemande ($idDemande){
         $query = "update historiqueConge set etat=-1 where id='".$idDemande."'";
