@@ -1,5 +1,6 @@
 
-    <main>
+    
+  <div class="container">
       <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h2>Formulaire de demande de congé</h2>
@@ -59,4 +60,4 @@
         </div>
       </form>
 
-  </main>
+            </div>

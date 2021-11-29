@@ -1,4 +1,4 @@
-<div>
+
     <?php for($i=0; $i<3; $i++){ ?>   
         </br>
     <?php } ?>
@@ -29,4 +29,3 @@
     <?php } ?>
   </tbody>
 </table>
-</div>

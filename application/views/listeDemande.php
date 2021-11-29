@@ -15,6 +15,8 @@
       <th scope="col">congés pris</th>
       <th scope="col">congés restants</th>
       <th scope="col">remarque</th>
+      <th scope="col">departement</th>
+      <th scope="col">poste</th>
     </tr>
   </thead>
   <tbody>
@@ -29,11 +31,15 @@
         <td><?php echo $demandes[$i]['pris']; ?></td>
         <td><?php echo $demandes[$i]['restant']; ?></td>
         <td><?php echo $demandes[$i]['remarque']; ?></td>
-        <form action="DemandeCongeCtrl/accepter" method="post">
+        <td><?php echo $demandes[$i]['nomDepartement']; ?></td>
+        <td><?php echo $demandes[$i]['nomPoste']; ?></td>
+        <form action="<?php echo site_url('DemandeCongeCtrl/accepter') ?>" method="post">
             <input type="hidden" name="idDemande" value="<?php echo $demandes[$i]['id']; ?>" />
+            <input type="hidden" name="dateDebut" value="<?php echo $demandes[$i]['dateDebut']; ?>" />
+            <input type="hidden" name="idDepartement" value="<?php echo $demandes[$i]['idDepartement']; ?>" />
             <td><button class="w-100 btn btn-success btn-lg" type="submit" >Accepter</button></td>
         </form>
-        <form action="DemandeCongeCtrl/refuser" method="post">
+        <form action="<?php echo site_url('DemandeCongeCtrl/refuser') ?>" method="post">
             <input type="hidden" name="idDemande" value="<?php echo $demandes[$i]['id']; ?>" />
             <td><button class="w-100 btn btn-danger btn-lg" type="submit">Refuser</button></td>
         </form>

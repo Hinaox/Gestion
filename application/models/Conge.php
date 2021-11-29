@@ -73,18 +73,33 @@ class Conge extends CI_Model{
         }
         return $val;
     }
-    public function accepterDemande ($idDemande,$conf){
+    public function nombreCongeParDepartement($idDepartement,$dateDebut){
+        $sql = "select count(*) from congeParMoisParEmploye where idDepartement=".$idDepartement." and MONTH(dateDebut)=MONTH('".$dateDebut."')";
+        $query = $this->db->query($sql);
+        $val = null;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val = $value;  
+            }
+        }
+        return $val;
+        
+    }
+    public function accepterDemande ($idDemande,$dateDebut,$idDepartement,$conf){
         if ($conf != null){
             $query = "update historiqueConge set etat=1 where id='".$idDemande."'";
             $this->db->query($query);
             return "Demande Acceptée";  
         }
 
-        if ($idDemande==20){
-            return "Voulez-vous vraiment continuer? ";
+        if ($this->nombreCongeParDepartement($idDepartement,$dateDebut)>=3){
+            return "Il y a déjà plus de 3 personnes en congé ce mois-ci dans cette département
+            Voulez-vous vraiment confirmer cette demande? ";
         }else{
-            // $query = "update historiqueConge set etat=1 where id='".$idDemande."'";
-            // $this->db->query($query);
+            $query = "update historiqueConge set etat=1 where id='".$idDemande."'";
+            $this->db->query($query);
             return "Demande Acceptée";    
         }
         

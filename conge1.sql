@@ -76,10 +76,15 @@ create view etatConge as (
 );
 
 create view demandeEnCours as (
-    select hc.id,idEmp,mc.description,DATE(dateDebut) as dateDebut,DATE(dateFin) as dateFin,TIMESTAMPDIFF(day,dateDebut,dateFin) as demande,
-    cumule,pris,restant,remarque
+    select hc.id,idEmp,mc.description,DATE(dateDebut) as dateDebut,
+    DATE(dateFin) as dateFin,TIMESTAMPDIFF(day,dateDebut,dateFin) as demande,
+    cumule,pris,restant,remarque,
+    nomDepartement,
+    idDepartement,
+    nomPoste
     from historiqueConge hc inner join etatConge ec on hc.idEmp=ec.idEmploye
     left join motifConge mc on mc.id=hc.motif
+    join employe_view e on e.idEmploye = hc.idEmp
     where hc.etat=0
 );
 
@@ -116,4 +121,35 @@ BEGIN
    RETURN (val);
 END$$ 
 DELIMITER ;
+
+
+create view congeParMoisParEmploye as(
+select hc.*,
+    nomDepartement,
+    idDepartement,
+    nomPoste
+from historiqueConge hc  
+    join employe_view e on e.idEmploye = hc.idEmp
+where etat = 1
+    and (dateDebut>=NOW() or dateFin>=NOW())
+group by Month(dateDebut),e.idEmploye);
+
+
+
+
+create view employe_view as
+    select
+        personne.*,
+        employe.idEmploye, employe.idSalaire, employe.dateEmbauche,
+        departement.nom as nomDepartement, departement.idDepartement, departement.descri as descriDepartement,
+        salaire.montant as montantSalaire, salaire.dateMiseEnPlace,
+        poste.nom as nomPoste, poste.idPoste, poste.descri as descriPoste
+    from
+        personne
+        join employe on employe.idPersonne = personne.idPersonne
+        join poste on employe.idPoste = poste.idPoste
+        join departement on departement.idDepartement = poste.idDepartement
+        join salaire on salaire.idEmploye = employe.idSalaire
+
+
 

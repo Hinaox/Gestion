@@ -69,18 +69,23 @@ class DemandeCongeCtrl extends CI_Controller {
     {
         $this->load->model('conge');
         $reponse = null;
+        $idDemande = $this->input->post('idDemande');
+        $dateDebut = $this->input->post('dateDebut');
+        $idDepartement = $this->input->post('idDepartement');
 
         if (!empty($this->input->post('confirmation'))){
-            $reponse = $this->conge->accepterDemande($this->input->post('idDemande'),$this->input->post('confirmation'));
+            $reponse = $this->conge->accepterDemande($idDemande,$dateDebut,$idDepartement,$this->input->post('confirmation'));
         }else{
-            $reponse = $this->conge->accepterDemande($this->input->post('idDemande'),null);
+            $reponse = $this->conge->accepterDemande($idDemande,$dateDebut,$idDepartement,null);
         }
 
         if ($reponse != "Demande Acceptée"){
             $data = array(
                 "view" => 'confirmation',
                 "reponse" => $reponse,
-                "idDemande" => $this->input->post('idDemande')
+                "idDemande" => $idDemande,
+                "dateDebut" =>$dateDebut,
+                "idDepartement"=> $idDepartement
             );
             $this->load->view ('template',$data);
         }else{
@@ -101,9 +106,10 @@ class DemandeCongeCtrl extends CI_Controller {
         $dateFin = $this->input->post('dateFin');
         $idMotif = $this->input->post('idMotif');
         $this->load->model('conge');
+        
         $controleDate = $this->conge->controleDate($dateDebut,$dateFin);
         if ($controleDate!="Date Conge Valide"){
-            $motifs = $this->conge->getMotifsDeductible();
+            $motifs = $this->conge->getMotifsNonDeductible();
             $data = array(
                 "view" => 'justificatifConge',
                 "motif" => $motifs,

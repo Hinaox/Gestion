@@ -71,7 +71,6 @@ if (empty($view)){
     </div>
   </nav>
 </header>
-  <div class="container">
   <?php include $view.'.php' ; ?>
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -82,7 +81,6 @@ if (empty($view)){
       <li class="list-inline-item"><a href="#">Support</a></li>
     </ul>
   </footer>
-  </div>
 
 
   <script src="<?php echo site_url('assets/dist/js/bootstrap.bundle.min.js'); ?>"></script>

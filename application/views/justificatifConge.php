@@ -1,5 +1,6 @@
 
-    <main>
+    
+  <div class="container">>
       <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h2>Justificatif de congé</h2>
@@ -21,6 +22,12 @@
             au <input type="date" class="form-control" id="dateFin" name="dateFin">
           </div>
 
+          <?php if(isset($erreur)){ ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><?php echo $erreur;?></strong>
+                </div>
+            <?php } ?>
+
           <div class="col-md-7 col-lg-8">
             <div class="row g-3">
                 <div class="col-sm-3">
@@ -33,13 +40,6 @@
               </div>
             </div>
           </div>
-
-            <?php if(isset($send)){ ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong><?php echo $send;?></strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            <?php } ?>
             <?php if(isset($send)){ ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong><?php echo $send;?></strong>
@@ -53,4 +53,4 @@
         </div>
       </form>
 
-  </main>
+            </div>
