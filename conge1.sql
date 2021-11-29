@@ -93,12 +93,12 @@ create view demandeEnCours as (
 
 -- Controles SQL Date 
 
--- si < 0 : donc la date entrée est antérieure à la date du jour
+-- si < 0 : donc la date entrée est antérieure a la date du jour
 
 select 
     case
-    when DATEDIFF("2021-11-02 12:10:21",NOW())<0 THEN "Date antérieure à la date du jour"
-    when DATEDIFF("2021-11-02 12:10:21","2021-11-04 12:10:21")<0 THEN "Date Fin antérieure à date fin "
+    when DATEDIFF("2021-11-02 12:10:21",NOW())<0 THEN "Date antérieure a la date du jour"
+    when DATEDIFF("2021-11-02 12:10:21","2021-11-04 12:10:21")<0 THEN "Date Fin antérieure a date fin "
     when DATEDIFF("2021-11-29 12:10:21",NOW())>0 AND DATEDIFF("2021-11-29 12:10:21",NOW())<5 THEN "Il faut au moins 5 jours d'avance pour demander un congé"
     else "Date Congé Valide"
     end as Controle
@@ -107,26 +107,19 @@ select
 
 DELIMITER $$
 CREATE FUNCTION controleDate ( dateDebut DATETIME ,dateFin DATETIME)
-RETURNS varchar(50)
+RETURNS varchar(100)
 BEGIN
-   DECLARE val varchar(50);
+   DECLARE val varchar(100);
     IF DATEDIFF(dateDebut,NOW())<0 THEN
-		SET val = "Date antérieure à la date du jour";
+		SET val = "Date anterieure a la date du jour";
     ELSEIF DATEDIFF(dateDebut,dateFin)>0 THEN
-        SET val = "Date Debut antérieure à date fin ";
-    ELSEIF DATEDIFF(dateDebut,NOW())>0 AND DATEDIFF(dateDebut,NOW())<5 THEN
-        SET val = "Il faut au moins 5 jours d'avance pour demander un congé";
+        SET val = "Date fin anterieure a date debut ";
+    ELSEIF DATEDIFF(dateDebut,NOW())>=0 AND DATEDIFF(dateDebut,NOW())<5 THEN
+        SET val = "Il faut au moins 5 jours d'avance pour demander un conge";
     ELSE
-        SET val = "Date Congé Valide";
+        SET val = "Date Conge Valide";
     END IF;
    RETURN (val);
-END valiny$$
+END$$ 
 DELIMITER ;
-
-
-
-
-
-
-
 

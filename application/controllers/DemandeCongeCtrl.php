@@ -43,16 +43,27 @@ class DemandeCongeCtrl extends CI_Controller {
         $idMotif = $this->input->post('idMotif');
         $this->load->model('conge');
 
-        // if ($dateDebut)
-        $this->conge->sendDemande($idEmp,$idMotif,$dateDebut,$dateFin);
+        $controleDate = $this->conge->controleDate($dateDebut,$dateFin);
+        if ($controleDate!="Date Conge Valide"){
+            $motifs = $this->conge->getMotifsDeductible();
+            $data = array(
+                "view" => 'demandeConge',
+                "motif" => $motifs,
+                "erreur" => $controleDate
+            );
+            $this->load->view('template',$data);
+        }else{
+            $this->conge->sendDemande($idEmp,$idMotif,$dateDebut,$dateFin);
 
-        $motifs = $this->conge->getMotifs();
-        $data = array(
-            "view" => 'demandeConge',
-            "motif" => $motifs,
-            "send" => "Demande envoyée"
-        );
-        $this->load->view('template',$data);
+            $motifs = $this->conge->getMotifsDeductible();
+            $data = array(
+                "view" => 'demandeConge',
+                "motif" => $motifs,
+                "send" => "Demande envoyée"
+            );
+            $this->load->view('template',$data);
+        }
+        
     }
     public function accepter()
     {
@@ -74,15 +85,27 @@ class DemandeCongeCtrl extends CI_Controller {
         $dateFin = $this->input->post('dateFin');
         $idMotif = $this->input->post('idMotif');
         $this->load->model('conge');
-        $this->conge->accepterND($idEmp,$idMotif,$dateDebut,$dateFin);
+        $controleDate = $this->conge->controleDate($dateDebut,$dateFin);
+        if ($controleDate!="Date Conge Valide"){
+            $motifs = $this->conge->getMotifsDeductible();
+            $data = array(
+                "view" => 'justificatifConge',
+                "motif" => $motifs,
+                "erreur" => $controleDate
+            );
+            $this->load->view('template',$data);
+        }else{
 
-        $motifs = $this->conge->getMotifsNonDeductible();
-        $data = array(
-            "view" => 'demandeConge',
-            "motif" => $motifs,
-            "send" => "Demande prise en compte"
-        );
-        $this->load->view('template',$data);
+            $this->conge->accepterND($idEmp,$idMotif,$dateDebut,$dateFin);
+
+            $motifs = $this->conge->getMotifsNonDeductible();
+            $data = array(
+                "view" => 'justificatifConge',
+                "motif" => $motifs,
+                "send" => "Demande prise en compte"
+            );
+            $this->load->view('template',$data);
+        }
     }
     public function refuser()
     {
