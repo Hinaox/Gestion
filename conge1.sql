@@ -1,20 +1,20 @@
--- CREATE TABLE employe (
---   idEmploye varchar(10) NOT NULL primary key,
---   idPersonne varchar(10) DEFAULT NULL,
---   idPoste varchar(10) DEFAULT NULL,
---   idSalaire varchar(10) DEFAULT NULL,
---   dateEmbauche dateTime DEFAULT NULL
--- ) ;
+CREATE TABLE employe (
+  idEmploye varchar(10) NOT NULL primary key,
+  idPersonne varchar(10) DEFAULT NULL,
+  idPoste varchar(10) DEFAULT NULL,
+  idSalaire varchar(10) DEFAULT NULL,
+  dateEmbauche dateTime DEFAULT NULL
+) ;
 
 --
 -- Dumping data for table `employe`
 --
 
--- INSERT INTO employe (idEmploye, idPersonne, idPoste, idSalaire, dateEmbauche) VALUES (2, 2, 1, 1, '1999-03-06');
--- INSERT INTO employe (idEmploye, idPersonne, idPoste, idSalaire, dateEmbauche) VALUES (4, 4, 2, 1, '2003-10-16'); 
+INSERT INTO employe (idEmploye, idPersonne, idPoste, idSalaire, dateEmbauche) VALUES (2, 2, 1, 1, '1999-03-06');
+INSERT INTO employe (idEmploye, idPersonne, idPoste, idSalaire, dateEmbauche) VALUES (4, 4, 2, 1, '2003-10-16'); 
 
--- INSERT INTO employe (idEmploye, idPersonne, idPoste, idSalaire, dateEmbauche) VALUES
--- (3, 1, 1, 1, '2021-03-06');
+INSERT INTO employe (idEmploye, idPersonne, idPoste, idSalaire, dateEmbauche) VALUES
+(3, 1, 1, 1, '2021-03-06');
 
 create table periodeConge(
     id varchar(10) primary key,
@@ -44,11 +44,12 @@ create table historiqueConge(
 
 create view empAnciente as select e.*,TIMESTAMPDIFF(year,dateEmbauche,NOW()) as years from employe e
 
-insert into motifConge values ('M1','evenement familial','ND');
-insert into motifConge values ('M2','conge parental','ND');
-insert into motifConge values ('M3','autre','D');
+insert into motifConge values ('M1','repos medical','ND');
+insert into motifConge values ('M2','evenement familial','ND');
+insert into motifConge values ('M3','conge parental','ND');
+insert into motifConge values ('M4','non justifie','D');
+insert into motifConge values ('M5','autre','D');
 
---maka ny conge pris les derniers 3 ans
 create view congePris as (
     select id,idEmp , SUM(TIMESTAMPDIFF(day,dateDebut,dateFin)) as nbJours 
     from historiqueConge 
