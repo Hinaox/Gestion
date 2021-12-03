@@ -75,7 +75,7 @@ select hc.*,motifconge.description,motifconge.deductibilite,e.idPoste, e.idSalai
 from historiqueconge as hc
          join motifconge on hc.motif = motifconge.id
          join employe e on hc.idEmp = e.idEmploye
-         join personne p on e.idPersonne = p.idPersonne
+         join personne p on e.idPersonne = p.idPersonne;
 
 
 
