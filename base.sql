@@ -5,60 +5,13 @@ create table contact(
     autre varchar(100)
 );
 
-INSERT INTO `contact` (`email`,`autre`)
-VALUES
-  ("gravida.non@nequenullam.org",null),
-  ("malesuada.fames@morbi.edu",null),
-  ("mi@utpharetra.co.uk",null),
-  ("ligula.aliquam@magnisdis.co.uk",null),
-  ("elit.pellentesque@eueleifend.org",null),
-  ("morbi.neque@nonhendrerit.edu",null),
-  ("ut.molestie@rutrumurna.org",null),
-  ("non.vestibulum@euismod.com",null),
-  ("rhoncus@sodalesmauris.net",null),
-  ("enim.non@lectussitamet.ca",null),
-  ("eros.non.enim@elitsedconsequat.org",null),
-  ("montes.nascetur@ornarelibero.ca",null),
-  ("consequat.nec.mollis@vulputateveliteu.org",null),
-  ("libero.proin@vitaedolordonec.org",null),
-  ("eros@sitametrisus.edu",null),
-  ("non.enim@mi.net",null),
-  ("nam.tempor@duismi.net",null),
-  ("donec.consectetuer.mauris@vestibulummauris.net",null),
-  ("cursus.integer.mollis@acarcu.ca",null),
-  ("suspendisse.non.leo@amet.edu",null);
-
---misaraka le contact mobile sy le contact satria anaty contact ray mety misy numero maromaro
 create table mobile(
     idMobile int not null auto_increment primary key,
     idContact int,
     numero int not null,
     foreign key (idContact) references contact(idContact) on delete cascade on update cascade
 );
-INSERT INTO `mobile` (`idContact`,`numero`)
-VALUES
-  (1,"0344526636"),
-  (2,"0345788862"),
-  (3,"0342326243"),
-  (4,"0341858661"),
-  (5,"034342585"),
-  (6,"0348573662"),
-  (7,"0346194367"),
-  (8,"0342243155"),
-  (9,"034282783"),
-  (10,"0344737847"),
-  (11,"0344255041"),
-  (12,"034497705"),
-  (13,"0342635633"),
-  (14,"0341253961"),
-  (15,"0344278357"),
-  (16,"0342686872"),
-  (17,"0345157172"),
-  (18,"0346532812"),
-  (19,"0342670372"),
-  (20,"0347451215");
 
---reto zany ny info generale anle personne; ka na olona mbola tsy miasa ary dia efa manana profile eto
 create table personne(
     idPersonne int not null auto_increment primary key,
     nom varchar(20),
@@ -67,10 +20,286 @@ create table personne(
     sexe char(1),
     adresse varchar(30),
     distance float,
-    matrimonial varchar(20),
+    matrimonial varchar(10),
     idContact int,
+    photo varchar(300),
     foreign key (idContact) references contact(idContact) on delete cascade on update cascade
 );
+
+create table departement(
+    idDepartement int not null auto_increment primary key,
+    nom varchar(30),
+    descri text
+);
+
+create table poste(
+    idPoste int not null auto_increment primary key,
+    idDepartement int,
+    nom varchar(30),
+    descri text,
+    constraint fk_poste_idDepartement foreign key (idDepartement) references departement(idDepartement)on delete cascade on update cascade
+);
+
+create table langue(
+    idLangue int not null auto_increment primary key,
+    titre varchar(20)
+);
+
+create table cv(
+    idCV int not null auto_increment primary key,
+    idPersonne int,
+    descriProfile text,
+    constraint fk_cv_idPersonne foreign key (idPersonne) references personne(idPersonne)
+    
+);
+
+create table grade(
+    idGrade int not null auto_increment primary key,
+    titre varchar(20)
+);
+
+create table diplome(
+    idDiplome int not null auto_increment primary key,
+    idCV int,
+    idGrade int,
+    titre varchar(20),
+    etablissement varchar(30),
+    obtention date,
+    constraint fk_diplome_idCV foreign key (idCV) references cv(idCV) on delete cascade on update cascade,
+    constraint fk_diplome_idGrade foreign key (idGrade) references grade(idGrade) on delete cascade on update cascade
+);
+
+create table domaine(
+    idDomaine int not null auto_increment primary key,
+    titre varchar(20),
+    descri text
+);
+create table experience(
+    idExperience int not null auto_increment primary key,
+    idCV int,
+    dateEntre date,
+    dateSortie date,
+    poste varchar(30),
+    societe varchar(30),
+    constraint fk_experience_idCV foreign key (idCV) references cv(idCV) on delete cascade on update cascade
+);
+create table experience_domaine(
+    idExperience int,
+    idDomaine int,
+    foreign key (idExperience) references experience(idExperience) on delete cascade on update cascade,
+    foreign key (idDomaine) references domaine(idDomaine) on delete cascade on update cascade
+);
+
+create table scolarite(
+    idScolarite int not null auto_increment primary key,
+    idCV int,
+    dateEntre date,
+    dateSortie date,
+    etablissement varchar(30),
+    constraint fk_scolarite_idCV foreign key (idCV) references cv(idCV) on delete cascade on update cascade
+);
+
+create table cv_langue(
+    idCV int,
+    idLangue int,
+    niveau float,
+    foreign key (idCV) references cv(idCV) on delete cascade on update cascade,
+    foreign key (idLangue) references langue(idLangue) on delete cascade on update cascade
+);
+
+create table categorieLoisir(
+    idCategorieLoisire int not null auto_increment primary key,
+    categorie varchar(20)
+);
+create table loisir(
+    idLoisir int not null auto_increment primary key,
+    idCategorieLoisire int,
+    pratique varchar(30),
+    foreign key (idCategorieLoisire) references categorieLoisir(idCategorieLoisire) on delete cascade on update cascade
+);
+create table cv_loisir(
+    idCV int,
+    idLoisir int,
+    foreign key (idCV) references cv(idCV) on delete cascade on update  cascade,
+    foreign key (idLoisir) references loisir(idLoisir) on delete cascade on update cascade
+);
+
+create table competence(
+    idCompetence int not null auto_increment primary key,
+    idCV int,
+    titre varchar(20),
+    niveau float,
+    foreign key (idCV) references cv(idCV) on delete cascade on update cascade
+); 
+
+create table cv_poste(
+    idCV int,
+    idPoste int,
+    foreign key (idCV) references cv(idCV) on delete cascade on update cascade,
+    foreign key (idPoste) references poste(idPoste) on delete cascade on update cascade
+);
+
+create table salaire(
+    idSalaire int not null auto_increment primary key,
+    idEmploye int,
+    montant float,
+    dateMiseEnPlace date
+);
+
+create table employe (
+    idEmploye int not null auto_increment primary key,
+    idPersonne int,
+    idPoste int,
+    idSalaire int,
+    dateEmbauche date,
+    constraint fk_employe_idPersonne foreign key (idPersonne) references personne(idPersonne)on delete cascade on update cascade,
+    constraint fk_employe_idPoste foreign key (idPoste) references poste(idPoste)on delete cascade on update cascade,
+    constraint fk_employe_idSalaire foreign key (idSalaire) references salaire(idSalaire)on delete cascade on update cascade
+);
+
+create table enfant (
+    idEnfant int not null auto_increment primary key,
+    idEmploye int,
+    nom varchar(30),
+    prenom varchar(30),
+    dtn date,
+    constraint fk_enfant_idEmploye foreign key (idEmploye) references employe(idEmploye)on delete cascade on update cascade
+);
+
+create table pointage (
+    idPointage int not null auto_increment primary key,
+    idEmploye int,
+    dateDebut datetime,
+    dateFin datetime,   
+    constraint fk_pointage_idEmploye foreign key (idEmploye) references employe(idEmploye) on delete cascade on update cascade
+);
+
+create table heureSup(
+    idHeureSup int not null auto_increment primary key,
+    idEmploye int,
+    dateDebut datetime,
+    dateFin datetime,
+    foreign key (idEmploye) references employe(idEmploye)
+);
+
+create table demande(
+    idDemande int not null auto_increment primary key,
+    idEmploye int,
+    dateDebut datetime,
+    dateFin datetime,
+    foreign key (idEmploye) references employe(idEmploye)
+);
+
+create table demandeHeureSupEmploye(
+    idDemande int,
+    idEmploye int,
+    foreign key (idDemande) references demande(idDemande),
+    foreign key (idEmploye) references employe(idEmploye)
+);
+
+create table irsa(
+    idTranche int not null auto_increment primary key,
+    label varchar(30),
+    montantMin int,
+    montantMax int,
+    taux float
+);
+
+create table fichePaie(
+    idFichePaie int not null auto_increment primary key,
+    idEmploye int,
+    dateMiseEnPlace date,
+    irsa float,
+    pc float,
+    net float,
+    foreign key (idEmploye) references employe(idEmploye) on delete cascade on update cascade
+);
+
+create table RN(
+    idRN int not null auto_increment primary key,
+    idFichePaie int,
+    salaireFix float,
+    prime float,
+    foreign key (idFichePaie) references fichePaie(idFichePaie) on delete cascade on update cascade
+);
+
+
+create table salaireVariable(
+    idSalaireVariable int not null auto_increment primary key,
+    idRN int,
+    libele varchar(30),
+    montant float,
+    foreign key (idRN) references RN(idRN) on delete cascade on update cascade
+);
+
+
+create table indemnite(
+    idIndemnite int not null auto_increment primary key,
+    idRN int,
+    libele varchar(30),
+    montant float,
+    foreign key (idRN) references RN(idRN) on delete cascade on update cascade
+);
+
+create table categorieAN(
+    idCategorieAN int not null auto_increment primary key,
+    libele varchar(30),
+    taux float
+);
+create table AN(
+    idAN int not null auto_increment primary key,
+    idFichePaie int,
+    idCategorieAN int,
+    montant float,
+    foreign key (idCategorieAN) references categorieAN(idCategorieAN) on delete cascade on update cascade,
+    foreign key (idFichePaie) references fichePaie(idFichePaie) on delete cascade on update cascade
+);
+create table avance(
+    idAvance int not null auto_increment primary key,
+    idFichePaie int,
+    libele varchar(30),
+    montant float,
+    foreign key (idFichePaie) references fichePaie(idFichePaie) on delete cascade on update cascade
+);
+
+
+create table categorieEvenement(
+    idCategorieEvenement int not null auto_increment primary key,
+    label varchar(30)
+);
+create table evenement(
+    idEvenement int not null auto_increment primary key,
+    idCategorieEvenement int,
+    label varchar(30),
+    descri text,
+    dateEvenement date,
+    constraint fk_evenement_idCategorieEvenement foreign key (idCategorieEvenement) references categorieEvenement(idCategorieEvenement) on delete cascade on update cascade
+);
+
+create table evenement_personne(
+    idEvenement int,
+    idPersonne int,
+    foreign key (idEvenement) references evenement(idEvenement) on delete cascade on update cascade,
+    foreign key (idPersonne) references personne(idPersonne) on delete cascade on update cascade
+);
+
+INSERT INTO `categorieEvenement` (`idCategorieEvenement`,`label`)
+VALUES
+   (1,"test"),
+   (2,"entretient"),
+  (3,"conference"),
+  (4,"team building"),
+  (5,"ferie"),
+  (6,"lancement de produit"),
+  (7,"exposition");
+
+
+INSERT INTO `evenement` (`idCategorieEvenement`,`label`,`descri`,`dateEvenement`)
+VALUES
+   (1,"test a l'entreprise","Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis","2021-02-05"),
+   (2,"entretient d'embauche","Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis","2021-02-10");
+
+
 INSERT INTO personne (idPersonne,`nom`,`prenom`,`dtn`,`sexe`,`adresse`,`distance`,`matrimonial`,`idContact`)VALUES
   (1,"Lillith", "Pope","1981-03-12","F","970-3240 Nec Rd.",1,"Mariée",1),
   (2,"Kim", "Baxter","1981-03-12","F","Ap #862-3446 Phasellus Ave",6,"Celibataire",2),
@@ -93,439 +322,10 @@ INSERT INTO personne (idPersonne,`nom`,`prenom`,`dtn`,`sexe`,`adresse`,`distance
   (19,"Gage", "Norman","1981-03-12","M","6895 Orci St.",8,"Celibataire",19),
   (20,"Angela", "Gomez","1981-03-12","F","207-4603 Tellus, Ave",7,"Mariée",20);
 
----misy departement satria le poste anatinle orinasa manaraka organigramme
-
-create table departement(
-    idDepartement int not null auto_increment primary key,
-    nom varchar(30),
-    descri text
-);
-INSERT INTO `departement` (`idDepartement`,`nom`,`descri`)
-VALUES
-  (1,"administration generale","velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla"),
-  (2,"ressource humaine","natoque penatibus et magnis"),
-  (3,"production","Nunc mauris sapien, cursus in, hendrerit consectetuer,"),
-  (4,"marketing et commercial","consectetuer ipsum nunc id enim. Curabitur"),
-  (5,"financier","ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed");
-
-create table poste(
-    idPoste int not null auto_increment primary key,
-    idDepartement int,
-    nom varchar(50),
-    descri text,
-    constraint fk_poste_idDepartement foreign key (idDepartement) references departement(idDepartement)on delete cascade on update cascade
-);
-INSERT INTO `poste` (`idPoste`,`idDepartement`,`nom`,`descri`)
-VALUES
-  (1,1,"DG","rutrum lorem ac risus. Morbi metus. Vivamus euismod urna. Nullam"),
-  (2,2,"DRH","Aenean gravida nunc sed pede. Cum sociis natoque penatibus et"),
-  (3,3,"Agent de conditionnement","mattis semper, dui lectus rutrum urna, nec luctus felis purus"),
-  (4,4,"Directeur de la relation client","sem, consequat nec, mollis vitae, posuere at, velit. Cras lorem"),
-  (5,5,"Comptable","magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna.");
-
----------------------
---------------------- MIDITRA CV TSIKA ETO
----------------------
-
---- nosarahako tsara ny information tsotra fotsiny tsy ilaina en tant que employe de nataoko tanatinle cv anle olona
--- ka anatin'izany ny langue afaka resahany
-
-create table langue(
-    idLangue int not null auto_increment primary key,
-    titre varchar(20)
-);
-INSERT INTO `langue` (`idLangue`,`titre`)
-VALUES
-  (1,"Malgache"),
-  (2,"Francais"),
-  (3,"Anglais"),
-  (4,"Allemand"),
-  (5,"Japonais"),
-  (6,"Espagnol"),
-  (7,"Russe"),
-  (8,"Mandarin");
-
-create table cv(
-    idCV int not null auto_increment primary key,
-    idPersonne int,
-    constraint fk_cv_idPersonne foreign key (idPersonne) references personne(idPersonne),
-    descriProfile text
-);
-INSERT INTO `cv` (`idCV`,`idPersonne`,`descriProfile`)
-VALUES
-  (1,1,"Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis"),
-  (2,2,"ac, fermentum vel, mauris. Integer sem elit, pharetra ut, pharetra"),
-  (3,3,"quam a felis ullamcorper viverra. Maecenas iaculis aliquet diam. Sed"),
-  (4,4,"a, enim. Suspendisse aliquet, sem ut cursus luctus, ipsum leo");
-
--- ity ilay grade anle diplome anle olona anaty cv
-create table grade(
-    idGrade int not null auto_increment primary key,
-    titre varchar(20)
-);
-INSERT INTO `grade` (`idGrade`,`titre`)
-VALUES
-  (1,"1e annee"),
-  (2,"2e annee"),
-  (3,"3e annee"),
-  (4,"4e annee"),
-  (5,"5e annee");
-
-create table diplome(
-    idDiplome int not null auto_increment primary key,
-    idCV int,
-    idGrade int,
-    titre varchar(20),
-    etablissement varchar(30),
-    obtention date,
-    constraint fk_diplome_idCV foreign key (idCV) references cv(idCV) on delete cascade on update cascade,
-    constraint fk_diplome_idGrade foreign key (idGrade) references grade(idGrade) on delete cascade on update cascade
-);
-INSERT INTO `diplome` (`idCV`,`idGrade`,`titre`,`etablissement`,`obtention`)
-VALUES
-  (1,4,"BACC","ITU", "07-20-2015"),
-  (2,2,"MASTER","ESCA","01-07-2011"),
-  (3,1,"MASTER","ISCAM","26-45-2011"),
-  (4,3,"BACC","Ankatso","05-23-2015");
-
-
----ito le domaine anle experience ananany; de aza adino hoanle nanao cv fa tsy duré no mipetraka eo fa le date entre et sortie tamle orinasa niasany
-create table domaine(
-    idDomaine int not null auto_increment primary key,
-    titre varchar(20),
-    descri text
-);
-INSERT INTO `domaine` (`idDomaine`,`titre`,`descri`)
-VALUES
-  (1,"financier","neque pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper, velit in aliquet lobortis,"),
-  (2,"communication","commodo auctor velit. Aliquam"),
-  (3,"Science","Proin velit. Sed malesuada augue ut lacus. Nulla tincidunt, neque vitae semper");
-
-create table experience(
-    idExperience int not null auto_increment primary key,
-    idCV int,
-    dateEntre date,
-    dateSortie date,
-    poste varchar(30),
-    societe varchar(30),
-    constraint fk_experience_idCV foreign key (idCV) references cv(idCV) on delete cascade on update cascade
-);
-INSERT INTO `experience` (`idCV`,`dateEntre`,`dateSortie`,`poste`,`societe`)
-VALUES
-  (1,"2018-09-11","2018-12-13","caissier","Jumbo score"),
-  (1,"2019-01-30","2020-02-05","Comptable","BNI"),
-  (3,"2020-12-27","2021-01-18","responsable marketing","Etoile color"),
-  (4,"2018-05-20","2021-09-20","infirmiere","HJRA");
-
-create table experience_domaine(
-    idExperience int,
-    idDomaine int,
-    foreign key (idExperience) references experience(idExperience) on delete cascade on update cascade,
-    foreign key (idDomaine) references domaine(idDomaine) on delete cascade on update cascade
-);
-INSERT INTO `experience_domaine` (`idExperience`,`idDomaine`)
-VALUES
-  (1,1),
-  (2,1),
-  (3,2),
-  (4,3);
-
-
--- ity scolarite ity ilay cursus scolaire anle olona anaty cv
-create table scolarite(
-    idScolarite int not null auto_increment primary key,
-    idCV int,
-    dateEntre date,
-    dateSortie date,
-    etablissement varchar(30),
-    constraint fk_scolarite_idCV foreign key (idCV) references cv(idCV) on delete cascade on update cascade
-);
-INSERT INTO `scolarite` (`idCV`,`dateEntre`,`dateSortie`,`etablissement`)
-VALUES
-  (1,"2012-08-11","2016-05-20","ITU"),
-  (2,"2009-08-11","2014-05-20","ESCA"),
-  (3,"2010-08-11","2014-05-20","ISCAM"),
-  (4,"2014-08-11","2017-05-20","Ankatso");
-
---- ity le fifandraisanle cv sy le langue teo
-create table cv_langue(
-    idCV int,
-    idLangue int,
-    niveau float,
-    foreign key (idCV) references cv(idCV) on delete cascade on update cascade,
-    foreign key (idLangue) references langue(idLangue) on delete cascade on update cascade
-);
-INSERT INTO `cv_langue` (`idCV`,`idLangue`,`niveau`)
-VALUES
-  (1,1,10),
-  (1,2,10),
-  (1,3,9.5),
-  (1,7,8),
-  (2,1,10),
-  (2,2,9),
-  (2,3,7.5),
-  (2,4,8),
-  (2,6,7),
-  (3,1,10),
-  (3,2,10),
-  (3,3,10),
-  (3,8,4),
-  (4,1,10),
-  (4,2,6),
-  (4,8,5);
-
-
---- ito le loisir mifanaraka amle tao amle formulaire ana cv iny [inforamtion tsy ilaina akory]
-create table categorieLoisir(
-    idCategorieLoisire int not null auto_increment primary key,
-    categorie varchar(20)
-);
-INSERT INTO `categorieLoisir` (`categorie`)
-VALUES
-  ("sport"),
-  ("culture"),
-  ("musique"),
-  ("electronique"),
-  ("art");
-
-
-create table loisir(
-    idLoisir int not null auto_increment primary key,
-    idCategorieLoisire int,
-    pratique varchar(30),
-    foreign key (idCategorieLoisire) references categorieLoisir(idCategorieLoisire) on delete cascade on update cascade
-);
-create table cv_loisir(
-    idCV int,
-    idLoisir int,
-    foreign key (idCV) references cv(idCV) on delete cascade on update  cascade,
-    foreign key (idLoisir) references loisir(idLoisir) on delete cascade on update cascade
-);
---ity le competence personnel anle olona (specifique amin'ny olona iray) [information tsy nilaina akory]
-create table competence(
-    idCompetence int not null auto_increment primary key,
-    idCV int,
-    titre varchar(20),
-    niveau float,
-    foreign key (idCV) references cv(idCV) on delete cascade on update cascade
-); 
--- ity ilay poste postulen'ilay olona anaty cv satria mety misy offre d'employe(idEmploye) on delete cascade on update cascade betsaka amle orinasa de mo te i-postule amna poste betsaka izy ao amle orinasa
----amzay mba tsy hisina redondance ana cv de tonga de eto fotsiny
-create table cv_poste(
-    idCV int,
-    idPoste int,
-    foreign key (idCV) references cv(idCV) on delete cascade on update cascade,
-    foreign key (idPoste) references poste(idPoste) on delete cascade on update cascade
-);
-INSERT INTO `cv_poste` (`idCV`,`idPoste`)
-VALUES
-  (1,3),
-  (2,2),
-  (3,4),
-  (4,3);
-
----------------------------
----------------------------MIITRA AMLE EMPLOYE NDRAY ISIKA ETO-------------
----------------------------
-
---tsy nfixeko tanatinle employé ilay salaire satria 1° information sensible, 2° mora ny manao retour en arrière
-----rehefa le vao ampiditra salaire voalohany aloha (le olona vao n'embauchena) de ajanona null ilay idEmployé io de updatena fotsiny aveo
-create table salaire(
-    idSalaire int not null auto_increment primary key,
-    idEmploye int,
-    montant float,
-    dateMiseEnPlace date
-);
-INSERT INTO `salaire` (`idSalaire`,`idEmploye`,`montant`,`dateMiseEnPlace`)
-VALUES
-  (1,1,5000000,"2021-02-12");
-
--- le idEmployé eto no matricule
-create table employe (
-    idEmploye int not null auto_increment primary key,
-    idPersonne int,
-    idPoste int,
-    idSalaire int,
-    dateEmbauche date,
-    constraint fk_employe_idPersonne foreign key (idPersonne) references personne(idPersonne)on delete cascade on update cascade,
-    constraint fk_employe_idPoste foreign key (idPoste) references poste(idPoste)on delete cascade on update cascade,
-    constraint fk_employe_idSalaire foreign key (idSalaire) references salaire(idSalaire)on delete cascade on update cascade
-);
 
 INSERT INTO `employe` (`idEmploye`,`idPersonne`,`idPoste`,`idSalaire`,`dateEmbauche`)
-VALUES
+VALUES (2,2,4,1,"2021-12-03");
   (1,3,4,1,"2021-02-15");
-
----- ity ilay enfant amle personne à charge ao amle calcule ana irsa
-create table enfant (
-    idEnfant int not null auto_increment primary key,
-    idEmploye int,
-    nom varchar(30),
-    prenom varchar(30),
-    dtn date,
-    constraint fk_enfant_idEmploye foreign key (idEmploye) references employe(idEmploye)on delete cascade on update cascade
-);
-
-INSERT INTO `enfant` (`idEmploye`,`nom`,`prenom`,`dtn`)
-VALUES
-  (1,"Ella","Mimi","2019-03-14"),
-  (1,"Elio","Mimi","2017-01-24");
-
------ pointage anle olona rehefa miasa
-create table pointage (
-    idPointage int not null auto_increment primary key,
-    idEmploye int,
-    datePointage date,
-    duree float,
-    constraint fk_pointage_idEmploye foreign key (idEmploye) references employe(idEmploye) on delete cascade on update cascade
-);
-INSERT INTO `pointage` (`idEmploye`,`datePointage`,`duree`)
-VALUES
-  (1,"2021-02-15",8),
-  (1,"2021-02-16",8),
-  (1,"2021-02-17",10),
-  (1,"2021-02-18",12),
-  (1,"2021-02-19",8),
-  (1,"2021-02-20",9),
-  (1,"2021-02-22",8),
-  (1,"2021-02-23",7),
-  (1,"2021-02-24",8),
-  (1,"2021-02-28",9);
-
----- ity ilay irsa modifiena satria miova isan-atona ny irsa
-
-create table irsa(
-    idTranche int not null auto_increment primary key,
-    label varchar(30),
-    montantMin int,
-    montantMax int,
-    taux float
-);
-INSERT INTO `irsa` (`idTranche`,`label`,`montantMin`,`montantMax`,`taux`)
-VALUES
-  (1,"1e tranche",0,350000,0),
-  (2,"2e tranche",350001,400000,5),
-  (3,"3e tranche",400001,500000,10),
-  (4,"4e tranche",500001,600000,15),
-  (5,"5e tranche",600001,null,20);
-
----fiche de paie 
-create table fichePaie(
-    idFichePaie int not null auto_increment primary key,
-    idEmploye int,
-    dateMiseEnPlace date,
-    irsa float,
-    pc float,
-    net float,
-    foreign key (idEmploye) references employe(idEmploye) on delete cascade on update cascade
-);
-
-
---- remunération en numéraire
---- le salaire fix io le salaire fix ary ihany
-create table RN(
-    idRN int not null auto_increment primary key,
-    idFichePaie int,
-    salaireFix float,
-    prime float,
-    foreign key (idFichePaie) references fichePaie(idFichePaie) on delete cascade on update cascade
-);
-
----- le salaire variable anatinle RN ihany fa izy betsaka isaky ny RN
------ ny heur sup koa miditra ato amin'ny salaire variable ,,, fa ty mila ampidirina any amin'ny metier fa tsy eo amin'ny saisie formulaire satria resultat an'ny fanisana ny pointage
----- comission koa
-create table salaireVariable(
-    idSalaireVariable int not null auto_increment primary key,
-    idRN int,
-    libele varchar(30),
-    montant float,
-    foreign key (idRN) references RN(idRN) on delete cascade on update cascade
-);
-
----- indemnite koa mbola anatin'ny RN sady mety misy maro anatinle RN
-
-create table indemnite(
-    idIndemnite int not null auto_increment primary key,
-    idRN int,
-    libele varchar(30),
-    montant float,
-    foreign key (idRN) references RN(idRN) on delete cascade on update cascade
-);
-
-----eto ndray miditra avantage en nature
-create table categorieAN(
-    idCategorieAN int not null auto_increment primary key,
-    libele varchar(30),
-    taux float
-);
-INSERT INTO `categorieAN` (`libele`,`taux`)
-VALUES
-  ("voiture",20),
-  ("logement",50),
-  ("nourriture",70),
-  ("outils de communication",60);
-
-create table AN(
-    idAN int not null auto_increment primary key,
-    idFichePaie int,
-    idCategorieAN int,
-    montant float,
-    foreign key (idCategorieAN) references categorieAN(idCategorieAN) on delete cascade on update cascade,
-    foreign key (idFichePaie) references fichePaie(idFichePaie) on delete cascade on update cascade
-);
-create table avance(
-    idAvance int not null auto_increment primary key,
-    idFichePaie int,
-    libele varchar(30),
-    montant float,
-    foreign key (idFichePaie) references fichePaie(idFichePaie) on delete cascade on update cascade
-);
-
--------------
--------------   ETO LE RESAKA AGENDA ----
--------------
-
---genre ato ny atao le date de test sy le date d'entretient
---nataoko global otranzao satria tsy voatery reny ihany ny evenement ao amle orinasa  
-
-
-create table categorieEvenement(
-    idCategorieEvenement int not null auto_increment primary key,
-    label varchar(30)
-);
-
-INSERT INTO `categorieEvenement` (`idCategorieEvenement`,`label`)
-VALUES
-   (1,"test"),
-   (2,"entretient"),
-  (3,"conference"),
-  (4,"team building"),
-  (5,"ferie"),
-  (6,"lancement de produit"),
-  (7,"exposition");
-
-create table evenement(
-    idEvenement int not null auto_increment primary key,
-    idCategorieEvenement int,
-    label varchar(30),
-    descri text,
-    dateEvenement date,
-    constraint fk_evenement_idCategorieEvenement foreign key (idCategorieEvenement) references categorieEvenement(idCategorieEvenement) on delete cascade on update cascade
-);
-
-INSERT INTO `evenement` (`idCategorieEvenement`,`label`,`descri`,`dateEvenement`)
-VALUES
-   (1,"test a l'entreprise","Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis","2021-02-05"),
-   (2,"entretient d'embauche","Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis","2021-02-10");
-
----eto ny mametraka ny olona rehetra voakasik'ilay evenement ; nataoko olona satria mety ny employé no voakasika , fa mety koa oe le olona mbola vao mipostule
-
-create table evenement_personne(
-    idEvenement int,
-    idPersonne int,
-    foreign key (idEvenement) references evenement(idEvenement) on delete cascade on update cascade,
-    foreign key (idPersonne) references personne(idPersonne) on delete cascade on update cascade
-);
 
 INSERT INTO `evenement_personne` (`idEvenement`,`idPersonne`)
 VALUES
