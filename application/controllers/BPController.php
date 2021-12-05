@@ -27,6 +27,7 @@ class BPController extends CI_Controller {
 	public function listeBP()
 	{
 		$this->load->model('BPModel');
+		$data=array();
 		$data['listeBP'] = $this->BPModel->getListeBP();
 		$this->load->view('listeBP',$data);
 		
@@ -37,7 +38,39 @@ class BPController extends CI_Controller {
 		$this->load->model('BPModel');
 		$idFichePaie = $this->input->get('idFichePaie');
 		$data['listeBP'] = $this->BPModel->getBulletinDePaie($idFichePaie);
-
-	
 	}
+
+	public function listeBulletin()
+	{
+		$this->load->model('BPModel');
+		$data=array();
+		$nbPage=$this->BPModel->nbPagination();
+		$data['nbPage']=$nbPage/20;
+		$data['listeBP']=$this->BPModel->paginationListeBP(1,20);
+		$this->load->view('viewTest',$data);
+	}
+
+		public function pagination()
+	{
+		$indicePage=$this->input->post('indicePage');
+		$this->load->model('BPModel');
+		$data=array();
+		$indicePage=intval($indicePage);
+		$data['listeBP']=$this->BPModel->paginationListeBP($indicePage,20);
+		echo json_encode($data['listeBP']);
+		// $this->load->view('viewTest',$data);
+	}
+
+
+	// public function nbPageBP()
+	// {
+	// 	$this->load->model('BPModel');
+	// 	$data=array();
+	// 	$nbPage=$this->BPModel->nbPagination();
+	// 	$data['nbPage']=$nbPage/20;
+	// 	$this->load->view('viewTest',$data);
+	// }
+
+
 }
+

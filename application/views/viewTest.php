@@ -6,41 +6,41 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="<?php echo site_url("assets/css/bootstrap.min.css")?>" rel="stylesheet">
-    <title>liste Bulletin de Paie</title>
+    <title>Test Pagination</title>
 </head>
 
 <body>
     <div class="container">
 
         <div class="py-5 text-center">
-            <h2>liste Bulletin de Paie</h2>
+            <h2>Test Pagination</h2>
         </div>
 
-        <nav aria-label="...">
-          <ul class="pagination">
-            <li class="page-item disabled">
-              <span class="page-link">Previous</span>
-            </li>
-<!--            <li class="page-item active">
-              <span class="page-link">
-                1
-                <span class="sr-only">(current)</span>
-                
-              </span>
-            </li> -->
-            <input type="hidden" id="site" value="<?php echo site_url() ?>">
-            <?php for($i=1;$i<$nbPage;$i++) {?>
-                <li class="page-item" id="indicePage<?php echo $i ;?>" value="<?php echo $i?>">
-                    <span  class="page-link"  onclick="paginer(<?php echo $i ?>)"><?php echo $i?>
-                        
-                    </span>
-                </li>
-            <?php }?>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </nav>
+    	<nav aria-label="...">
+		  <ul class="pagination">
+		    <li class="page-item disabled">
+		      <span class="page-link">Previous</span>
+		    </li>
+<!-- 		    <li class="page-item active">
+		      <span class="page-link">
+		        1
+		        <span class="sr-only">(current)</span>
+		        
+		      </span>
+		    </li> -->
+		    <input type="hidden" id="site" value="<?php echo site_url() ?>">
+		    <?php for($i=1;$i<$nbPage;$i++) {?>
+		    	<li class="page-item" id="indicePage<?php echo $i ;?>" value="<?php echo $i?>">
+		    		<span  class="page-link"  onclick="paginer(<?php echo $i ?>)"><?php echo $i?>
+		    			
+		    		</span>
+		    	</li>
+			<?php }?>
+		    <li class="page-item">
+		      <a class="page-link" href="#">Next</a>
+		    </li>
+		  </ul>
+		</nav>
 
         <table class="table">
             <thead class="thead-dark">
