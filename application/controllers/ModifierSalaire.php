@@ -29,4 +29,26 @@ class ModifierSalaire extends CI_Controller {
         $this->modifierSal->modifierSalaire($this->session->userdata('idEmploye'),$montant);
         $this->afficher();
     }
+    public function versModification(){
+        $data['montant'] =$this->input->get('montant');
+        $this->load->model('modifierSal');
+        if($this->input->get('montant') == "" ){
+            $this->annulation();
+        }
+        $salaireMin = $this->modifierSal-> salaireMinimum($this->session->userdata('idEmploye'));
+        if( $salaireMin > $this->input->get('montant')){
+            $data['employe']= $this->modifierSal->getEmploye($this->session->userdata('idEmploye'));
+            $data['montant']= $this->modifierSal->getSalaire($this->session->userdata('idEmploye'));
+            $data['erreur']="processus d'exécution annuler !! le valeur minimale est ".$salaireMin." ariary";
+            $this->load->view('modifierSalaire',$data);
+        }
+        $this->load->view('ConfirmeModif',$data);
+    }
+    public function annulation(){
+        $this->load->model('modifierSal');
+        $data['employe']= $this->modifierSal->getEmploye($this->session->userdata('idEmploye'));
+        $data['montant']= $this->modifierSal->getSalaire($this->session->userdata('idEmploye'));
+        $data['erreur']="processus d'exécution annuler !!";
+        $this->load->view('modifierSalaire',$data);
+    }
 }

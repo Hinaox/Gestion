@@ -36,4 +36,28 @@ class modifierSal extends CI_Model{
         }
         return $val;
     }
+    public function salaireMinimum($idEmploye) 
+    {
+        $sql = "select * from grillesalaire where categorie=(select idcategorie from emp_pers_categpro where idemploye=".$idEmploye.") and gradeprofessionnel=(select idgradepro from emp_pers_categpro where idemploye=".$idEmploye.")";
+        var_dump($sql);
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val[0]['SalaireMin'];
+    }
+    public function verifierSalaire($idEmploye,$montant){
+        $erreur = null;
+        if($this->salaireMinimum($idEmploye)[0]['salaireMin'] < $montant){
+            $erreur = "le montant que vous voulez est inferieur au norme ";
+        }
+        return $erreur;
+    }
 }
