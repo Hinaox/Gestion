@@ -5,17 +5,14 @@ class EtatCongeEmploye extends CI_Controller
 {
     public function index()
     {
-        $idEmp=$_GET['idEmpl'];
+        $idEmpl=$this->input->get('idEmpl');
+        $this->load->model('conge');
 
-        $this->load->model('Connex');
-        $this->load->model('EmployeConge');
-        $this->load->model('CongeEmployer');
-
-        $co=$this->Connex->getConnexion();
-        $data['congeEmpl']=$this->CongeEmployer->getConger($idEmp,$co);
-        $data['nombreCongeDed']=$this->CongeEmployer->getNbrCongerDeductible($idEmp,$co);
-        $data['nombreCongeNDed']=$this->CongeEmployer->getNbrCongerNDeductible($idEmp,$co);
-        $this->load->view('AfficheConge',$data);
+        $data['congeEmpl']=$this->conge->getConger($idEmpl);
+        $data['nombreCongeDed']=$this->conge->getNbrCongerDeductible($idEmpl);
+        $data['nombreCongeNDed']=$this->conge->getNbrCongerNDeductible($idEmpl);
+        $data['view']='AfficheConge';
+        $this->load->view('template',$data);
 
     }
 

@@ -11,7 +11,8 @@
     <title>Document</title>
 </head>
 <body>
-<form action="http://localhost/bulletinPaie/EtatCongeEmploye/index">
+
+<form action=<?php echo site_url('EtatCongeEmploye/index') ?>>
     <label for="Matricule">Matricule</label>
     <input type="text" name="idEmpl">
     <button type="submit">Valider</button>

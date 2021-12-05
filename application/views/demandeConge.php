@@ -1,8 +1,9 @@
 
-    
+    <?php for($i=0; $i<2; $i++){ ?>   
+        </br>
+    <?php } ?>
   <div class="container">
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h2>Formulaire de demande de congé</h2>
         <?php if(isset($succes)){ ?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -54,7 +55,7 @@
             <?php } ?>
 
           <button class="w-100 btn btn-success btn-lg" type="submit">Demander</button>
-          <a href = "#"> Voir son état de congé </a>
+          
           <hr class="my-4">
 
         </div>

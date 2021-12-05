@@ -18,7 +18,7 @@
   <tbody>
     <?php for($i=0; $i<count($etat); $i++){ ?>
         <tr>
-        <th scope="row"><?php echo $etat[$i]['idEmploye']; ?></th>
+        <th scope="row"><a href = "<?php echo site_url('EtatCongeEmploye/index?idEmpl='.$etat[$i]['idEmploye']) ?>"><?php echo $etat[$i]['idEmploye']; ?></a></th>
         <td><?php echo $etat[$i]['dateEmbauche']; ?></td>
         <td><?php echo $etat[$i]['anneeTravail']; ?></td>
         <td><?php echo $etat[$i]['cumule']; ?></td>

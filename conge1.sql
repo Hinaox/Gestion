@@ -41,39 +41,65 @@ create table historiqueConge(
     foreign key (motif) references motifConge(id)
 );
 
+create table retraitConge(
+    id int not null auto_increment primary key,
+    idEmp int,
+    heure int,
+    dateDiminution dateTime,
+    foreign key (idEmp) references employe(idEmploye)
+);
+
+insert into retraitConge values (null, 1, 1, '2021-12-02 00:00:00');
+insert into retraitConge values (null, 1, 1, '2021-11-02 00:00:00');
+insert into retraitConge values (null, 1, 1, '2019-12-02 00:00:00');
+
 
 create view empAnciente as select e.*,TIMESTAMPDIFF(year,dateEmbauche,NOW()) as years from employe e
 
-insert into motifConge values ('M1','repos medical','ND');
-insert into motifConge values ('M2','evenement familial','ND');
-insert into motifConge values ('M3','conge parental','ND');
-insert into motifConge values ('M4','non justifie','D');
-insert into motifConge values ('M5','autre','D');
+insert into motifConge values ('M1','repos medical','non');
+insert into motifConge values ('M2','evenement familial','non');
+insert into motifConge values ('M3','conge parental','non');
+insert into motifConge values ('M4','non justifie','oui');
+insert into motifConge values ('M5','autre','oui');
 
 create view congePris as (
-    select id,idEmp , SUM(TIMESTAMPDIFF(day,dateDebut,dateFin)) as nbJours 
+    select id,idEmp , SUM(TIMESTAMPDIFF(hour,dateDebut,dateFin)) as nbJours 
     from historiqueConge 
     where TIMESTAMPDIFF(year,dateDebut,NOW())<=3 and etat=1
     group by idEmp 
 );
 
+-- somme des heures de congés en moins tao anaty 4 ans
+create view heureEnMoins as(
+    select ea.idEmploye, sum(heure) as heureMoins, "heure de travail pris sur conge" as remarque from retraitConge rc 
+    join empAnciente ea on ea.idEmploye = rc.idEmp
+    where TIMESTAMPDIFF(year,dateDiminution,NOW())<=MOD(years,4)
+
+);
+select * from congePris cross join heureEnMoins
+
 create view etatConge as (
-    select idEmploye,dateEmbauche,years as anneeTravail,MOD(years,4)*30 as cumule,
+    select ea.idEmploye,dateEmbauche,years as anneeTravail,MOD(years,4)*30*24 as cumule,
     case 
         when cp.nbJours is null then 0
         else cp.nbJours
     end pris,
     case
         when cp.nbJours is null then 0
-        else MOD(years,4)*30-cp.nbJours 
+        when hm.heureMoins is null then MOD(years,4)*30*24-cp.nbJours
+        else MOD(years,4)*30*24-cp.nbJours-hm.heureMoins
     end restant,
     case 
-        when MOD(years,4)*30 = 0 and years > 0 then "conge expire"
-        when MOD(years,4)*30 = 0 and years = 0 then "travail depuis moins d'un an"
+        when MOD(years,4)*30*24 = 0 and years > 0 then "conge expire"
+        when MOD(years,4)*30*24 = 0 and years = 0 then "travail depuis moins d'un an"
+        when hm.remarque is not null then hm.remarque
     else ""
     end remarque
     from empAnciente ea left join congePris cp on ea.idEmploye=cp.idEmp
+    left join heureEnMoins hm on hm.idEmploye=ea.idEmploye
 );
+
+
 
 create view demandeEnCours as (
     select hc.id,idEmp,mc.description,DATE(dateDebut) as dateDebut,
@@ -102,7 +128,19 @@ select
     else "Date Congé Valide"
     end as Controle
 
-    
+DELIMITER $$
+CREATE FUNCTION diminuerConger (heure int, idEmpl int)
+RETURNS boolean 
+BEGIN
+   DECLARE val boolean;
+   SET val = (select
+        case when restant-heure >0 then true
+        else false
+    end peutDiminuer
+    from etatConge where idEmploye=idEmpl);
+   RETURN (val);
+END$$ 
+DELIMITER ;
 
 DELIMITER $$
 CREATE FUNCTION controleDate ( dateDebut DATETIME ,dateFin DATETIME)
@@ -164,4 +202,21 @@ create view employe_view as
         join salaire on salaire.idEmploye = employe.idSalaire
 
 
+create view EmployeConge AS
+select hc.*,motifconge.description,motifconge.deductibilite,e.idPoste, e.idSalaire, e.dateEmbauche,p.nom,p.prenom,(timestampdiff(HOUR ,hc.dateDebut,hc.dateFin))as NbrHeure
+from historiqueconge as hc
+         join motifconge on hc.motif = motifconge.id
+         join employe e on hc.idEmp = e.idEmploye
+         join personne p on e.idPersonne = p.idPersonne
 
+
+
+DELIMITER $$
+CREATE PROCEDURE retraitHeureConge(IN heureRetire int, IN idEmploye int)
+BEGIN
+    select diminuerConger(heureRetire,idEmploye) as retrait;
+    IF (retrait=1) THEN 
+        insert into retraitConge values (null, idEmploye, heureRetire, NOW());
+    END IF;
+END$$
+DELIMITER ;

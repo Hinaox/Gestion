@@ -124,4 +124,67 @@ class Conge extends CI_Model{
         }
         return $val;
     }
+    public function heurePeutEtreRetireDuConge($heure, $idEmploye){
+        $sql = "select diminuerConger(%d, %d) as retrait";
+        $sql = sprintf($sql,$heure,$idEmploye);
+        $query = $this->db->query($sql);
+        $val = null;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val = $value;  
+            }
+        }
+        return $val;
+    }
+    function getConger($idEmpl)
+    {
+        $sql ="select * from EmployeConge where idEmp=".$idEmpl;
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val;
+        
+    }
+
+    function getNbrCongerDeductible($idEmpl)
+    {
+        $sql ="select SUM(NbrHeure) from EmployeConge where idEmp=".$idEmpl." and deductibilite='oui' and  (select YEAR(dateDebut)) = (select YEAR(NOW()))";
+        $query = $this->db->query($sql);
+        $val = null;
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val = $value;  
+            }
+        }
+        return $val;
+    }
+
+    function getNbrCongerNDeductible($idEmpl)
+    {
+        $sql ="select SUM(NbrHeure) from EmployeConge where idEmp=".$idEmpl." and deductibilite='non' and  (select YEAR(dateDebut)) = (select YEAR(NOW()))";
+        $query = $this->db->query($sql);
+        $val = null;
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val = $value;  
+            }
+        }
+        return $val;
+    }
 }

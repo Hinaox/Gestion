@@ -2,7 +2,6 @@
     
   <div class="container">>
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h2>Justificatif de congé</h2>
         <h3>non deductible sur congé</h3>
       </div>
@@ -47,7 +46,6 @@
                 </div>
             <?php } ?>
           <button class="w-100 btn btn-success btn-lg" type="submit">Demander</button>
-          <a href = "#"> Voir son état de congé </a>
           <hr class="my-4">
 
         </div>
