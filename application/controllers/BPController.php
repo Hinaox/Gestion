@@ -28,6 +28,8 @@ class BPController extends CI_Controller {
 	{
 		$this->load->model('BPModel');
 		$data=array();
+		$nbPage=$this->BPModel->nbPagination();
+		$data['nbPage']=$nbPage/20;
 		$data['listeBP'] = $this->BPModel->getListeBP();
 		$this->load->view('listeBP',$data);
 		
