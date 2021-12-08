@@ -19,8 +19,7 @@ class Formulaire extends CI_Controller
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
-    public function index()
-    {
+    public function setData(){
         $this->load->model('BDtable');
         $this->load->model('Connex');
         $this->load->model('poste');
@@ -46,6 +45,11 @@ class Formulaire extends CI_Controller
         $grade = new grade();
         $data['listeGrade'] = $grade->find($connexion);
 
+        return $data;
+    }
+    public function index()
+    {
+        $data = $this->setData();
         $this->load->view('FormulaireCV', $data);
     }
 
@@ -263,5 +267,8 @@ class Formulaire extends CI_Controller
         var_dump($competence->getNiveau());*/
 
         $competence->Insert($connexion);
+        $data = $this->setData();
+        $data["success"]="Votre candidature a été envoyée";
+        $this->load->view('FormulaireCV', $data);
     }
 }
