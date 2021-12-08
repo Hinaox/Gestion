@@ -4,7 +4,7 @@ class Conge extends CI_Model{
    
     public function getMotifsDeductible()
     {
-        $sql = "SELECT * FROM motifConge where deductibilite='D'";
+        $sql = "SELECT * FROM motifConge where deductibilite='oui'";
         $query = $this->db->query($sql);
         $val = array();
         $i = 0;
@@ -20,7 +20,7 @@ class Conge extends CI_Model{
     }
     public function getMotifsNonDeductible()
     {
-        $sql = "SELECT * FROM motifConge where deductibilite='ND'";
+        $sql = "SELECT * FROM motifConge where deductibilite='non'";
         $query = $this->db->query($sql);
         $val = array();
         $i = 0;

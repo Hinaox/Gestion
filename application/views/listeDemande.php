@@ -27,9 +27,9 @@
         <td><?php echo $demandes[$i]['dateDebut']; ?></td>
         <td><?php echo $demandes[$i]['dateFin']; ?></td>
         <td><?php echo $demandes[$i]['demande']; ?></td>
-        <td><?php echo $demandes[$i]['cumule']; ?></td>
-        <td><?php echo $demandes[$i]['pris']; ?></td>
-        <td><?php echo $demandes[$i]['restant']; ?></td>
+        <td><?php echo $demandes[$i]['cumule']; ?>h (<?php echo $demandes[$i]['cumule']/24; ?>j)</td>
+        <td><?php echo $demandes[$i]['pris']; ?>h (<?php echo $demandes[$i]['pris']/24; ?>j)</td>
+        <td><?php echo $demandes[$i]['restant']; ?>h (<?php echo $demandes[$i]['restant']/24; ?>j)</td>
         <td><?php echo $demandes[$i]['remarque']; ?></td>
         <td><?php echo $demandes[$i]['nomDepartement']; ?></td>
         <td><?php echo $demandes[$i]['nomPoste']; ?></td>
