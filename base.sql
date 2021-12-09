@@ -573,6 +573,7 @@ create table historiqueConge(
     foreign key (motif) references motifConge(id)
 );
 
+-- raha miala amin'ny congé ny heure de travail any dia miditra ato ilay heure nalaina
 create table retraitConge(
     id int not null auto_increment primary key,
     idEmp int,
@@ -581,12 +582,12 @@ create table retraitConge(
     foreign key (idEmp) references employe(idEmploye)
 );
 
-
+--données de test
 insert into retraitConge values (null, 1, 1, '2021-12-02 00:00:00');
 insert into retraitConge values (null, 1, 1, '2021-11-02 00:00:00');
 insert into retraitConge values (null, 1, 1, '2019-12-02 00:00:00');
 
-
+-- anciennete ana employe
 create view empAnciente as select e.*,TIMESTAMPDIFF(year,dateEmbauche,NOW()) as years from employe e
 
 insert into motifConge values ('M1','repos medical','non');
@@ -595,7 +596,7 @@ insert into motifConge values ('M3','conge parental','non');
 insert into motifConge values ('M4','non justifie','oui');
 insert into motifConge values ('M5','autre','oui');
 
-
+-- congé nalain'ny olona tsirairay dans un intervalle de 4 ans satria 4ans = 90jours de congés 
 create view congePris as (
     select id,idEmp , SUM(TIMESTAMPDIFF(hour,dateDebut,dateFin)) as nbJours 
     from historiqueConge 
@@ -610,6 +611,7 @@ create view heureEnMoins as(
 
 );
 
+--etat de congé an'ny olona isaky ny 90j
 create view etatConge as (
     select ea.idEmploye,dateEmbauche,years as anneeTravail,MOD(years,4)*30*24 as cumule,
     case 
