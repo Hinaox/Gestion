@@ -19,16 +19,70 @@ class Offre extends CI_Controller
      * map to /index.php/Fiche/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('AjouterOffre');
+        $this->load->helper('url');
+    }
     public function index()
+    {
+        $posteId=1;
+        $poste = $this->AjouterOffre->getPosteById($posteId);
+        // eto no soloina le izy $_GET['grade] de lasa diplome
+        $diplomes = $this->AjouterOffre->getDiplomeByCateg(4);
+        // var_dump($diplomes);
+        $data=array();
+        $data['postenom']=$poste;
+        $data['diplomes']= $diplomes;
+        $this->load->view('ajoutOffre',$data);
+    }
+    public function pageAjoutOffre(){
+        // eto no soloina get le izy $_GET['idPoste]
+        $posteId=1;
+        $poste = $this->AjouterOffre->getPosteById($posteId);
+        // eto no soloina le izy $_GET['grade] de lasa diplome
+        $diplomes = $this->AjouterOffre->getDiplomeByCateg(4);
+        // var_dump($diplomes);
+        $data=array();
+        $data['postenom']=$poste;
+        $data['diplomes']= $diplomes;
+        $this->load->view('ajoutOffre',$data);
+    }
+    public function index2()
     {
         $this->load->helper('url');
         $data = array();
-        //maka anaty base
-        // $data['nom'] = "RAKOTO";
-        // $data['prenom'] = "ZAFY";
-        // $data['matricule'] = "781227";
-        // $data['photo'] =  base_url("assets/photos/icon.png");
-
-        $this->load->view('ajoutOffre', $data);
+        $listeOffres = $this->AjouterOffre->getListeOffre();
+        // $diplomes = $this->AjouterOffre->getDiplomesOffre();
+        // $data['diplomes'] = $diplomes;
+        // var_dump($listeOffres);
+        $data['listeOffres'] = $listeOffres;
+        $this->load->view('ListeOffre', $data);
+    }
+    public function insertOffre()
+    {
+        date_default_timezone_set('Indian/Antananarivo');
+        $data = array();
+        $data['Poste']  = $this->input->post('poste');
+        $data['description'] = $this->input->post('Description');
+        $data['responsabilite'] = $this->input->post('responsabilite');
+        $data['ageMin']  = $this->input->post('ageMIn');
+        // $data['']  = $this->input->post('ageMax');
+        $data['idDiplomeOffre']  = $this->input->post('diplomes');
+        $data['Experiences']  = $this->input->post('experience');
+        $data['AutreExperience']  = $this->input->post('AutreExigences');
+        $date = $this->input->post('date');
+        $mysqlDate = date("Y-m-d", strtotime($date));
+        $data['dateLimite'] = $mysqlDate;
+        echo $data['dateLimite'];
+        // echo $post . '</br>' . $responsabilite . '</br>' . $Description . '</br>' . $ageMIn;
+        // echo $ageMax . '</br>' . $diplomes . '</br>' . $experience . '</br>' . $AutreExigences . '</br>' . $date;
+        $response = $this->AjouterOffre->insertOffre($data);
+        if ($response == true) {
+            echo "Records Saved Successfully";
+        } else {
+            echo "Insert error !";
+        }
     }
 }
