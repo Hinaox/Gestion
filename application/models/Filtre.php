@@ -1,7 +1,34 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 
 class Filtre extends CI_Model{
-
+        public function getAllCV()
+        {
+                $query = "select idPersonne,nomPersonne,age,sexe,distance,matrimonial,titrediplome,titregrade,titredomaine,
+                CONCAT(
+                (IF(idPersonne in (select idPersonne from filtre_view where nomposteexperience='caissier'),'Caissier','')),',',
+                (IF(idPersonne in (select idPersonne from filtre_view where nomposteexperience='Comptable'),'Comptable','')),',',
+                (IF(idPersonne in (select idPersonne from filtre_view where nomposteexperience='infirmiere'),'Infirmiere','')),',',
+                (IF(idPersonne in (select idPersonne from filtre_view where nomposteexperience='responsable marketing'),' Responsable marketing','')) 
+                ) as nomPosteExperience,
+                dateentreexperience,datesortieexperience,nomposte,nomdepartement,
+                CONCAT(
+                (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Anglais'),'Anglais','')),',',
+                (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Francais'),'Francais','')),',',
+                (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Russe'),'Russe','')),',',
+                (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Mandarin'),'Mandarin','')),',',
+                (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Malgache'),'Malgache',''))
+                ) as AllLangue
+                from filtre_view ";
+                $query.="group by idpersonne,nomPersonne,age,sexe,distance,matrimonial,titrediplome,titregrade,titredomaine,nomPosteExperience,dateentreexperience,datesortieexperience,nomposte,nomdepartement";
+                // echo $query;
+        
+                $result = $this->db->query($query);
+                $filtre = array();
+                foreach ($result->result_array() as $key) {
+                    $filtre[] = $key;
+                }
+                return $filtre;
+        }
 	public  function getFiltre($matrimonial,$age,$distance,$titreLangue,$sexe,$nomPosteExperience,$titreDomaine,$titreDiplome,$titreGrade){
         $isFirst=0;
         $query = "select idPersonne,nomPersonne,age,sexe,distance,matrimonial,titrediplome,titregrade,titredomaine,

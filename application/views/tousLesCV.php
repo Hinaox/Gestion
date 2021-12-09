@@ -3,14 +3,14 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap.css" >
-	<title>Resultat du  Filtre</title>
+	<title>Liste de tous les CV</title>
 </head>
 <body>
 	<div class="container">
         <br>
         <br>
 		<div class="row">
-			<h1>Resultat du Filtre des CV : <?php echo count($filtre) ?> Trouvée(s) </h1>
+			<h1>Liste de tous les CV</h1>
 			<table class="table table-hover" border="1">
                 <thead class="thead-dark">
                     <tr>
@@ -42,6 +42,9 @@
                 </tr>
                 <?php } ?>
             </table>
+            <form action ="<?php echo site_url('FiltreCVController/'); ?>" action="get">
+                <button>Filtrer</button>
+            </form>
 		</div>
 	</div>
 

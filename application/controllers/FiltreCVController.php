@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class FiltreController extends CI_Controller {
+class FiltreCVController extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -26,7 +26,13 @@ class FiltreController extends CI_Controller {
 
 		$this->load->view('filtre',$data);
 	}
+	public function tousCV(){
+		$this->load->model('filtre');
+		$data = array();
+		$data['filtre'] = $this->filtre->getAllCV();
 
+		$this->load->view('tousLesCV',$data);
+	}
 	public function filtreCV(){
 		
 		$this->load->model('filtre');

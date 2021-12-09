@@ -155,8 +155,9 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-4">
+        <a href="<?php echo site_url('FiltreCVController/tousCV'); ?>">Voir tous les CV</a>
 
-            <form method="GET" action="<?php echo base_url();?>Formulaire/traiteCV" class="request-form ftco-animate">
+            <form method="GET" action="<?php echo base_url();?>FormulaireInsertionCV/traiteCV" class="request-form ftco-animate">
 
                 <center>
                     <h2>Curiculum Vitae</h2>

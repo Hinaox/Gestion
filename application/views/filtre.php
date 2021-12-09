@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="<?php  echo site_url("assets/css/bootstrap.min.css") ?>" >
+	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap.css" >
 	
 	<!-- <link rel="stylesheet" href="css/style.css"> -->
 	<title>Filtre du CV</title>
@@ -18,7 +18,7 @@
 				<br>
 				<h5>Tous les champs ne sont pas obligatoires</h5>
 				<br>
-				<form  action="<?php echo site_url('FiltreController/filtreCV'); ?>" method="post">
+				<form  action="<?php echo site_url('FiltreCVController/filtreCV'); ?>" method="post">
 
 
 					<!-- situation matri -->
