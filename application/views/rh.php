@@ -139,7 +139,7 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
+        <a href="<?php echo site_url("demandeCongeCtrl/"); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
             Liste Demande Congé
         </a>
@@ -174,9 +174,7 @@
   </div>
 
   <div class="b-example-divider"></div>
-
 </main>
-
 
     <script src="<?php echo site_url('/assets/dist/js/bootstrap.bundle.min.js');?>"></script>
 
