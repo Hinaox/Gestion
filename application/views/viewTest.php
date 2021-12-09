@@ -21,13 +21,6 @@
 		    <li class="page-item disabled">
 		      <span class="page-link">Previous</span>
 		    </li>
-<!-- 		    <li class="page-item active">
-		      <span class="page-link">
-		        1
-		        <span class="sr-only">(current)</span>
-		        
-		      </span>
-		    </li> -->
 		    <input type="hidden" id="site" value="<?php echo site_url() ?>">
 		    <?php for($i=1;$i<$nbPage;$i++) {?>
 		    	<li class="page-item" id="indicePage<?php echo $i ;?>" value="<?php echo $i?>">
