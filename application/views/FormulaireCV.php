@@ -161,6 +161,11 @@
                 <center>
                     <h2>Curiculum Vitae</h2>
                 </center>
+                <?php if(!empty($succes)){ ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $succes; ?>
+                </div>
+                <?php } ?>
 
                 <div class="form-group">
                     <label for="">Nom</label>
@@ -349,6 +354,11 @@
                     <center><button type="submit" class="btn btn-success" style="border-radius: 8px;">Valider</button></center>
                 </div>
             </form>
+            <?php if(!empty($succes)){ ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $succes; ?>
+                </div>
+            <?php } ?>
         </div>
 
         <div class="col-md-1"></div>
