@@ -712,3 +712,30 @@ from historiqueconge as hc
          join motifconge on hc.motif = motifconge.id
          join employe e on hc.idEmp = e.idEmploye
          join personne p on e.idPersonne = p.idPersonne
+
+--view ilaina @ CV
+create view filtre_view as 
+    select 
+        personne.idPersonne,personne.nom as nomPersonne,(YEAR(NOW())-substring(personne.dtn,1,4)) as age,personne.sexe,personne.distance,personne.matrimonial,
+        cv_langue.niveau,
+        langue.titre as titreLangue,
+        diplome.titre as titreDiplome,
+        grade.titre as titreGrade,
+        domaine.titre as titreDomaine,
+        experience.poste as nomPosteExperience,experience.dateEntre as dateEntreExperience, experience.dateSortie as dateSortieExperience,
+        poste.nom as nomPoste,
+        departement.nom as nomDepartement
+    from
+        cv
+        join personne on personne.idPersonne=cv.idPersonne
+        join cv_langue on cv_langue.idCV=cv.idCV
+        join langue on langue.idLangue=cv_langue.idLangue
+        join diplome on diplome.idCV=cv.idCV
+        join grade on diplome.idGrade=grade.idGrade
+        join experience on experience.idCV=cv.idCV
+        join experience_domaine on experience_domaine.idExperience=experience.idExperience
+        join domaine on domaine.idDomaine=experience_domaine.idDomaine
+        join cv_poste on cv_poste.idCV=cv.idCV
+        join poste on poste.idPoste=cv_poste.idPoste
+        join departement on departement.idDepartement=poste.idDepartement
+    ;
