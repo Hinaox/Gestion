@@ -1,7 +1,7 @@
 <?php
 
 
-class BDtable Extends CI_Model
+class BDtable Extends CI_Controller
 
 {
 	

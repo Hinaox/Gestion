@@ -161,11 +161,7 @@
                 <center>
                     <h2>Curiculum Vitae</h2>
                 </center>
-                <?php if (!empty($success)){ ?>
-                    <div class="alert alert-success" role="alert">
-                    <?php echo $success; ?>
-                    </div>
-                <?php } ?>
+
                 <div class="form-group">
                     <label for="">Nom</label>
                     <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" required></input>
@@ -187,11 +183,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <label for="">Adresse</label>
                     </div>
-                    <div class="col-md-6">
-                        <label for="">(cliquer sur "lieu" pour remplir)</label>
+                    <div class="col-md-4">
+                        <label for=""></label>
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse" required></input>
@@ -352,11 +348,6 @@
                 <div class="form-group">
                     <center><button type="submit" class="btn btn-success" style="border-radius: 8px;">Valider</button></center>
                 </div>
-                <?php if (!empty($success)){ ?>
-                    <div class="alert alert-success" role="alert">
-                    <?php echo $success; ?>
-                    </div>
-                <?php } ?>
             </form>
         </div>
 
