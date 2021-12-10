@@ -16,6 +16,8 @@ create table Fournisseur (
     nomFournisseurstat
 );
 
+
+
 /*create table proformat(
     id varchar(10) primary key,
     dateValidite date,
@@ -26,7 +28,16 @@ create table Fournisseur (
 );*/
 
 create table demandeGrouper(
+    idDemandeGrouper int auto_increment primary key
+    label varchar(150),
+    quantite float
+);
 
+create table detailDemandeGrouper(
+    idDemandeGrouper int,
+    idDemande int,
+    foreign key (idDemandeGrouper) references demandeGrouper(idDemandeGrouper),
+    foreign key (idDemande) references demande(id)  
 );
 
 select dem.idDepartement,label,nom,quantite,unite,etat from demande dem
