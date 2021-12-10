@@ -21,10 +21,6 @@
                         <th>Note</th>
                         <th>Date entretien</th>
                         <th>Heure entretien</th>
-                        
-
-                        
-                        
                     </tr>
                 </thead>
                 <?php for($i=0;$i<count($entretien);$i++){?>

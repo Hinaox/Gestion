@@ -22,10 +22,6 @@
                         <th>Date entretien</th>
                         <th>Heure entretien</th>
                         <th>validation</th>
-                        
-
-                        
-                        
                     </tr>
                 </thead>
                 <?php for($i=0;$i<count($personne);$i++){?>

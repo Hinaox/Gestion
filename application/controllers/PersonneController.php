@@ -9,9 +9,9 @@ public function __construct(){
     public function index()
     {
         $this->load->helper('url');
-        $this->load->model('Personne');
+        $this->load->model('PersonneDao','pdao');
         $data = array();
-        $data['personne'] = $this->->getAttente();
+        $data['personne'] = $this->pdao->getAttente();
 
         $this->load->view('personne',$data);
 
@@ -19,7 +19,7 @@ public function __construct(){
 
     public function insertentretien(){
         
-        $this->load->model('Personne');
+        $this->load->model('PersonneDao','pdao');
         $data = array();
       
         $idpersonne=$this->input->post('idPersonne');
@@ -28,19 +28,19 @@ public function __construct(){
         $note=$this->input->post('note');
         if($note>49)
         {
-            $this->->insertentretien($idpersonne,$note,$date,$heure);
-            $this->->deleteAttente($idpersonne);
+            $this->insertentretien($idpersonne,$note,$date,$heure);
+            $this->deleteAttente($idpersonne);
         }
 
-        $data['personne'] = $this->->getAttente();
+        $data['personne'] = $this->getAttente();
 
       $this->load->view('personne',$data);
     }
     public function afficheEntretien(){
         $this->load->helper('url');
-          $this->load->model('Personne');
+          $this->load->model('PersonneDao','pdao');
         $data = array();
-        $data['entretien']= $this->->getEntretien();
+        $data['entretien']= $this->pdao->getEntretien();
         $this->load->view('liste_view',$data);
 
     }
