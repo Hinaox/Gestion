@@ -155,12 +155,18 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-4">
+        <a href="<?php echo site_url('FiltreCVController/tousCV'); ?>">Voir tous les CV</a>
 
-            <form method="GET" action="traiteCV" class="request-form ftco-animate">
+            <form method="GET" action="<?php echo base_url();?>FormulaireInsertionCV/traiteCV" class="request-form ftco-animate">
 
                 <center>
                     <h2>Curiculum Vitae</h2>
                 </center>
+                <?php if(!empty($succes)){ ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $succes; ?>
+                </div>
+                <?php } ?>
 
                 <div class="form-group">
                     <label for="">Nom</label>
@@ -183,11 +189,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <label for="">Adresse</label>
                     </div>
-                    <div class="col-md-6">
-                        <label for="">(cliquer sur "lieu" pour remplir)</label>
+                    <div class="col-md-4">
+                        <label for=""></label>
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse" required></input>
@@ -349,6 +355,11 @@
                     <center><button type="submit" class="btn btn-success" style="border-radius: 8px;">Valider</button></center>
                 </div>
             </form>
+            <?php if(!empty($succes)){ ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $succes; ?>
+                </div>
+            <?php } ?>
         </div>
 
         <div class="col-md-1"></div>
