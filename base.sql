@@ -739,3 +739,15 @@ create view filtre_view as
         join poste on poste.idPoste=cv_poste.idPoste
         join departement on departement.idDepartement=poste.idDepartement
     ;
+create table entretien(
+    idEntretien int not null auto_increment primary key,
+    idPersonne int,
+    note int,
+    dateentretien date,
+    heureentretien time
+);
+create table attente(
+    idAttente int not null auto_increment primary key,
+    idPersonne int
+);
+INSERT INTO attente VALUES (null,14),(null,15);
