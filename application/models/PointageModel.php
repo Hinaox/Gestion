@@ -9,15 +9,15 @@ class PointageModel extends CI_Model{
             $query = "update pointage set datefin=now() where dateFin is NULL and datedebut is not NULL and idEmploye=".$idEmploye;
         } 
 		$ret=$this->db->query($query);
-        var_dump($query);
+        // var_dump($query);
     }
 	public function getEmploye($idEmploye)
 	{
         if($idEmploye != ""){
             $sql = "SELECT * FROM employe_view where idEmploye=".$idEmploye;
             $query = $this->db->query($sql);
-            $row = $query->row();
-            return count($row); 
+            $row = $query->num_rows();
+            return $row; 
         }
         return 0;
 	}
@@ -25,8 +25,8 @@ class PointageModel extends CI_Model{
         $sql = null;  
         $sql = "SELECT * FROM pointage where idEmploye = ".$idEmploye." and datefin is NULL";  
         $query = $this->db->query($sql);
-        $row = $query->row();
-        return count($row);     
+        $row = $query->num_rows();
+        return $row;     
     }
     
 }
