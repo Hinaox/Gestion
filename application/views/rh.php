@@ -131,6 +131,12 @@ if (empty($viewRH)){
         </a>
       </li>
       <li>
+        <a href="<?php echo site_url("filtreCVController/tousCV"); ?>" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer"/></svg>
+          Module CV
+        </a>
+      </li>
+      <li>
         <a href="<?php echo site_url("pointage/"); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
           Pointage
