@@ -116,7 +116,7 @@ if (empty($view)){
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
         <a href="<?php echo site_url('demandeCongeCtrl/'); ?>" class="nav-link active" aria-current="page">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Liste des demandes
         </a>
       </li>
@@ -136,6 +136,12 @@ if (empty($view)){
         <a href="<?php echo site_url('EtatCongeCtrl/'); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Etat de congé
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="<?php echo site_url('RHController/'); ?>" class="nav-link  link-dark" aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+          Retour à la page d'accueil
         </a>
       </li>
     </ul>

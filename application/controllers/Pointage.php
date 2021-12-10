@@ -23,9 +23,9 @@ class Pointage extends CI_Controller {
         parent::__construct();
 
     }
-    public function afficher(){
-        $data['employe']= "kiko";
-        $this->load->view('pointage',$data);
+    public function index(){
+        $data['viewRH']= "pointage";
+        $this->load->view('rh',$data);
     }
     public function erreur($erreur){
         $data['erreur']= $erreur;

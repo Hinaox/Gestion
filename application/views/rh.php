@@ -1,3 +1,8 @@
+<?php
+if (empty($viewRH)){
+        $viewRH = 'accueil';
+    }
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -97,7 +102,6 @@
 </svg>
 
 <main>
-  <h1 class="visually-hidden">Sidebars examples</h1>
 
   <div class="b-example-divider"></div>
 
@@ -108,16 +112,16 @@
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
+      <li>
+        <a href="#" class="nav-link active">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-          Générer Offre
+          Organigramme
         </a>
       </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          Organigramme
+      <li class="nav-item">
+        <a href="#" class="nav-link link-dark" aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          Générer Offre
         </a>
       </li>
       <li>
@@ -127,13 +131,19 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          Liste Bulletin de Paie
+        <a href="<?php echo site_url("pointage/"); ?>" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+          Pointage
         </a>
       </li>
       <li>
         <a href="#" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+          Bulletin de Paie
+        </a>
+      </li>
+      <li>
+        <a href="<?php echo site_url("irsaController/"); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
             Modification IRSA
         </a>
@@ -141,13 +151,13 @@
       <li>
         <a href="<?php echo site_url("demandeCongeCtrl/"); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-            Liste Demande Congé
+            Congé
         </a>
       </li>
       <li>
         <a href="#" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-            Liste Demande Heure Supp
+            Heures Supplémentaire
         </a>
       </li>
       <li>
@@ -173,7 +183,10 @@
     </div>
   </div>
 
-  <div class="b-example-divider"></div>
+  <div class="b-example-divider" ></div>
+  <div>
+    <?php include $viewRH.'.php' ; ?>
+  </div>
 </main>
 
     <script src="<?php echo site_url('/assets/dist/js/bootstrap.bundle.min.js');?>"></script>
