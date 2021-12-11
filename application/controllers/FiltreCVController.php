@@ -21,9 +21,11 @@ class FiltreCVController extends CI_Controller {
 	public function index()
 	{
 		$this->load->helper('url');
-		$data = array();
+		$data = array(
+			"view" => "filtre"
+		);
 
-		$this->load->view('filtre',$data);
+		$this->load->view('templateCV',$data);
 	}
 	public function tousCV(){
 		$this->load->model('filtre');
@@ -32,7 +34,7 @@ class FiltreCVController extends CI_Controller {
 			"view" => "tousLesCV",
 			"filtre" => $all
 		);
-		$this->load->view('template',$data);
+		$this->load->view('templateCV',$data);
 	}
 	public function filtreCV(){
 		
@@ -62,8 +64,12 @@ class FiltreCVController extends CI_Controller {
 		// $annee = $this->input->post('annee');
 
 
-		$data['filtre'] = $this->filtre->getFiltre($matrimoniale,$ageMin,$distanceMax,$langue,$sexe,$poste,$domaine,$diplome,$grade);
+		$filtre= $this->filtre->getFiltre($matrimoniale,$ageMin,$distanceMax,$langue,$sexe,$poste,$domaine,$diplome,$grade);
+		$data = array(
+			"view" => "resultat_filtre",
+			"filtre" => $filtre
+		);
 
-		$this->load->view('resultat_filtre',$data);
+		$this->load->view('templateCV',$data);
 	}
 }

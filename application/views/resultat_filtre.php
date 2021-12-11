@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap.css" >
-	<title>Resultat du  Filtre</title>
-</head>
-<body>
+
 	<div class="container">
-        <br>
-        <br>
 		<div class="row">
 			<h1>Resultat du Filtre des CV : <?php echo count($filtre) ?> Trouvée(s) </h1>
 			<table class="table table-hover" border="1">
@@ -38,12 +29,9 @@
                     <td><?php echo $filtre[$i]['titreGrade'] ?></td>
                     <td><?php echo $filtre[$i]['titreDiplome'] ?></td>
                     <td><?php echo $filtre[$i]['AllLangue'] ?></td>
-                    <td><a href="#" class="btn btn-success">Envoyer vers Test</a></td>
+                    <td><a href="<?php echo site_url('personneController/'); ?>" class="btn btn-success">Envoyer vers Test</a></td>
                 </tr>
                 <?php } ?>
             </table>
 		</div>
 	</div>
-
-</body>
-</html>

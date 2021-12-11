@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
-	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap.css" >
-	
-	<!-- <link rel="stylesheet" href="css/style.css"> -->
-	<title>Filtre du CV</title>
-</head>
-<body>
-	<div class="container h-100">
+
+	<div class="container">
 		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
+			<div class="col">
 				
 				<h1 style="text-align: center;">Filtre Cv </h1>
 				<br>
@@ -153,12 +142,10 @@
 
 				</div>
 			</div>
-			<div class="col-md-2"></div>
 		</div>
 	</div>
 
 
-</body>
 <script type="text/javascript" src="<?php  echo site_url("assets/js/jquery-3.4.1.min.js") ?>"></script>
 <!-- <script src="js/app.js"></script> -->
 <?php
@@ -216,4 +203,3 @@ $(document).ready(function(){
 })
 
 </script>
-</html>

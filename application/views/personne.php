@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-    <link rel="stylesheet" href="<?php  echo site_url("assets/css/bootstrap.min.css") ?>" >
-	
-	<title>Resultat</title>
-</head>
-<body>
-	<div class="container">
-        <br>
-        <br>
-		<div class="row">
-            
 
+	<div class="container">
+		<div class="row">
 			<h1>Liste des admis pour avoir un entretien </h1>
 			<table class="table table-hover" border="1">
                 <thead class="thead-dark">
@@ -49,6 +37,3 @@
 		</div>
 	</div>
 
-</body>
-
-</html>

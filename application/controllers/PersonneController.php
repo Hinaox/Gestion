@@ -10,10 +10,13 @@ public function __construct(){
     {
         $this->load->helper('url');
         $this->load->model('PersonneDao','pdao');
-        $data = array();
-        $data['personne'] = $this->pdao->getAttente();
+        $val = $this->pdao->getAttente();
+        $data = array(
+            "view" => "personne",
+            "personne" => $val
+        );
 
-        $this->load->view('personne',$data);
+        $this->load->view('templateCV',$data);
 
     }
 
