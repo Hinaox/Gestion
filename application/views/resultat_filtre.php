@@ -29,7 +29,7 @@
                     <td><?php echo $filtre[$i]['titreGrade'] ?></td>
                     <td><?php echo $filtre[$i]['titreDiplome'] ?></td>
                     <td><?php echo $filtre[$i]['AllLangue'] ?></td>
-                    <td><a href="<?php echo site_url('personneController/'); ?>" class="btn btn-success">Envoyer vers Test</a></td>
+                    <td><a href="<?php echo site_url('personneController/insertIntoAttente?idPersonne='.$filtre[$i]['idPersonne']); ?>" class="btn btn-success">Envoyer vers Test</a></td>
                 </tr>
                 <?php } ?>
             </table>

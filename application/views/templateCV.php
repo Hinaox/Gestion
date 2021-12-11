@@ -125,10 +125,17 @@ if (empty($view)){
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
           Filtrage
         </a>
-      </li><li>
-        <a href="<?php echo site_url('filtreCVController/'); ?>" class="nav-link link-dark">
+      </li>
+      <li>
+        <a href="<?php echo site_url('PersonneController/'); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          Les admis à l'entretien
+          Formulaire d'admission
+        </a>
+      </li>
+      <li>
+        <a href="<?php echo site_url('PersonneController/afficheEntretien'); ?>" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+          Liste des admis à l'entretien
         </a>
       </li>
       <li class="nav-item">

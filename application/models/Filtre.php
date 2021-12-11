@@ -18,8 +18,9 @@ class Filtre extends CI_Model{
                 (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Mandarin'),'Mandarin','')),',',
                 (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Malgache'),'Malgache',''))
                 ) as AllLangue
-                from filtre_view ";
-                $query.="group by idpersonne,nomPersonne,age,sexe,distance,matrimonial,titrediplome,titregrade,titredomaine,nomPosteExperience,dateentreexperience,datesortieexperience,nomposte,nomdepartement";
+                from filtre_view where idPersonne not in (select idPersonne from attente)";
+                $query.="group by idpersonne,nomPersonne,age,sexe,distance,matrimonial,titrediplome,titregrade,titredomaine,nomPosteExperience,
+                dateentreexperience,datesortieexperience,nomposte,nomdepartement";
                 // echo $query;
         
                 $result = $this->db->query($query);
@@ -46,7 +47,7 @@ class Filtre extends CI_Model{
                         (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Mandarin'),'Mandarin','')),',',
                         (IF(idPersonne in (select idPersonne from filtre_view where titreLangue='Malgache'),'Malgache',''))
                         ) as AllLangue
-                        from filtre_view ";
+                        from filtre_view where idPersonne not in (select idPersonne from attente) ";
         if($matrimonial!="" || $age!="" || $distance!="" || $titreLangue!="" || $sexe!="" || $nomPosteExperience!="" || $titreDomaine!="" || $titreDiplome!="" || $titreGrade!=""){
                 $query.=" where ";
         }

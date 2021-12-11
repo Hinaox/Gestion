@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-    <link rel="stylesheet" href="<?php  echo site_url("assets/css/bootstrap.min.css") ?>" >
-	
-	<title>Resultat</title>
-</head>
-<body>
+
 	<div class="container">
-        <br>
-        <br>
 		<div class="row">
             
 
@@ -38,7 +28,3 @@
             <button><a href="<?php echo base_url() ?>PersonneController">Retour</a></button>
 		</div>
 	</div>
-
-</body>
-
-</html>
