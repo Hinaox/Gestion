@@ -34,16 +34,16 @@ class DemandeAchatController extends CI_Controller {
         $idDepartement = $this->input->get('idDepartement');
         var_dump($_GET);
         $this->demande->insert($label,$quantite,$unite,$idDepartement);
-        /*$data['employe']= $this->modifierSal->getEmploye($this->session->userdata('idEmploye'));
-        $data['montant']= $this->modifierSal->getSalaire($this->session->userdata('idEmploye'));
-        $this->load->view('modifierSalaire',$data);*/
     }
 
-    public function listerDemande(){
-
+    public function demandeProformat(){
+        $this->load->model('DemandeGrouper');
+        $li=$this->DemandeGrouper->findDemandeGrouper();
+        var_dump($li);
     }
+
     
-    public function demanderDeductible(){
+    /*public function demanderDeductible(){
         $this->load->model('conge');
         $motifs = $this->conge->getMotifsDeductible();
         $data = array(
@@ -146,6 +146,6 @@ class DemandeAchatController extends CI_Controller {
             "reponse" =>$refus
         );
         $this->load->view ('template',$data);
-    }
+    }*/
     
 }

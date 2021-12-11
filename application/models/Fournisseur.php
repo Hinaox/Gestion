@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 
-class Demande extends CI_Model{
+class Fournisseur extends CI_Model{
 
     public function insert($label,$quatite,$unite,$idDepartement){
         $query = "insert into demande values (null,'".$label."',".$quatite.",'".$unite."','".$idDepartement."','envoye')";
@@ -29,7 +29,7 @@ class Demande extends CI_Model{
 
     public function find($idDemande)
 	{
-        $sql = "SELECT * from demande where id = '".$idDemande."'";
+        $sql = "SELECT * from fournisseur";
         $query = $this->db->query($sql);
         $val = array();
         $i = 0;
