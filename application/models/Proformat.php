@@ -7,7 +7,20 @@ class Proformat extends CI_Model{
         $this->db->query($query);
     }
     public function findProformat($idProformat){
-        $sql = "select pro.dateValidite as dateValidite,pro.label as labelProformat,pro.quantité as quantitePro,pro.prix as prix, fou.*,dem.quantite as quantite,dem.label as  label from proformat pro,fournisseur fou , demandeGouper dem where pro.idFournisseur=fou.id and dem.idDemandeGrouper = pro.idDemandeGrouper and pro.id =".$idProformat;
+        $sql = "SELECT pro.dateValidite as dateValidite,
+            pro.id as idProformat,
+            pro.label as labelProformat,
+            pro.quantité as quantitePro,
+            pro.prix as prix,
+            fou.*,
+            dem.quantite as quantite,
+            dem.label as  label 
+            from proformat pro,
+                fournisseur fou, 
+                demandeGrouper dem 
+            where pro.idFournisseur=fou.idFournisseur 
+                and dem.idDemandeGrouper = pro.idDemandeGrouper 
+                and pro.id =".$idProformat;
         $query = $this->db->query($sql);
         $val = array();
         $i = 0;
