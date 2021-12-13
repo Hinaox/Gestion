@@ -36,11 +36,24 @@ class DemandeAchatController extends CI_Controller {
         $this->demande->insert($label,$quantite,$unite,$idDepartement);
     }
 
-    public function demandeProformat(){
+    public function listeDemendeGrouper(){
         $this->load->model('DemandeGrouper');
-        $li=$this->DemandeGrouper->findDemandeGrouper();
-        var_dump($li);
+        $data['demandeGrouper'] = $this->DemandeGrouper->findDemandeGrouper();
+        $this->load->view('listeDemandeGrouper',$data);
     }
+
+    public function ficheDemandeGrouer(){
+        $this->load->model('DemandeGrouper');
+        $id = $this->input->get('id');
+        $data['demandeGrouper'] = $this->DemandeGrouper->findOne($id);
+        // var_dump($data);
+        $this->load->model('Fournisseur');
+        $data['listeFournisseur'] = $this->Fournisseur->find();
+        // var_dump($data);
+        $this->load->view('ficheDemandeGrouper',$data);
+        //var_dump($li);
+    }
+    
 
     
     /*public function demanderDeductible(){

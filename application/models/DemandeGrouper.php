@@ -39,6 +39,18 @@ class DemandeGrouper extends CI_Model{
         return $val;
 	}
 
+    public function findOne($id)
+	{
+        $sql = "SELECT * FROM demandeGrouper where idDemandeGrouper = ".$id;
+        $query = $this->db->query($sql);
+        $val;
+        foreach($query -> result_array() as $row)
+        {
+            $val[] = $row;
+        }
+        return $val;
+	}
+
 
     
 

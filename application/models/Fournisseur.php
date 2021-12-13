@@ -2,34 +2,45 @@
 
 class Fournisseur extends CI_Model{
 
-    public function insert($label,$quatite,$unite,$idDepartement){
-        $query = "insert into demande values (null,'".$label."',".$quatite.",'".$unite."','".$idDepartement."','envoye')";
-		$this->db->query($query);
-    }
+    // public function insert($label,$quatite,$unite,$idDepartement){
+    //     $query = "insert into demande values (null,'".$label."',".$quatite.",'".$unite."','".$idDepartement."','envoye')";
+	// 	$this->db->query($query);
+    // }
 
-    public function getDemande()
-	{
-        $sql = "SELECT id,dem.idDepartement,label,nom,quantite,unite,etat FROM demande dem 
-        join departement dep on dep.idDepartement = dem.idDepartement 
-        WHERE id not in (select idDemande from detailDemandeGrouper) order by etat";
-        //var_dump($sql);
-        $query = $this->db->query($sql);
-        $val = array();
-        $i = 0;
-        foreach($query -> result_array() as $row)
-        {
-            foreach($row as $key => $value)
-            {
-                $val[$i][$key] = $value;  
-            }
-            $i++;
-        }
-        return $val;
-	}
+    // public function getDemande()
+	// {
+    //     $sql = "SELECT id,dem.idDepartement,label,nom,quantite,unite,etat FROM demande dem 
+    //     join departement dep on dep.idDepartement = dem.idDepartement 
+    //     WHERE id not in (select idDemande from detailDemandeGrouper) order by etat";
+    //     //var_dump($sql);
+    //     $query = $this->db->query($sql);
+    //     $val = array();
+    //     $i = 0;
+    //     foreach($query -> result_array() as $row)
+    //     {
+    //         foreach($row as $key => $value)
+    //         {
+    //             $val[$i][$key] = $value;  
+    //         }
+    //         $i++;
+    //     }
+    //     return $val;
+	// }
 
-    public function find($idDemande)
+    public function find()
 	{
-        $sql = "SELECT * from fournisseur";
+        $sql = "select 
+            idFournisseur,
+            nom,
+            addresse,
+            tel,
+            mail,
+            nif,
+            f.idCateg,
+            label
+        from fournisseur f
+            join categorieFournisseur cf on f.idCateg = cf.idCateg
+        ";
         $query = $this->db->query($sql);
         $val = array();
         $i = 0;
