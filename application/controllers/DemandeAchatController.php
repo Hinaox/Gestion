@@ -73,8 +73,16 @@ class DemandeAchatController extends CI_Controller {
         $this->load->view('listeProforma',$data);
     }
 
+
+    public function formulaireBonDeCommande(){
+        $this->load->model('Proformat');
+        $id = $this->input->get('id');
+        $pr = $this->Proformat->findProformat($id);
+    }
+
     public function genererBondDeCommande(){
-        
+        $this->load->model('BonDeCommande');
+        $this->BonDeCommande->insertBonDeCommande();
     }
     
 

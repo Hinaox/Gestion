@@ -6,6 +6,7 @@ class BonDeCommande extends CI_Model{
         $query = "insert into proformat values(null,'".$dateValiditer."','".$label."',".$quantite.",".$prix.",".$idFournisseur.",".$idDemandeGrouper.")";
         $this->db->query($query);
     }
+    
     public function allProformat($idDemandeGroupe){
         $sql = "select * from proformat where idDemandeGrouper =".$idDemandeGroupe;
         $query = $this->db->query($sql);

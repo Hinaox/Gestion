@@ -77,6 +77,8 @@ create table bonDeCommande(
     foreign key (idProformat) references proformat(id)
 );
 
+select * from bonDeCommande
+
 insert into bonDeCommande values (null,,'',,'');
 
 select dem.idDepartement,label,nom,quantite,unite,etat from demande dem

@@ -78,7 +78,11 @@
                 <td><?php echo $listeProformat[$i]['label'] ?></td>
                 <td><?php echo $listeProformat[$i]['prix'] ?></td>
                 <td><?php echo $listeProformat[$i]['dateValidite'] ?></td>
-                <td><a class="btn btn-info"  href="<?php echo site_url('DemandeAchatController/genererBondDeCommande'); ?>?id=<?php echo $listeProformat[$i]['id'] ?>">valider proformats et generer bond de commande</a></td>
+                <td><a class="btn btn-info"  href="
+                <?php echo site_url('DemandeAchatController/formulaireBonDeCommande'); ?>?
+                id=<?php echo $listeProformat[$i]['id'] ?>
+                ">
+                valider proformats et generer bond de commande</a></td>
             </tr>
         <?php } ?>
         </table>
