@@ -36,14 +36,15 @@ insert into Fournisseur values (null,'premier','tanjombato',null,null,123456,4);
 
 
 
-/*create table proformat(
-    id varchar(10) primary key,
+create table proformat(
+    id varchar(10) auto_increment primary key,
     dateValidite date,
     label varchar(150),
     quantité float,
     prix float,
-    nomFournisseur 
-);*/
+    idFournisseur int ,
+    foreign key(idFournisseur)references Fournisseur(id) 
+);
 
 create table demandeGrouper(
     idDemandeGrouper int auto_increment primary key
