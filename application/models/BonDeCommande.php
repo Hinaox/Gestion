@@ -21,4 +21,9 @@ class BonDeCommande extends CI_Model{
         }
         return $val;
     }
+
+    public function insertBonCommande($idProformat,$quantite,$delaiLivraison){
+        $query = "insert into bonDeCommande values (null,".$idProformat.",now(),".$quantite.",'".$delaiLivraison."')";
+        $this->db->query($query);
+    }
 }
