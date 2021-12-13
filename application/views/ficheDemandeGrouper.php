@@ -29,7 +29,7 @@
                         </tr>
                     <?php } ?>
                 </table>
-                <form>
+                <form action="" method="get">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">quantite</label>
                         <input type="texte" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></div>
