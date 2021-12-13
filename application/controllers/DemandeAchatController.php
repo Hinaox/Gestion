@@ -67,7 +67,14 @@ class DemandeAchatController extends CI_Controller {
     public function listeProformat(){
         $id = $this->input->get('id');
         $this->load->model('Proformat');
-        $liste = $this->Proformat->allProformat($id);
+        $this->load->model('DemandeGrouper');
+        $data['demandeGrouper'] = $this->DemandeGrouper->findOne($id);
+        $data['listeProformat'] = $this->Proformat->allProformat($id);
+        $this->load->view('listeProforma',$data);
+    }
+
+    public function genererBondDeCommande(){
+        
     }
     
 

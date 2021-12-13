@@ -67,6 +67,18 @@ create table detailDemandeGrouper(
 
 insert into detailDemandeGrouper values('','');
 
+
+create table bonDeCommande(
+    idBonDeCommande int auto_increment primary key,
+    idProformat int,
+    dateCommande dateTime,
+    quantite float,
+    delaiLivraison dateTime,
+    foreign key (idProformat) references proformat(id)
+);
+
+insert into bonDeCommande values (null,,'',,'');
+
 select dem.idDepartement,label,nom,quantite,unite,etat from demande dem
     join departement dep on dep.idDepartement = dem.idDepartement
 
