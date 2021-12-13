@@ -27,6 +27,7 @@ class BonDeCommande extends CI_Model{
         $query = "insert into bonDeCommande values (null,".$idProformat.",now(),".$quantite.",'".$delaiLivraison."')";
         $this->db->query($query);
     }
+
     public function lastInserted(){
         $sql = "SELECT
                     bon.idBonDeCommande as idBonDeCommande,
@@ -47,6 +48,41 @@ class BonDeCommande extends CI_Model{
                     pro.idFournisseur = frs.idFournisseur
                 and
                      id in (select max(id) from bonddecommande)";
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val;
+    }
+
+    public function findBonCommande(){
+        $sql = "SELECT
+                    bon.idBonDeCommande as idBonDeCommande,
+                    frs.nom as nomFornisseur,
+                    frs.nif as nif,
+                    pro.label as label,
+                    bon.quantite as quantite,
+                    pro.prix as prixProformat,
+                    bon.dateCommande as dateCommande,
+                    bon.delaiLivraison as delaiLivraison
+                from 
+                    bondecommande bon,
+                    proformat pro,
+                    fournisseur frs
+                where
+                    bon.idProformat = pro.id 
+                
+                and
+                    pro.idFournisseur = frs.idFournisseur
+                and 
+                    pro.id=".$id;
         $query = $this->db->query($sql);
         $val = array();
         $i = 0;

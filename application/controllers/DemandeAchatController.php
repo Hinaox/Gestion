@@ -95,6 +95,14 @@ class DemandeAchatController extends CI_Controller {
         $this->load->view('afficheBonCommande',$data);
 
     }
+
+    public function formLivraison(){
+        $this->load->model('BonDeCommande');
+        $this->BonDeCommande->findBonCommande();
+
+
+
+    }
     
 
 }
