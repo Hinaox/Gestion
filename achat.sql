@@ -37,7 +37,7 @@ insert into Fournisseur values (null,'premier','tanjombato',null,null,123456,4);
 
 
 create table proformat(
-    id varchar(10) auto_increment primary key,
+    id int auto_increment primary key,
     dateValidite date,
     label varchar(150),
     quantité float,
