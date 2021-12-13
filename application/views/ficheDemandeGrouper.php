@@ -29,17 +29,33 @@
                         </tr>
                     <?php } ?>
                 </table>
-                <form action="" method="get">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">quantite</label>
-                        <input type="texte" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></div>
+                <form action="<?php echo site_url('DemandeAchatController/insertProformat'); ?>" method="get">
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">reference</label>
-                        <input type="teste" class="form-control" id="exampleInputPassword1">
+                        <input type="teste" name="reference" class="form-control" id="exampleInputPassword1">
                     </div>
                     <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">quantite</label>
+                        <input type="texte" name="quantite" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">prix en Ariary</label>
+                        <input type="texte" name="prix" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                   </div>
+                    
+                    <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">date limite</label>
-                        <input type="date" class="form-control" id="exampleInputPassword1">
+                        <input type="date" name="date" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div>
+                        <select name="idFournisseur">
+                        <?php for($i=0;$i<count($listeFournisseur);$i++) { ?>
+                            <option value="<?php echo $listeFournisseur[$i]['idFournisseur'] ?>" >
+                            <?php echo $listeFournisseur[$i]['nom'] ?>
+                            </option>
+                        <?php } ?>
+                        </select>
+                   
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

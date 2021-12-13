@@ -36,14 +36,19 @@ insert into Fournisseur values (null,'premier','tanjombato',null,null,123456,4);
 
 
 
-/*create table proformat(
-    id varchar(10) primary key,
+create table proformat(
+    id varchar(10) auto_increment primary key,
     dateValidite date,
     label varchar(150),
     quantité float,
     prix float,
-    nomFournisseur 
-);*/
+    idFournisseur int,
+    idDemandeGrouper int,
+    foreign key (idDemandeGrouper) references demandeGrouper(idDemandeGrouper),
+    foreign key (idFournisseur) references Fournisseur(idFournisseur) 
+);
+
+
 
 create table demandeGrouper(
     idDemandeGrouper int auto_increment primary key
@@ -82,3 +87,16 @@ join detailDemandeGrouper ddg on dg.idDemandeGrouper = ddg.idDemandeGrouper
 join demande d on d.id = ddg.idDemande
 
 select * from demandeGrouper;
+
+select 
+    idFournisseur,
+    nom,
+    addresse,
+    tel,
+    mail,
+    nif,
+    f.idCateg,
+    label
+from fournisseur f
+    join categorieFournisseur cf on f.idCateg = cf.idCateg
+

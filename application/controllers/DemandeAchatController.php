@@ -53,5 +53,15 @@ class DemandeAchatController extends CI_Controller {
         $this->load->view('ficheDemandeGrouper',$data);
         //var_dump($li);
     }
+
+    public function insertProformat(){
+        $this->load->model('Proformat');
+        $label = $this->input->get('labelCommande');
+        $quantite = $this->input->get('quantite');
+        $unite = $this->input->get('unite');
+        $idDepartement = $this->input->get('idDepartement');
+        var_dump($_GET);
+        $this->Proformat->insertProformat($label,$quantite,$unite,$idDepartement);
+    }
     
 }
