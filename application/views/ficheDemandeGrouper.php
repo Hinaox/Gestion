@@ -47,7 +47,7 @@
                         <label for="exampleInputPassword1" class="form-label">date limite</label>
                         <input type="date" name="date" class="form-control" id="exampleInputPassword1">
                     </div>
-                    <input type="texte" name="idDemandeGrouper" value="<?php echo $demandeGrouper[$i]['idDemandeGrouper'] ?>" >
+                    <input type="hidden" name="idDemandeGrouper" value="<?php echo $demandeGrouper[0]['idDemandeGrouper'] ?>" >
                     <div>
                         <select name="idFournisseur">
                         <?php for($i=0;$i<count($listeFournisseur);$i++) { ?>

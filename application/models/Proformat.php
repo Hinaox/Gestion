@@ -88,7 +88,7 @@ class Proformat extends CI_Model{
     //     //var_dump($somme);
     // }
     public function insertProformat($dateValiditer,$label,$quantite,$prix,$idDemandeGrouper,$idFournisseur){
-        $query = "insert into proformat values(null,'".$dateValiditer."','".$label."',".$quantite.",".$prix.",".$idDemandeGrouper.",".$idFournisseur.")";
+        $query = "insert into proformat values(null,'".$dateValiditer."','".$label."',".$quantite.",".$prix.",".$idFournisseur.",".$idDemandeGrouper.")";
         $this->db->query($query);
     }
 }
