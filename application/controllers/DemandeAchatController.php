@@ -83,8 +83,13 @@ class DemandeAchatController extends CI_Controller {
     }
 
     public function genererBondDeCommande(){
+        
+        // var_dump($_GET);
+        $idProformat = $this->input->get('proformat');
+        $delaiLivraison = $this->input->get('date');
+        $quantite = $this->input->get('quantite');
         $this->load->model('BonDeCommande');
-        $this->BonDeCommande->insertBonDeCommande();
+        $this->BonDeCommande->insertBonCommande($idProformat,$quantite,$delaiLivraison);
     }
     
 
