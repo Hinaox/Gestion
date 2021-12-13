@@ -172,6 +172,12 @@ if (empty($viewRH)){
             CNAPS
         </a>
       </li>
+      <!-- <li>
+        <a href="<?php //echo site_url('ModifierSalaire/afficher'); ?>" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+          Modification de salaire
+        </a>
+      </li> -->
     </ul>
     <hr>
     <div class="dropdown">

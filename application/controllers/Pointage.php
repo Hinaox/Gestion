@@ -29,7 +29,8 @@ class Pointage extends CI_Controller {
     }
     public function erreur($erreur){
         $data['erreur']= $erreur;
-        $this->load->view('pointage',$data);
+        $data['viewRH']= "pointage";
+        $this->load->view('rh',$data);
     }
     public function ajouterPointage(){
         $idEmploye = $this->input->post('idEmploye');

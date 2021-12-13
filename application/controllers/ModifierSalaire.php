@@ -12,7 +12,8 @@ class ModifierSalaire extends CI_Controller {
 
         $data['employe']= $this->modifierSal->getEmploye($this->session->userdata('idEmploye'));
         $data['montant']= $this->modifierSal->getSalaire($this->session->userdata('idEmploye'));
-        $this->load->view('modifierSalaire',$data);
+        $data['viewRH']= "modifierSalaire";
+        $this->load->view('rh',$data);
     }
     public function index(){
         $this->load->model('modifierSal');
