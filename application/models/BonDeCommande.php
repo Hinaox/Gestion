@@ -28,7 +28,25 @@ class BonDeCommande extends CI_Model{
         $this->db->query($query);
     }
     public function lastInserted(){
-        $sql = "select * from bondecommande where id in (select max(id) from bonddecommande)";
+        $sql = "SELECT
+                    bon.idBonDeCommande as idBonDeCommande,
+                    frs.nom as nomFornisseur,
+                    frs.nif as nif,
+                    pro.label as label,
+                    bon.quantite as quantite,
+                    pro.prix as prixProformat,
+                    bon.dateCommande as dateCommande,
+                    bon.delaiLivraison as delaiLivraison
+                from 
+                    bondecommande bon,
+                    proformat pro,
+                    fournisseur frs
+                where
+                    bon.idProformat = pro.id 
+                and
+                    pro.idFournisseur = frs.idFournisseur
+                and
+                     id in (select max(id) from bonddecommande)";
         $query = $this->db->query($sql);
         $val = array();
         $i = 0;
