@@ -27,4 +27,19 @@ class BonDeCommande extends CI_Model{
         $query = "insert into bonDeCommande values (null,".$idProformat.",now(),".$quantite.",'".$delaiLivraison."')";
         $this->db->query($query);
     }
+    public function lastInserted(){
+        $sql = "select * from bondecommande where id in (select max(id) from bonddecommande)";
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val;
+    }
 }
