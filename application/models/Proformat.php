@@ -7,7 +7,7 @@ class Proformat extends CI_Model{
         $this->db->query($query);
     }
     public function findProformat($idProformat){
-        $sql = "select * from proformat where idProformat =".$idProformat;
+        $sql = "select * from proformat where id =".$idProformat;
         $query = $this->db->query($sql);
         $val = array();
         $i = 0;
