@@ -43,29 +43,6 @@
         <div class="col col-lg-2">
            
         </div>
-        <!-- <div class="col-sm-5">  -->
-        <!-- <table border='1' class="table table-striped">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">nom</td>
-                            <th scope="col">categorie</td>
-                            <th scope="col">tel</td>
-                            <th scope="col">mail</td>
-                            <th scope="col">addresse</td>
-                        </tr>
-                    <?php for($i=0;$i<count($listeFournisseur);$i++) { ?>
-                        <tr>
-                            <td scope="row"><?php echo $i+1; ?></td>
-                            <td><?php echo $listeFournisseur[$i]['nom'] ?></td>
-                            <td><?php echo $listeFournisseur[$i]['label'] ?></td>
-                            <td><?php echo $listeFournisseur[$i]['tel'] ?></td>
-                            <td><?php echo $listeFournisseur[$i]['mail'] ?></td>
-                            <td><?php echo $listeFournisseur[$i]['addresse'] ?></td>
-                            <td></td>
-                        </tr>
-                    <?php } ?>
-                </table>
-        </div> -->
     </div>
 </body>
 </html>

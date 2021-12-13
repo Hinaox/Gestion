@@ -90,6 +90,10 @@ class DemandeAchatController extends CI_Controller {
         $quantite = $this->input->get('quantite');
         $this->load->model('BonDeCommande');
         $this->BonDeCommande->insertBonCommande($idProformat,$quantite,$delaiLivraison);
+
+        $data['bonCom']=$this->BonDeCommande->lastInserted();
+        $this->load->view('afficheBonCommande',$data);
+
     }
     
 
