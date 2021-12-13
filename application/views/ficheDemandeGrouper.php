@@ -30,6 +30,7 @@
                     <?php } ?>
                 </table>
                 <form action="<?php echo site_url('DemandeAchatController/insertProformat'); ?>" method="get">
+                        <h2>ajouter un proformat</h2>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">reference</label>
                         <input type="teste" name="reference" class="form-control" id="exampleInputPassword1">

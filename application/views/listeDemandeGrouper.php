@@ -31,7 +31,8 @@
                         <td scope="row"><?php echo $i+1; ?></td>
                         <td><?php echo $demandeGrouper[$i]['label'] ?></td>
                         <td><?php echo $demandeGrouper[$i]['quantite'] ?></td>
-                        <td><a class="btn btn-info"  href="<?php echo site_url('DemandeAchatController/ficheDemandeGrouer'); ?>?id=<?php echo $demandeGrouper[$i]['idDemandeGrouper'] ?>">proformats</a></td>
+                        <td><a class="btn btn-info"  href="<?php echo site_url('DemandeAchatController/ficheDemandeGrouer'); ?>?id=<?php echo $demandeGrouper[$i]['idDemandeGrouper'] ?>">ajout proformats</a></td>
+                        <td><a class="btn btn-info"  href="<?php echo site_url('DemandeAchatController/listeProformat'); ?>?id=<?php echo $demandeGrouper[$i]['idDemandeGrouper'] ?>">lister proformats</a></td>
                     </tr>
                     </div>
                 <?php } ?>

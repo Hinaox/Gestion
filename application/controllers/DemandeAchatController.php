@@ -62,8 +62,13 @@ class DemandeAchatController extends CI_Controller {
         $dateValiditer = $this->input->get('date');
         $idFournisseur = $this->input->get('idFournisseur');
         $idDemandeGrouper = $this->input->get('idDemandeGrouper');
-        var_dump($_GET);
         $this->Proformat->insertProformat($dateValiditer,$label,$quantite,$prix,$idDemandeGrouper,$idFournisseur);
     }
+    public function listeProformat(){
+        $id = $this->input->get('id');
+        $this->load->model('Proformat');
+        $liste = $this->Proformat->allProformat($id);
+    }
     
+
 }
