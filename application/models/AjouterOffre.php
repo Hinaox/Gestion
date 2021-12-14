@@ -104,7 +104,7 @@ class AjouterOffre extends CI_Model
             $retour[$indice] = $tab;
             $indice++;
         }
-        $this->db->close();
+        // $this->db->close();
         return $retour;
     }
     public function getPosteById($id)
@@ -126,7 +126,7 @@ class AjouterOffre extends CI_Model
             $retour[$indice] = $tab;
             $indice++;
         }
-        $this->db->close();
+        // $this->db->close();
         return $retour;
     }
 }

@@ -23,32 +23,42 @@ class Offre extends CI_Controller
     {
         parent::__construct();
         $this->load->model('AjouterOffre');
+        $this->load->model('Orga');
+
         $this->load->helper('url');
     }
     public function index()
     {
-        $posteId=1;
+        $nomPoste=$this->input->get('FormNomEmp');
+        echo $nomPoste;
+        $detailsPoste=$this->Orga->getPosteIdByNomPoste($nomPoste);
+        $posteId=$detailsPoste[0]['idPoste'];
         $poste = $this->AjouterOffre->getPosteById($posteId);
         // eto no soloina le izy $_GET['grade] de lasa diplome
-        $diplomes = $this->AjouterOffre->getDiplomeByCateg(4);
+        $categ=$this->input->get('FormPost');
+        $diplomesInfo=$this->Orga->getDiplomeByidCateg($categ);
+        // var_dump($diplomesInfo);
+        $diplomesId=$diplomesInfo[0]['idcat'];
+        var_dump($diplomesId);
+        $diplomes = $this->AjouterOffre->getDiplomeByCateg($diplomesId);
         // var_dump($diplomes);
         $data=array();
         $data['postenom']=$poste;
         $data['diplomes']= $diplomes;
         $this->load->view('ajoutOffre',$data);
     }
-    public function pageAjoutOffre(){
-        // eto no soloina get le izy $_GET['idPoste]
-        $posteId=1;
-        $poste = $this->AjouterOffre->getPosteById($posteId);
-        // eto no soloina le izy $_GET['grade] de lasa diplome
-        $diplomes = $this->AjouterOffre->getDiplomeByCateg(4);
-        // var_dump($diplomes);
-        $data=array();
-        $data['postenom']=$poste;
-        $data['diplomes']= $diplomes;
-        $this->load->view('ajoutOffre',$data);
-    }
+    // public function pageAjoutOffre(){
+    //     // eto no soloina get le izy $_GET['idPoste]
+    //     $posteId=1;
+    //     $poste = $this->AjouterOffre->getPosteById($posteId);
+    //     // eto no soloina le izy $_GET['grade] de lasa diplome
+    //     $diplomes = $this->AjouterOffre->getDiplomeByCateg(4);
+    //     // var_dump($diplomes);
+    //     $data=array();
+    //     $data['postenom']=$poste;
+    //     $data['diplomes']= $diplomes;
+    //     $this->load->view('ajoutOffre',$data);
+    // }
     public function index2()
     {
         $this->load->helper('url');
