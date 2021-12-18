@@ -20,11 +20,30 @@ class Employe extends CI_Controller {
 	 */
 	public function fiche()
 	{
+		$this->load->database();
+		$this->load->helper("employes");
 		$this->load->model('EmployeModel');
 		$data = array();
+		$idEmploye = $_GET['idEmploye'];
 		//maka anaty base
 		// $data = $this->Employe->getEmploye($this->input->post('idEmploye'));
-		$data = $this->EmployeModel->getEmploye("1");
+		$data = (getEmployeFromBase($this->db, $idEmploye))[0];
 		$this->load->view('fiche',$data);
+	}
+
+	public function liste() {
+		$this->load->helper('employes');
+		$this->load->helper('url');
+		$this->load->helper('departement');
+        $this->load->database();
+        $liste_emp = getEmployes($this->db);
+		$liste_dept = getDepartements($this->db);
+
+        $data = array(
+            "employes" => $liste_emp,
+			"departements" => $liste_dept
+        );
+
+        $this->load->view("employes", $data);
 	}
 }

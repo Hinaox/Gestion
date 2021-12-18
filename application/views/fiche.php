@@ -6,8 +6,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <head>
     <meta charset="utf-8">
     <title>Fiche</title>
-    <link href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>"  rel="stylesheet" meadia="all">
-    <link href="<?php echo base_url("assets/css/bootstrap.css"); ?>" rel="stylesheet" meadia="all">
+    <link href="<?php echo site_url("assets/css/bootstrap.min.css"); ?>"  rel="stylesheet" meadia="all">
+    <link href="<?php echo site_url("assets/css/bootstrap.css"); ?>" rel="stylesheet" meadia="all">
 
   </head>
   <body>
