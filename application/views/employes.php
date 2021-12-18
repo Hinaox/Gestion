@@ -51,7 +51,7 @@
 <script>
   $('#filtre_bt').on('click', function() {
     $.ajax({
-      url: "Employes/filtre",
+      url: siteUrl + "Employe/filtre",
       type: "get",
       data: $('#form_filtre').serialize(),
       success: function(reponse) {
@@ -68,7 +68,7 @@
       $tableau = $('#tableau_liste');
       $tableau.html("<tr><th>Nom</th><th>Prénom</th><th>Poste</th><th>Département</th></tr>");
       for (var i = 0; i<liste.length; i++) {
-        $tableau.html($tableau.html() + "<tr>"+"<td>"+liste[i]['nom'] +"</td>"+"<td>"+liste[i]['prenom'] +"</td>"+"<td>"+liste[i]['nomPoste'] +"</td>"+"<td>"+liste[i]['nomDepartement'] +"</td>"+"</tr>")
+        $tableau.html($tableau.html() + "<tr onclick='versFiche("+ liste[i]['idEmploye'] +")' >"+"<td>"+liste[i]['nom'] +"</td>"+"<td>"+liste[i]['prenom'] +"</td>"+"<td>"+liste[i]['nomPoste'] +"</td>"+"<td>"+liste[i]['nomDepartement'] +"</td>"+"</tr>")
       }
   }
 </script>

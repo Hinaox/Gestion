@@ -46,4 +46,16 @@ class Employe extends CI_Controller {
 
         $this->load->view("employes", $data);
 	}
+
+	public function filtre() {
+		$this->load->helper('employes');
+		$this->load->database();
+
+		$nom_prenom = $_GET['nom_prenom'];
+		$departement = $_GET['departement'];
+
+		$liste_emp = getEmployes($this->db, $nom_prenom, $departement);
+
+		echo json_encode($liste_emp);
+	}
 }
