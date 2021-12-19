@@ -117,6 +117,11 @@ if (empty($viewRH)){
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Organigramme
         </a>
+      </li><li class="nav-item">
+        <a href="#" class="nav-link link-dark" aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          Liste de tous les employes
+        </a>
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link link-dark" aria-current="page">
