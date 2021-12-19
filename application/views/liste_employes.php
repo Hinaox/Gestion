@@ -1,13 +1,4 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
 
     <div>
         <form id="filtreforme">
@@ -35,7 +26,7 @@
                 </select>
             </div>
             <div class="col">
-                <input type="submit"  class="form-control" value="Rechercher">
+                <button type="submit"  class="btn btn-primary mb-3" >Rechercher</button
             </div>
             
         </div>
@@ -43,7 +34,7 @@
     </div>
     <div>
         <div id="result_bloc" >
-        <table class="table table-striped" style="text-align:center;">
+        <table id="tableau_liste" class="table table-striped" style="text-align:center;">
             <thead>
                 <tr>
                     <th>Matricule</th>
@@ -73,9 +64,16 @@
     <script>
         let siteUrl = "<?php echo site_url(); ?>";
             function versFiche(idEmploye) {
-                // console.log("Vers fiche "+idEmploye);
                 document.location= siteUrl + "EmployeController/fiche?idEmploye=" +idEmploye; 
             }
+        function replaceTableContent (liste) {
+            $tableau = $('#tableau_liste');
+            $tableau.html("<thead><tr><th>Matricule</th><th>Nom</th><th>Prénom</th><th>Département</th><th>Poste</th></tr></thead><tbody>");
+            for (var i = 0; i<liste.length; i++) {
+                $tableau.html($tableau.html() + "<tr style='text-align : center;' onclick='versFiche("+ liste[i]['idEmploye'] +")' >"+"<td>"+liste[i]['idEmploye'] +"</td>"+"<td>"+liste[i]['nom'] +"</td>"+"<td>"+liste[i]['prenom'] +"</td>"+"<td>"+liste[i]['nomDepartement'] +"</td>"+"<td>"+liste[i]['nomPoste'] +"</td>"+"</tr>")
+            }
+            $tableau.html($tableau.html() + "</tbody>");
+        }
             
         $(document).ready(function () {
             
@@ -83,20 +81,14 @@
             $('#filtreforme').on('submit', function(event) {
                 event.preventDefault();
                 var  values = $(this).serialize();
-                // console.log($data);
-
-                // console.log($nom);
-                // console.log($prenom);
-                // console.log($departement);
-                // console.log($poste);
-                // console.log($matricule);
 
                 $.ajax({
                     url: "<?php echo site_url('EmployeController/filtrer'); ?>",
                     type: "post",
                     data:  values,
                     success: function (response) {
-                        $("#result_bloc").html(response);
+                        liste = JSON.parse(response);
+                        replaceTableContent(liste);
                     }
                 });
 
@@ -110,12 +102,16 @@
                     type: "post",
                     data: "departement="+$val,
                     success: function (response) {
-                        $('#poste').html(response);
+                        liste_postes = JSON.parse(response);
+                         $p = $('#poste');
+                         $p.html("<option value='0'>poste</option>");
+                         for(var i=0; i<liste_postes.length ; i++){
+                            $p.html($p.html() + "<option value='"+ liste_postes[i]['idPoste'] +"' >"+liste_postes[i]['nom']+"</option>");
+                         }
+                        
+
                     }
                 })
             });
         });
     </script>
-</body>
-</html>
-

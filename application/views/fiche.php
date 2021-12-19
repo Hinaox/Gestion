@@ -1,18 +1,6 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-<!DOCTYPE html>
-<html lang="fr" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Fiche</title>
-    <link href="<?php echo site_url("assets/css/bootstrap.min.css"); ?>"  rel="stylesheet" meadia="all">
-    <link href="<?php echo site_url("assets/css/bootstrap.css"); ?>" rel="stylesheet" meadia="all">
 
-  </head>
-  <body>
-
-    <div class="col-md-6 offset-2">
+  <div class="container">
+    <div class="row">
       <h1 class="offset-4">Fiche de <?php echo $nom ?></h1>
       <p>Nom: <?php echo $nom ?></p>
       <p>Prénom:<?php echo $prenom ?></p>
@@ -27,6 +15,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <a href="<?php echo site_url("BPController/listeBulletinEmploye/".$idEmploye."/".$nom) ?>" class="offset-5 btn btn-primary ">Liste de bulletins</a>
         <a href="#" class="offset-1 btn btn-primary ">Elaborer le bulletin de paie</a>
       </p>
-    </div>
-  </body>
-</html>
+  </div>
+</div>

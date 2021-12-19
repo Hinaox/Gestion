@@ -38,13 +38,7 @@ class EmployeController extends CI_Controller {
         // echo $_POST['nom'];
 
         $liste_emp = $this->Employe->getEmployeFromBase($this->db, $_POST['matricule'], $_POST['nom'], $_POST['prenom'], $_POST['departement'], $_POST['poste']);
-
-        $data = array(
-            "liste_emp" => $liste_emp,
-            "view" => "result_filter_liste_emp"
-        );
-
-        $this -> load -> view('templateUser', $data);
+        echo json_encode($liste_emp);
     }
 
     public function changerDept() {
@@ -54,11 +48,6 @@ class EmployeController extends CI_Controller {
         $dept = $_POST['departement'];
 
         $liste_postes = $this->Departement->getPostes($this->db, $dept);
-
-        $data = array (
-            'liste_postes' => $liste_postes,
-            "view" => 'result_filter_liste_postes'
-        );
-        $this -> load -> view('templateUser', $data);
+        echo json_encode($liste_postes);
     }
 }

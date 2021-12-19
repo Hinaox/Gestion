@@ -143,6 +143,12 @@ if (empty($view)){
           Pointage
         </a>
       </li>
+      <li class="nav-item">
+        <a href="<?php echo site_url('RHController/'); ?>" class="nav-link  link-dark" aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+          Retour à la page d'accueil
+        </a>
+      </li>
     </ul>
     <hr>
     <div class="dropdown">
