@@ -11,27 +11,40 @@
 
     <div>
         <form id="filtreforme">
-            <label for="matricule">Matricule :</label>
-            <input id="matricule" name="matricule">
-            <label for="nom">Nom :</label>
-            <input id="nom" name="nom">
-            <label for="prenom">Prénom :</label>
-            <input id="prenom" name="prenom">
-            <select id="departement" name="departement">
-                <option value="0">Département</option>
-                <?php for ($i=0; $i<count($liste_dept); $i++) {?>
-                    <option value="<?php echo $liste_dept[$i]['idDepartement']; ?>" ><?php echo $liste_dept[$i]['nom']; ?></option>
-                <?php } ?>
-            </select>
-            <select id="poste" name="poste">
-                <option value="0">poste</option>
-            </select>
-            <input type="submit" value="Rechercher" >
+        <div class="row">
+            <div class="col">
+                <input id="matricule" placeholder="Matricule" class="form-control" name="matricule">
+            </div>
+            <div class="col">
+                <input id="nom" name="nom" type="text" class="form-control" placeholder="Nom">
+            </div>
+            <div class="col">
+                <input id="prenom" name="prenom" type="text" class="form-control" placeholder="prenom">
+            </div>
+            <div class="col">
+                <select class="form-select" aria-label="Default select example" id="departement" name="departement">
+                    <option value="0">Département</option>
+                    <?php for ($i=0; $i<count($liste_dept); $i++) {?>
+                        <option value="<?php echo $liste_dept[$i]['idDepartement']; ?>" ><?php echo $liste_dept[$i]['nom']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="col">
+                <select class="form-select" aria-label="Default select example" id="poste" name="poste">
+                    <option value="0">poste</option>
+                </select>
+            </div>
+            <div class="col">
+                <input type="submit"  class="form-control" value="Rechercher">
+            </div>
+            
+        </div>
         </form>
     </div>
     <div>
         <div id="result_bloc" >
-            <table  border="1">
+        <table class="table table-striped" style="text-align:center;">
+            <thead>
                 <tr>
                     <th>Matricule</th>
                     <th>Nom</th>
@@ -39,6 +52,8 @@
                     <th>Département</th>
                     <th>Poste</th>
                 </tr>
+                </thead>
+                <tbody>
                 <!-- bloc resultat -->
                 <?php  for ($i=0; $i<count($liste_emp); $i++) {?>
                 <tr style="text-align : center;" onclick="versFiche( <?php $liste_emp[$i]['idEmploye']; ?>)">
@@ -50,7 +65,8 @@
                 </tr>
                 <?php }?>
                 <!-- fin bloc resultat -->
-            </table>
+                </tbody>
+        </table>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -58,7 +74,7 @@
         let siteUrl = "<?php echo site_url(); ?>";
             function versFiche(idEmploye) {
                 // console.log("Vers fiche "+idEmploye);
-                document.location= siteUrl + "EmployeCtrl/fiche?idEmploye=" +idEmploye; 
+                document.location= siteUrl + "EmployeController/fiche?idEmploye=" +idEmploye; 
             }
             
         $(document).ready(function () {
@@ -76,7 +92,7 @@
                 // console.log($matricule);
 
                 $.ajax({
-                    url: "Liste_employes/filtrer",
+                    url: "<?php echo site_url('EmployeController/filtrer'); ?>",
                     type: "post",
                     data:  values,
                     success: function (response) {
@@ -90,7 +106,7 @@
                 $val= $(this).val();
                 console.log($val);
                 $.ajax({
-                    url: "Liste_employes/changerDept",
+                    url: "<?php echo site_url('EmployeController/changerDept'); ?>",
                     type: "post",
                     data: "departement="+$val,
                     success: function (response) {

@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 
 class Employe extends CI_Model{
-	public function getEmployes()
+	public function getEmployes1()
 	{
         $sql = "SELECT * FROM employe";
         $query = $this->db->query($sql);
@@ -17,10 +17,10 @@ class Employe extends CI_Model{
         }
         return $val;
 	}
-}
+
   public function getEmployeFromBase ($bdd ,$matricule = 0, $nom = null, $prenom = null, $departement = 0, $poste = 0) {
     $retour = array();
-    $requete = ("select * from employe_view where ");
+    $requete = ("select * from employe_view where 1<2 ");
     if ($matricule > 0) {
         $requete = $requete." and idEmploye=".$matricule;
     }

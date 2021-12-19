@@ -1,3 +1,8 @@
+<?php
+if (empty($view)){
+        $view = 'tousLesCV';
+    }
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -156,7 +161,9 @@
   </div>
 
   <div class="b-example-divider"></div>
-
+  <div>
+    <?php include $view.'.php' ; ?>
+  </div>
 </main>
 
 

@@ -118,9 +118,9 @@ if (empty($viewRH)){
           Organigramme
         </a>
       </li><li class="nav-item">
-        <a href="#" class="nav-link link-dark" aria-current="page">
+        <a href="EmployeController/" class="nav-link link-dark" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          Liste de tous les employes
+          Module employe
         </a>
       </li>
       <li class="nav-item">
