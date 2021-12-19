@@ -768,3 +768,10 @@ create table Empemp(
   constraint fk_idemployeur foreign key (idEmployeur) references Employeur(idEmployeur) on delete cascade on update cascade,
   constraint fk_idemploye foreign key (idEmploye) references Employe(idEmploye) on delete cascade on update cascade
 );
+
+Create view ListeBulletin AS
+    Select 
+        e.idEmploye,p.nom,p.prenom,f.idFichePaie,f.dateMiseEnPlace,f.net 
+    from Employe e 
+        Join Personne p on e.idPersonne=p.idPersonne 
+        Join fichePaie f on e.idEmploye=f.idEmploye;
