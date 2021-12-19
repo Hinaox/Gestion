@@ -655,3 +655,10 @@ from filtre_view f
 group by idpersonne;
 
 select idPersonne from filtre_view
+Create view ListeBulletin AS
+    Select 
+        e.idEmploye,p.nom,p.prenom,f.idFichePaie,f.dateMiseEnPlace,f.net 
+    from Employe e 
+        Join Personne p on e.idPersonne=p.idPersonne 
+        Join fichePaie f on e.idEmploye=f.idEmploye;
+
