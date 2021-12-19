@@ -41,7 +41,7 @@
                 </tr>
                 <!-- bloc resultat -->
                 <?php  for ($i=0; $i<count($liste_emp); $i++) {?>
-                <tr style="text-align : center;">
+                <tr style="text-align : center;" onclick="versFiche( <?php $liste_emp[$i]['idEmploye']; ?>)">
                     <td><?php echo $liste_emp[$i]['idEmploye']; ?></td>
                     <td><?php echo $liste_emp[$i]['nom']; ?></td>
                     <td><?php echo $liste_emp[$i]['prenom']; ?></td>
@@ -55,7 +55,14 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        let siteUrl = "<?php echo site_url(); ?>";
+            function versFiche(idEmploye) {
+                // console.log("Vers fiche "+idEmploye);
+                document.location= siteUrl + "EmployeCtrl/fiche?idEmploye=" +idEmploye; 
+            }
+            
         $(document).ready(function () {
+            
 
             $('#filtreforme').on('submit', function(event) {
                 event.preventDefault();
