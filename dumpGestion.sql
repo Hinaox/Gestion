@@ -16,6 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Current Database: `gestion`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `gestion` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `gestion`;
+
+--
 -- Table structure for table `an`
 --
 
@@ -42,6 +50,32 @@ CREATE TABLE `an` (
 LOCK TABLES `an` WRITE;
 /*!40000 ALTER TABLE `an` DISABLE KEYS */;
 /*!40000 ALTER TABLE `an` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `attente`
+--
+
+DROP TABLE IF EXISTS `attente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `attente` (
+  `idAttente` int(11) NOT NULL AUTO_INCREMENT,
+  `idPersonne` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idAttente`),
+  KEY `idPersonne` (`idPersonne`),
+  CONSTRAINT `attente_ibfk_1` FOREIGN KEY (`idPersonne`) REFERENCES `personne` (`idPersonne`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `attente`
+--
+
+LOCK TABLES `attente` WRITE;
+/*!40000 ALTER TABLE `attente` DISABLE KEYS */;
+INSERT INTO `attente` VALUES (10,1),(18,28);
+/*!40000 ALTER TABLE `attente` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -121,6 +155,30 @@ INSERT INTO `categorieevenement` VALUES (1,'test'),(2,'entretient'),(3,'conferen
 UNLOCK TABLES;
 
 --
+-- Table structure for table `categoriefournisseur`
+--
+
+DROP TABLE IF EXISTS `categoriefournisseur`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categoriefournisseur` (
+  `idCateg` int(11) NOT NULL AUTO_INCREMENT,
+  `label` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`idCateg`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoriefournisseur`
+--
+
+LOCK TABLES `categoriefournisseur` WRITE;
+/*!40000 ALTER TABLE `categoriefournisseur` DISABLE KEYS */;
+INSERT INTO `categoriefournisseur` VALUES (1,'quincaillerie'),(2,'pharmacie'),(3,'superMarche'),(4,'papeterie');
+/*!40000 ALTER TABLE `categoriefournisseur` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `categorieloisir`
 --
 
@@ -145,6 +203,30 @@ INSERT INTO `categorieloisir` VALUES (1,'sport'),(2,'culture'),(3,'musique'),(4,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `categorieprofessionnel`
+--
+
+DROP TABLE IF EXISTS `categorieprofessionnel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categorieprofessionnel` (
+  `idcat` int(11) NOT NULL AUTO_INCREMENT,
+  `Categorie` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idcat`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categorieprofessionnel`
+--
+
+LOCK TABLES `categorieprofessionnel` WRITE;
+/*!40000 ALTER TABLE `categorieprofessionnel` DISABLE KEYS */;
+INSERT INTO `categorieprofessionnel` VALUES (1,'M1'),(2,'M2'),(3,'OS1'),(4,'OS2'),(5,'OS3'),(6,'OP1A'),(7,'OP1B'),(8,'OP2A'),(9,'OP2B'),(10,'OP3');
+/*!40000 ALTER TABLE `categorieprofessionnel` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `competence`
 --
 
@@ -159,7 +241,7 @@ CREATE TABLE `competence` (
   PRIMARY KEY (`idCompetence`),
   KEY `idCV` (`idCV`),
   CONSTRAINT `competence_ibfk_1` FOREIGN KEY (`idCV`) REFERENCES `cv` (`idCV`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +250,7 @@ CREATE TABLE `competence` (
 
 LOCK TABLES `competence` WRITE;
 /*!40000 ALTER TABLE `competence` DISABLE KEYS */;
-INSERT INTO `competence` VALUES (1,5,'Dessin',10),(2,5,'Dessin',10),(3,5,'Dessin',10),(4,5,'Dessin',10),(5,5,'Dessin',10),(6,5,'Dessin',10);
+INSERT INTO `competence` VALUES (1,5,'Dessin',10),(2,5,'Dessin',10),(3,5,'Dessin',10),(4,5,'Dessin',10),(5,5,'Dessin',10),(6,5,'Dessin',10),(7,12,'aaa',4);
 /*!40000 ALTER TABLE `competence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,7 +304,7 @@ CREATE TABLE `contact` (
   `email` varchar(50) NOT NULL,
   `autre` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idContact`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,7 +313,7 @@ CREATE TABLE `contact` (
 
 LOCK TABLES `contact` WRITE;
 /*!40000 ALTER TABLE `contact` DISABLE KEYS */;
-INSERT INTO `contact` VALUES (1,'gravida.non@nequenullam.org',NULL),(2,'malesuada.fames@morbi.edu',NULL),(3,'mi@utpharetra.co.uk',NULL),(4,'ligula.aliquam@magnisdis.co.uk',NULL),(5,'elit.pellentesque@eueleifend.org',NULL),(6,'morbi.neque@nonhendrerit.edu',NULL),(7,'ut.molestie@rutrumurna.org',NULL),(8,'non.vestibulum@euismod.com',NULL),(9,'rhoncus@sodalesmauris.net',NULL),(10,'enim.non@lectussitamet.ca',NULL),(11,'eros.non.enim@elitsedconsequat.org',NULL),(12,'montes.nascetur@ornarelibero.ca',NULL),(13,'consequat.nec.mollis@vulputateveliteu.org',NULL),(14,'libero.proin@vitaedolordonec.org',NULL),(15,'eros@sitametrisus.edu',NULL),(16,'non.enim@mi.net',NULL),(17,'nam.tempor@duismi.net',NULL),(18,'donec.consectetuer.mauris@vestibulummauris.net',NULL),(19,'cursus.integer.mollis@acarcu.ca',NULL),(20,'suspendisse.non.leo@amet.edu',NULL),(21,'coco@gmail.com','0325644499'),(22,'coco@gmail.com','0325644499'),(23,'coco@gmail.com','0325644499'),(24,'coco@gmail.com','0325644499'),(25,'coco@gmail.com','0325644499'),(26,'coco@gmail.com','0325644499'),(27,'coco@gmail.com','0325644499');
+INSERT INTO `contact` VALUES (1,'gravida.non@nequenullam.org',NULL),(2,'malesuada.fames@morbi.edu',NULL),(3,'mi@utpharetra.co.uk',NULL),(4,'ligula.aliquam@magnisdis.co.uk',NULL),(5,'elit.pellentesque@eueleifend.org',NULL),(6,'morbi.neque@nonhendrerit.edu',NULL),(7,'ut.molestie@rutrumurna.org',NULL),(8,'non.vestibulum@euismod.com',NULL),(9,'rhoncus@sodalesmauris.net',NULL),(10,'enim.non@lectussitamet.ca',NULL),(11,'eros.non.enim@elitsedconsequat.org',NULL),(12,'montes.nascetur@ornarelibero.ca',NULL),(13,'consequat.nec.mollis@vulputateveliteu.org',NULL),(14,'libero.proin@vitaedolordonec.org',NULL),(15,'eros@sitametrisus.edu',NULL),(16,'non.enim@mi.net',NULL),(17,'nam.tempor@duismi.net',NULL),(18,'donec.consectetuer.mauris@vestibulummauris.net',NULL),(19,'cursus.integer.mollis@acarcu.ca',NULL),(20,'suspendisse.non.leo@amet.edu',NULL),(21,'coco@gmail.com','0325644499'),(22,'coco@gmail.com','0325644499'),(23,'coco@gmail.com','0325644499'),(24,'coco@gmail.com','0325644499'),(25,'coco@gmail.com','0325644499'),(26,'coco@gmail.com','0325644499'),(27,'coco@gmail.com','0325644499'),(28,'aaa@hh.com','0325566482');
 /*!40000 ALTER TABLE `contact` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,7 +331,7 @@ CREATE TABLE `cv` (
   PRIMARY KEY (`idCV`),
   KEY `fk_cv_idPersonne` (`idPersonne`),
   CONSTRAINT `fk_cv_idPersonne` FOREIGN KEY (`idPersonne`) REFERENCES `personne` (`idPersonne`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +340,7 @@ CREATE TABLE `cv` (
 
 LOCK TABLES `cv` WRITE;
 /*!40000 ALTER TABLE `cv` DISABLE KEYS */;
-INSERT INTO `cv` VALUES (1,1,'Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis'),(2,2,'ac, fermentum vel, mauris. Integer sem elit, pharetra ut, pharetra'),(3,3,'quam a felis ullamcorper viverra. Maecenas iaculis aliquet diam. Sed'),(4,4,'a, enim. Suspendisse aliquet, sem ut cursus luctus, ipsum leo'),(5,21,'Description'),(6,21,'Description'),(7,21,'Description'),(8,21,'Description'),(9,21,'Description'),(10,21,'Description'),(11,21,'Description');
+INSERT INTO `cv` VALUES (1,1,'Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis'),(2,2,'ac, fermentum vel, mauris. Integer sem elit, pharetra ut, pharetra'),(3,3,'quam a felis ullamcorper viverra. Maecenas iaculis aliquet diam. Sed'),(4,4,'a, enim. Suspendisse aliquet, sem ut cursus luctus, ipsum leo'),(5,21,'Description'),(6,21,'Description'),(7,21,'Description'),(8,21,'Description'),(9,21,'Description'),(10,21,'Description'),(11,21,'Description'),(12,28,'aaaa');
 /*!40000 ALTER TABLE `cv` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,7 +368,7 @@ CREATE TABLE `cv_langue` (
 
 LOCK TABLES `cv_langue` WRITE;
 /*!40000 ALTER TABLE `cv_langue` DISABLE KEYS */;
-INSERT INTO `cv_langue` VALUES (1,1,10),(1,2,10),(1,3,9.5),(1,7,8),(2,1,10),(2,2,9),(2,3,7.5),(2,4,8),(2,6,7),(3,1,10),(3,2,10),(3,3,10),(3,8,4),(4,1,10),(4,2,6),(4,8,5),(5,1,7),(5,1,7),(5,1,7),(5,1,7),(5,1,7),(5,1,7);
+INSERT INTO `cv_langue` VALUES (1,1,10),(1,2,10),(1,3,9.5),(1,7,8),(2,1,10),(2,2,9),(2,3,7.5),(2,4,8),(2,6,7),(3,1,10),(3,2,10),(3,3,10),(3,8,4),(4,1,10),(4,2,6),(4,8,5),(5,1,7),(5,1,7),(5,1,7),(5,1,7),(5,1,7),(5,1,7),(12,1,10);
 /*!40000 ALTER TABLE `cv_langue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,7 +395,7 @@ CREATE TABLE `cv_loisir` (
 
 LOCK TABLES `cv_loisir` WRITE;
 /*!40000 ALTER TABLE `cv_loisir` DISABLE KEYS */;
-INSERT INTO `cv_loisir` VALUES (5,1),(5,1),(5,1),(5,1),(5,1),(5,1);
+INSERT INTO `cv_loisir` VALUES (5,1),(5,1),(5,1),(5,1),(5,1),(5,1),(12,7);
 /*!40000 ALTER TABLE `cv_loisir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -340,8 +422,37 @@ CREATE TABLE `cv_poste` (
 
 LOCK TABLES `cv_poste` WRITE;
 /*!40000 ALTER TABLE `cv_poste` DISABLE KEYS */;
-INSERT INTO `cv_poste` VALUES (1,3),(2,2),(3,4),(4,3),(5,5),(5,5),(5,5),(5,5),(5,5),(5,5);
+INSERT INTO `cv_poste` VALUES (1,3),(2,2),(3,4),(4,3),(5,5),(5,5),(5,5),(5,5),(5,5),(5,5),(12,5),(1,3),(2,2),(3,4),(4,3);
 /*!40000 ALTER TABLE `cv_poste` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `demande`
+--
+
+DROP TABLE IF EXISTS `demande`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `demande` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `label` varchar(150) DEFAULT NULL,
+  `quantite` float DEFAULT NULL,
+  `unite` varchar(50) DEFAULT NULL,
+  `idDepartement` int(11) DEFAULT NULL,
+  `etat` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idDepartement` (`idDepartement`),
+  CONSTRAINT `demande_ibfk_1` FOREIGN KEY (`idDepartement`) REFERENCES `departement` (`idDepartement`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `demande`
+--
+
+LOCK TABLES `demande` WRITE;
+/*!40000 ALTER TABLE `demande` DISABLE KEYS */;
+/*!40000 ALTER TABLE `demande` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -370,6 +481,30 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Table structure for table `demandegrouper`
+--
+
+DROP TABLE IF EXISTS `demandegrouper`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `demandegrouper` (
+  `idDemandeGrouper` int(11) NOT NULL AUTO_INCREMENT,
+  `label` varchar(150) DEFAULT NULL,
+  `quantite` float DEFAULT NULL,
+  PRIMARY KEY (`idDemandeGrouper`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `demandegrouper`
+--
+
+LOCK TABLES `demandegrouper` WRITE;
+/*!40000 ALTER TABLE `demandegrouper` DISABLE KEYS */;
+/*!40000 ALTER TABLE `demandegrouper` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `departement`
 --
 
@@ -395,6 +530,32 @@ INSERT INTO `departement` VALUES (1,'administration generale','velit egestas lac
 UNLOCK TABLES;
 
 --
+-- Table structure for table `detaildemandegrouper`
+--
+
+DROP TABLE IF EXISTS `detaildemandegrouper`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `detaildemandegrouper` (
+  `idDemandeGrouper` int(11) DEFAULT NULL,
+  `idDemande` int(11) DEFAULT NULL,
+  KEY `idDemandeGrouper` (`idDemandeGrouper`),
+  KEY `idDemande` (`idDemande`),
+  CONSTRAINT `detaildemandegrouper_ibfk_1` FOREIGN KEY (`idDemandeGrouper`) REFERENCES `demandegrouper` (`idDemandeGrouper`),
+  CONSTRAINT `detaildemandegrouper_ibfk_2` FOREIGN KEY (`idDemande`) REFERENCES `demande` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `detaildemandegrouper`
+--
+
+LOCK TABLES `detaildemandegrouper` WRITE;
+/*!40000 ALTER TABLE `detaildemandegrouper` DISABLE KEYS */;
+/*!40000 ALTER TABLE `detaildemandegrouper` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `diplome`
 --
 
@@ -413,7 +574,7 @@ CREATE TABLE `diplome` (
   KEY `fk_diplome_idGrade` (`idGrade`),
   CONSTRAINT `fk_diplome_idCV` FOREIGN KEY (`idCV`) REFERENCES `cv` (`idCV`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_diplome_idGrade` FOREIGN KEY (`idGrade`) REFERENCES `grade` (`idGrade`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -422,7 +583,7 @@ CREATE TABLE `diplome` (
 
 LOCK TABLES `diplome` WRITE;
 /*!40000 ALTER TABLE `diplome` DISABLE KEYS */;
-INSERT INTO `diplome` VALUES (1,1,4,'BACC','ITU','0000-00-00'),(2,2,2,'MASTER','ESCA','0000-00-00'),(3,3,1,'MASTER','ISCAM','0000-00-00'),(4,4,3,'BACC','Ankatso','0000-00-00'),(5,5,3,'Test','Test','2021-12-14'),(6,5,3,'Test','Test','2021-12-14'),(7,5,3,'Test','Test','2021-12-14'),(8,5,3,'Test','Test','2021-12-14'),(9,5,3,'Test','Test','2021-12-14'),(10,5,3,'Test','Test','2021-12-14');
+INSERT INTO `diplome` VALUES (1,1,4,'BACC','ITU','0000-00-00'),(2,2,2,'MASTER','ESCA','0000-00-00'),(3,3,1,'MASTER','ISCAM','0000-00-00'),(4,4,3,'BACC','Ankatso','0000-00-00'),(5,5,3,'Test','Test','2021-12-14'),(6,5,3,'Test','Test','2021-12-14'),(7,5,3,'Test','Test','2021-12-14'),(8,5,3,'Test','Test','2021-12-14'),(9,5,3,'Test','Test','2021-12-14'),(10,5,3,'Test','Test','2021-12-14'),(11,12,1,'Test','aa','2021-12-08');
 /*!40000 ALTER TABLE `diplome` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -468,6 +629,34 @@ SET character_set_client = utf8;
   `years` tinyint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `empemp`
+--
+
+DROP TABLE IF EXISTS `empemp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empemp` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idEmployeur` int(11) DEFAULT NULL,
+  `idEmploye` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_idemployeur` (`idEmployeur`),
+  KEY `fk_idemploye` (`idEmploye`),
+  CONSTRAINT `fk_idemploye` FOREIGN KEY (`idEmploye`) REFERENCES `employe` (`idEmploye`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_idemployeur` FOREIGN KEY (`idEmployeur`) REFERENCES `employeur` (`idEmployeur`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empemp`
+--
+
+LOCK TABLES `empemp` WRITE;
+/*!40000 ALTER TABLE `empemp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empemp` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `employe`
@@ -561,6 +750,33 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Table structure for table `employeur`
+--
+
+DROP TABLE IF EXISTS `employeur`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `employeur` (
+  `idEmployeur` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(30) DEFAULT NULL,
+  `statut` varchar(30) DEFAULT NULL,
+  `adresse` varchar(30) DEFAULT NULL,
+  `identi` varchar(30) DEFAULT NULL,
+  `repre` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`idEmployeur`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employeur`
+--
+
+LOCK TABLES `employeur` WRITE;
+/*!40000 ALTER TABLE `employeur` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employeur` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `enfant`
 --
 
@@ -587,6 +803,35 @@ LOCK TABLES `enfant` WRITE;
 /*!40000 ALTER TABLE `enfant` DISABLE KEYS */;
 INSERT INTO `enfant` VALUES (1,1,'Ella','Mimi','2019-03-14'),(2,1,'Elio','Mimi','2017-01-24');
 /*!40000 ALTER TABLE `enfant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `entretien`
+--
+
+DROP TABLE IF EXISTS `entretien`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `entretien` (
+  `idEntretien` int(11) NOT NULL AUTO_INCREMENT,
+  `idPersonne` int(11) DEFAULT NULL,
+  `note` int(11) DEFAULT NULL,
+  `dateentretien` date DEFAULT NULL,
+  `heureentretien` time DEFAULT NULL,
+  PRIMARY KEY (`idEntretien`),
+  KEY `idPersonne` (`idPersonne`),
+  CONSTRAINT `entretien_ibfk_1` FOREIGN KEY (`idPersonne`) REFERENCES `personne` (`idPersonne`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entretien`
+--
+
+LOCK TABLES `entretien` WRITE;
+/*!40000 ALTER TABLE `entretien` DISABLE KEYS */;
+INSERT INTO `entretien` VALUES (1,4,50,'2021-12-11','08:05:00');
+/*!40000 ALTER TABLE `entretien` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -681,7 +926,7 @@ CREATE TABLE `experience` (
   PRIMARY KEY (`idExperience`),
   KEY `fk_experience_idCV` (`idCV`),
   CONSTRAINT `fk_experience_idCV` FOREIGN KEY (`idCV`) REFERENCES `cv` (`idCV`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -690,7 +935,7 @@ CREATE TABLE `experience` (
 
 LOCK TABLES `experience` WRITE;
 /*!40000 ALTER TABLE `experience` DISABLE KEYS */;
-INSERT INTO `experience` VALUES (1,1,'2018-09-11','2018-12-13','caissier','Jumbo score'),(2,1,'2019-01-30','2020-02-05','Comptable','BNI'),(3,3,'2020-12-27','2021-01-18','responsable marketing','Etoile color'),(4,4,'2018-05-20','2021-09-20','infirmiere','HJRA'),(5,5,'2021-12-06','2021-12-11','Test','Test'),(6,5,'2021-12-06','2021-12-11','Test','Test'),(7,5,'2021-12-06','2021-12-11','Test','Test'),(8,5,'2021-12-06','2021-12-11','Test','Test'),(9,5,'2021-12-06','2021-12-11','Test','Test'),(10,5,'2021-12-06','2021-12-11','Test','Test');
+INSERT INTO `experience` VALUES (1,1,'2018-09-11','2018-12-13','caissier','Jumbo score'),(2,1,'2019-01-30','2020-02-05','Comptable','BNI'),(3,3,'2020-12-27','2021-01-18','responsable marketing','Etoile color'),(4,4,'2018-05-20','2021-09-20','infirmiere','HJRA'),(5,5,'2021-12-06','2021-12-11','Test','Test'),(6,5,'2021-12-06','2021-12-11','Test','Test'),(7,5,'2021-12-06','2021-12-11','Test','Test'),(8,5,'2021-12-06','2021-12-11','Test','Test'),(9,5,'2021-12-06','2021-12-11','Test','Test'),(10,5,'2021-12-06','2021-12-11','Test','Test'),(11,12,'2021-12-14','2021-12-15','aa','aa');
 /*!40000 ALTER TABLE `experience` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -717,7 +962,7 @@ CREATE TABLE `experience_domaine` (
 
 LOCK TABLES `experience_domaine` WRITE;
 /*!40000 ALTER TABLE `experience_domaine` DISABLE KEYS */;
-INSERT INTO `experience_domaine` VALUES (1,1),(2,1),(3,2),(4,3);
+INSERT INTO `experience_domaine` VALUES (1,1),(2,1),(3,2),(4,3),(11,1);
 /*!40000 ALTER TABLE `experience_domaine` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -779,6 +1024,37 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Table structure for table `fournisseur`
+--
+
+DROP TABLE IF EXISTS `fournisseur`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fournisseur` (
+  `idFournisseur` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(150) DEFAULT NULL,
+  `addresse` varchar(150) DEFAULT NULL,
+  `tel` varchar(150) DEFAULT NULL,
+  `mail` varchar(100) DEFAULT NULL,
+  `nif` varchar(150) DEFAULT NULL,
+  `idCateg` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idFournisseur`),
+  KEY `idCateg` (`idCateg`),
+  CONSTRAINT `fournisseur_ibfk_1` FOREIGN KEY (`idCateg`) REFERENCES `categoriefournisseur` (`idCateg`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fournisseur`
+--
+
+LOCK TABLES `fournisseur` WRITE;
+/*!40000 ALTER TABLE `fournisseur` DISABLE KEYS */;
+INSERT INTO `fournisseur` VALUES (1,'sanifer','tanjombato',NULL,NULL,'123456',1),(2,'pharmacie de tana','tanjombato',NULL,NULL,'123456',2),(3,'score','tanjombato',NULL,NULL,'123456',3),(4,'premier','tanjombato',NULL,NULL,'123456',4);
+/*!40000 ALTER TABLE `fournisseur` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `grade`
 --
 
@@ -801,6 +1077,76 @@ LOCK TABLES `grade` WRITE;
 INSERT INTO `grade` VALUES (1,'1e annee'),(2,'2e annee'),(3,'3e annee'),(4,'4e annee'),(5,'5e annee');
 /*!40000 ALTER TABLE `grade` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `gradeprofessionnel`
+--
+
+DROP TABLE IF EXISTS `gradeprofessionnel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gradeprofessionnel` (
+  `idGrad` int(11) NOT NULL AUTO_INCREMENT,
+  `reference` varchar(50) DEFAULT NULL,
+  `Libelle` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idGrad`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gradeprofessionnel`
+--
+
+LOCK TABLES `gradeprofessionnel` WRITE;
+/*!40000 ALTER TABLE `gradeprofessionnel` DISABLE KEYS */;
+INSERT INTO `gradeprofessionnel` VALUES (1,'Stg','Stagiaire'),(2,'2C1','Deuxieme classe, 1er echelon'),(3,'2C2','Deuxieme classe, 2e echelon'),(4,'2C3','Deuxieme classe, 3e echelon'),(5,'1C1','Premiere classe, 1er echelon'),(6,'1C2','Premiere classe, 2e echelon'),(7,'1C3','Premiere classe, 3e echelon'),(8,'Ppal1','Principal 1er echelon'),(9,'Ppal2','Principal 2e echelon'),(10,'Ppal3','Principal 3e echelon'),(11,'Exc1','Classe exceptionnelle 1er echelon'),(12,'Exc2','Classe exceptionnelle 2e echelon');
+/*!40000 ALTER TABLE `gradeprofessionnel` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `grillesalaire`
+--
+
+DROP TABLE IF EXISTS `grillesalaire`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `grillesalaire` (
+  `GradeProfessionnel` int(11) NOT NULL,
+  `categorie` int(11) NOT NULL,
+  `SalaireMin` int(11) DEFAULT NULL,
+  PRIMARY KEY (`GradeProfessionnel`,`categorie`),
+  KEY `categorie` (`categorie`),
+  CONSTRAINT `grillesalaire_ibfk_1` FOREIGN KEY (`GradeProfessionnel`) REFERENCES `gradeprofessionnel` (`idGrad`),
+  CONSTRAINT `grillesalaire_ibfk_2` FOREIGN KEY (`categorie`) REFERENCES `categorieprofessionnel` (`idcat`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `grillesalaire`
+--
+
+LOCK TABLES `grillesalaire` WRITE;
+/*!40000 ALTER TABLE `grillesalaire` DISABLE KEYS */;
+INSERT INTO `grillesalaire` VALUES (1,1,246559),(1,2,272511),(1,3,323489),(1,4,419430),(1,5,443044),(1,6,479647),(1,7,525258),(1,8,576393),(1,9,642535),(2,1,250107),(2,2,277033),(2,3,330855),(2,4,441253),(2,5,468550),(2,6,500892),(2,7,549207),(2,8,610183),(2,9,672883),(3,1,259362),(3,2,281556),(3,3,338007),(3,4,463238),(3,5,489151),(3,6,532831),(3,7,574958),(3,8,641778),(3,9,710031),(4,1,262907),(4,2,288933),(4,3,348237),(4,4,485104),(4,5,515524),(4,6,555977),(4,7,606311),(4,8,676889),(4,9,745654),(5,1,267636),(5,2,298979),(5,3,362908),(5,4,520532),(5,5,516019),(5,6,587965),(5,7,635427),(5,8,718868),(5,9,783042),(6,1,273546),(6,2,303501),(6,3,373633),(6,4,543691),(6,5,586678),(6,6,617654),(6,7,667976),(6,8,760982),(6,9,831022),(7,1,281353),(7,2,309153),(7,3,384095),(7,4,579703),(7,5,612415),(7,6,652188),(7,7,705590),(7,8,813796),(7,9,875574),(7,10,1008075),(8,1,287263),(8,2,318168),(8,3,399034),(8,4,618729),(8,5,643294),(8,6,691769),(8,7,743140),(8,8,864193),(8,9,923693),(8,10,1060017),(9,1,291992),(9,2,322689),(9,3,410860),(9,4,654786),(9,5,678181),(9,6,731265),(9,7,790649),(9,8,920084),(9,9,984395),(9,10,1094583),(10,1,302067),(10,2,328341),(10,3,423971),(10,4,687459),(10,5,714970),(10,6,781217),(10,7,832552),(10,8,990306),(10,9,1045771),(10,10,1187812),(11,1,307655),(11,2,338234),(11,3,441366),(11,4,732052),(11,5,760519),(11,6,827340),(11,7,879576),(11,8,1055171),(11,9,1113035),(11,10,1216164),(12,1,353608),(12,2,425914),(12,3,579445),(12,4,747580),(12,5,808562),(12,6,860258),(12,7,1016262),(12,8,109122),(12,9,1190218),(12,10,1266399);
+/*!40000 ALTER TABLE `grillesalaire` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `grillesalairemin`
+--
+
+DROP TABLE IF EXISTS `grillesalairemin`;
+/*!50001 DROP VIEW IF EXISTS `grillesalairemin`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `grillesalairemin` (
+  `Categorie` tinyint NOT NULL,
+  `GradeProfessionnel` tinyint NOT NULL,
+  `salaireMin` tinyint NOT NULL,
+  `idGrad` tinyint NOT NULL,
+  `idcat` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary table structure for view `heureenmoins`
@@ -928,6 +1274,24 @@ INSERT INTO `langue` VALUES (1,'Malgache'),(2,'Francais'),(3,'Anglais'),(4,'Alle
 UNLOCK TABLES;
 
 --
+-- Temporary table structure for view `listebulletin`
+--
+
+DROP TABLE IF EXISTS `listebulletin`;
+/*!50001 DROP VIEW IF EXISTS `listebulletin`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `listebulletin` (
+  `idEmploye` tinyint NOT NULL,
+  `nom` tinyint NOT NULL,
+  `prenom` tinyint NOT NULL,
+  `idFichePaie` tinyint NOT NULL,
+  `dateMiseEnPlace` tinyint NOT NULL,
+  `net` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `loisir`
 --
 
@@ -941,7 +1305,7 @@ CREATE TABLE `loisir` (
   PRIMARY KEY (`idLoisir`),
   KEY `idCategorieLoisire` (`idCategorieLoisire`),
   CONSTRAINT `loisir_ibfk_1` FOREIGN KEY (`idCategorieLoisire`) REFERENCES `categorieloisir` (`idCategorieLoisire`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -950,7 +1314,7 @@ CREATE TABLE `loisir` (
 
 LOCK TABLES `loisir` WRITE;
 /*!40000 ALTER TABLE `loisir` DISABLE KEYS */;
-INSERT INTO `loisir` VALUES (1,1,'musique'),(2,1,'musique'),(3,1,'musique'),(4,1,'musique'),(5,1,'musique'),(6,1,'musique');
+INSERT INTO `loisir` VALUES (1,1,'musique'),(2,1,'musique'),(3,1,'musique'),(4,1,'musique'),(5,1,'musique'),(6,1,'musique'),(7,1,'aaa');
 /*!40000 ALTER TABLE `loisir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -968,7 +1332,7 @@ CREATE TABLE `mobile` (
   PRIMARY KEY (`idMobile`),
   KEY `idContact` (`idContact`),
   CONSTRAINT `mobile_ibfk_1` FOREIGN KEY (`idContact`) REFERENCES `contact` (`idContact`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -977,7 +1341,7 @@ CREATE TABLE `mobile` (
 
 LOCK TABLES `mobile` WRITE;
 /*!40000 ALTER TABLE `mobile` DISABLE KEYS */;
-INSERT INTO `mobile` VALUES (1,1,344526636),(2,2,345788862),(3,3,342326243),(4,4,341858661),(5,5,34342585),(6,6,348573662),(7,7,346194367),(8,8,342243155),(9,9,34282783),(10,10,344737847),(11,11,344255041),(12,12,34497705),(13,13,342635633),(14,14,341253961),(15,15,344278357),(16,16,342686872),(17,17,345157172),(18,18,346532812),(19,19,342670372),(20,20,347451215);
+INSERT INTO `mobile` VALUES (1,1,344526636),(2,2,345788862),(3,3,342326243),(4,4,341858661),(5,5,34342585),(6,6,348573662),(7,7,346194367),(8,8,342243155),(9,9,34282783),(10,10,344737847),(11,11,344255041),(12,12,34497705),(13,13,342635633),(14,14,341253961),(15,15,344278357),(16,16,342686872),(17,17,345157172),(18,18,346532812),(19,19,342670372),(20,20,347451215),(21,28,325566482);
 /*!40000 ALTER TABLE `mobile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1004,6 +1368,65 @@ LOCK TABLES `motifconge` WRITE;
 /*!40000 ALTER TABLE `motifconge` DISABLE KEYS */;
 INSERT INTO `motifconge` VALUES ('M1','evenement familial','non'),('M2','repos medical','non'),('M3','autre','oui');
 /*!40000 ALTER TABLE `motifconge` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `offre`
+--
+
+DROP TABLE IF EXISTS `offre`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `offre` (
+  `idOffre` int(11) NOT NULL AUTO_INCREMENT,
+  `Poste` varchar(255) NOT NULL,
+  `description` varchar(500) NOT NULL,
+  `responsabilite` varchar(500) NOT NULL,
+  `ageMin` int(11) NOT NULL,
+  `idDiplomeOffre` int(11) NOT NULL,
+  `Experiences` varchar(500) DEFAULT NULL,
+  `AutreExperience` varchar(500) DEFAULT NULL,
+  `dateLimite` date DEFAULT NULL,
+  PRIMARY KEY (`idOffre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `offre`
+--
+
+LOCK TABLES `offre` WRITE;
+/*!40000 ALTER TABLE `offre` DISABLE KEYS */;
+/*!40000 ALTER TABLE `offre` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `organigramme`
+--
+
+DROP TABLE IF EXISTS `organigramme`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `organigramme` (
+  `Poste` varchar(50) NOT NULL,
+  `PosteSup` varchar(50) DEFAULT NULL,
+  `idCategorie` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Poste`),
+  KEY `PosteSup` (`PosteSup`),
+  KEY `idCategorie` (`idCategorie`),
+  CONSTRAINT `organigramme_ibfk_1` FOREIGN KEY (`PosteSup`) REFERENCES `organigramme` (`Poste`),
+  CONSTRAINT `organigramme_ibfk_2` FOREIGN KEY (`idCategorie`) REFERENCES `categorieprofessionnel` (`idcat`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `organigramme`
+--
+
+LOCK TABLES `organigramme` WRITE;
+/*!40000 ALTER TABLE `organigramme` DISABLE KEYS */;
+INSERT INTO `organigramme` VALUES ('Administration','Directeur Admin. et Juridique',5),('Audit interne','Directeur Admin. et Juridique',5),('Comptabilite','Directeur Financier',5),('Controle de Gestion','Directeur Financier',5),('Directeur Admin. et Juridique','Directeur General',6),('Directeur Commercial','Directeur General',6),('Directeur de Production','Directeur General',6),('Directeur des RH','Directeur General',6),('Directeur Financier','Directeur General',6),('Directeur General',NULL,8),('Gestion du personnel','Directeur des RH',5),('Logistique','Directeur de Production',5),('Marketing','Directeur Commercial',5),('Paie','Directeur Financier',5),('Produit','Directeur Commercial',5),('Recrutement','Directeur des RH',5),('SAV','Directeur Commercial',5),('Secretariat General','Directeur General',6),('Service juridique','Directeur Admin. et Juridique',5),('Usine1','Directeur de Production',5),('Usine2','Directeur de Production',5);
+/*!40000 ALTER TABLE `organigramme` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1050,7 +1473,7 @@ CREATE TABLE `personne` (
   PRIMARY KEY (`idPersonne`),
   KEY `idContact` (`idContact`),
   CONSTRAINT `personne_ibfk_1` FOREIGN KEY (`idContact`) REFERENCES `contact` (`idContact`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1059,7 +1482,7 @@ CREATE TABLE `personne` (
 
 LOCK TABLES `personne` WRITE;
 /*!40000 ALTER TABLE `personne` DISABLE KEYS */;
-INSERT INTO `personne` VALUES (1,'Lillith','Pope','1981-03-12','F','970-3240 Nec Rd.',1,'Mari?e',1),(2,'Kim','Baxter','1981-03-12','F','Ap #862-3446 Phasellus Ave',6,'Celibataire',2),(3,'Tyrone','Love','1981-03-12','M','1704 Purus, Av.',5,'Mari?',3),(4,'Philip','West','1981-03-12','M','8340 Nisl. Street',9,'Mari?',4),(5,'Lance','Crane','1981-03-12','F','335-3726 Malesuada Rd.',0,'Mari?e',5),(6,'Dahlia','Olsen','1981-03-12','F','466-9537 Nec, St.',7,'Veuve',6),(7,'Amethyst','Patterson','1981-03-12','M','999-6773 Aliquam Av.',10,'Veuf',7),(8,'Frances','Cleveland','1981-03-12','M','Ap #236-4383 In St.',1,'Celibataire',8),(9,'Odessa','Leach','1981-03-12','F','Ap #580-7936 Malesuada Avenue',5,'Mari?e',9),(10,'Wilma','Rivera','1981-03-12','F','Ap #271-6542 Est. St.',2,'Veuve',10),(11,'Maggy','Lindsey','1981-03-12','M','857-2139 Dolor Avenue',4,'Mari?',11),(12,'Daria','Roth','1981-03-12','F','174-8534 Enim. Road',4,'Celibataire',12),(13,'Ursa','Jenkins','1981-03-12','M','481-6744 Pellentesque Av.',2,'Mari?',13),(14,'Kiona','Kirby','1981-03-12','M','P.O. Box 525, 8563 Auctor Stre',4,'Veuf',14),(15,'Thomas','Middleton','1981-03-12','M','571-530 Nec Rd.',10,'Mari?',15),(16,'Marshall','Juarez','1981-03-12','M','758-9471 Mus. Av.',4,'Celibataire',16),(17,'Signe','Bartlett','1981-03-12','F','8706 Dui. Av.',1,'Mari?e',17),(18,'Fatima','Mccray','1981-03-12','M','857-2340 Non, Rd.',4,'Veuf',18),(19,'Gage','Norman','1981-03-12','M','6895 Orci St.',8,'Celibataire',19),(20,'Angela','Gomez','1981-03-12','F','207-4603 Tellus, Ave',7,'Mari?e',20),(21,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(22,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(23,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(24,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(25,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(26,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(27,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21);
+INSERT INTO `personne` VALUES (1,'Lillith','Pope','1981-03-12','F','970-3240 Nec Rd.',1,'mariee',1),(2,'Kim','Baxter','1981-03-12','F','Ap #862-3446 Phasellus Ave',6,'Celibataire',2),(3,'Tyrone','Love','1981-03-12','M','1704 Purus, Av.',5,'marie',3),(4,'Philip','West','1981-03-12','M','8340 Nisl. Street',9,'marie',4),(5,'Lance','Crane','1981-03-12','F','335-3726 Malesuada Rd.',0,'mariee',5),(6,'Dahlia','Olsen','1981-03-12','F','466-9537 Nec, St.',7,'Veuve',6),(7,'Amethyst','Patterson','1981-03-12','M','999-6773 Aliquam Av.',10,'Veuf',7),(8,'Frances','Cleveland','1981-03-12','M','Ap #236-4383 In St.',1,'Celibataire',8),(9,'Odessa','Leach','1981-03-12','F','Ap #580-7936 Malesuada Avenue',5,'mariee',9),(10,'Wilma','Rivera','1981-03-12','F','Ap #271-6542 Est. St.',2,'Veuve',10),(11,'Maggy','Lindsey','1981-03-12','M','857-2139 Dolor Avenue',4,'marie',11),(12,'Daria','Roth','1981-03-12','F','174-8534 Enim. Road',4,'Celibataire',12),(13,'Ursa','Jenkins','1981-03-12','M','481-6744 Pellentesque Av.',2,'marie',13),(14,'Kiona','Kirby','1981-03-12','M','P.O. Box 525, 8563 Auctor Stre',4,'Veuf',14),(15,'Thomas','Middleton','1981-03-12','M','571-530 Nec Rd.',10,'marie',15),(16,'Marshall','Juarez','1981-03-12','M','758-9471 Mus. Av.',4,'Celibataire',16),(17,'Signe','Bartlett','1981-03-12','F','8706 Dui. Av.',1,'mariee',17),(18,'Fatima','Mccray','1981-03-12','M','857-2340 Non, Rd.',4,'Veuf',18),(19,'Gage','Norman','1981-03-12','M','6895 Orci St.',8,'Celibataire',19),(20,'Angela','Gomez','1981-03-12','F','207-4603 Tellus, Ave',7,'mariee',20),(21,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(22,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(23,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(24,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(25,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(26,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(27,'Coco','Test','1995-03-15','M','105 VGT',0,'Celibataire',21),(28,'Sam Koon','Mathieu','2000-12-06','M','Logt 32 IAV',30.529,'Celibataire',28);
 /*!40000 ALTER TABLE `personne` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1073,12 +1496,12 @@ DROP TABLE IF EXISTS `pointage`;
 CREATE TABLE `pointage` (
   `idPointage` int(11) NOT NULL AUTO_INCREMENT,
   `idEmploye` int(11) DEFAULT NULL,
-  `datePointage` date DEFAULT NULL,
-  `duree` float DEFAULT NULL,
+  `dateDebut` datetime DEFAULT NULL,
+  `dateFin` datetime DEFAULT NULL,
   PRIMARY KEY (`idPointage`),
   KEY `fk_pointage_idEmploye` (`idEmploye`),
   CONSTRAINT `fk_pointage_idEmploye` FOREIGN KEY (`idEmploye`) REFERENCES `employe` (`idEmploye`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1087,7 +1510,7 @@ CREATE TABLE `pointage` (
 
 LOCK TABLES `pointage` WRITE;
 /*!40000 ALTER TABLE `pointage` DISABLE KEYS */;
-INSERT INTO `pointage` VALUES (1,1,'2021-02-15',8),(2,1,'2021-02-16',8),(3,1,'2021-02-17',10),(4,1,'2021-02-18',12),(5,1,'2021-02-19',8),(6,1,'2021-02-20',9),(7,1,'2021-02-22',8),(8,1,'2021-02-23',7),(9,1,'2021-02-24',8),(10,1,'2021-02-28',9);
+INSERT INTO `pointage` VALUES (1,1,'2021-12-09 18:25:16','2021-12-10 19:01:51'),(2,2,'2021-12-09 18:50:21',NULL),(3,1,'2021-12-10 19:05:53',NULL);
 /*!40000 ALTER TABLE `pointage` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1243,7 +1666,7 @@ CREATE TABLE `scolarite` (
   PRIMARY KEY (`idScolarite`),
   KEY `fk_scolarite_idCV` (`idCV`),
   CONSTRAINT `fk_scolarite_idCV` FOREIGN KEY (`idCV`) REFERENCES `cv` (`idCV`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1252,9 +1675,15 @@ CREATE TABLE `scolarite` (
 
 LOCK TABLES `scolarite` WRITE;
 /*!40000 ALTER TABLE `scolarite` DISABLE KEYS */;
-INSERT INTO `scolarite` VALUES (1,1,'2012-08-11','2016-05-20','ITU'),(2,2,'2009-08-11','2014-05-20','ESCA'),(3,3,'2010-08-11','2014-05-20','ISCAM'),(4,4,'2014-08-11','2017-05-20','Ankatso');
+INSERT INTO `scolarite` VALUES (1,1,'2012-08-11','2016-05-20','ITU'),(2,2,'2009-08-11','2014-05-20','ESCA'),(3,3,'2010-08-11','2014-05-20','ISCAM'),(4,4,'2014-08-11','2017-05-20','Ankatso'),(5,12,'2021-12-08','2021-12-30','aaa');
 /*!40000 ALTER TABLE `scolarite` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Current Database: `gestion`
+--
+
+USE `gestion`;
 
 --
 -- Final view structure for view `congeparmoisparemploye`
@@ -1409,6 +1838,25 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `grillesalairemin`
+--
+
+/*!50001 DROP TABLE IF EXISTS `grillesalairemin`*/;
+/*!50001 DROP VIEW IF EXISTS `grillesalairemin`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `grillesalairemin` AS select `categorieprofessionnel`.`Categorie` AS `Categorie`,`gradeprofessionnel`.`reference` AS `GradeProfessionnel`,`grillesalaire`.`SalaireMin` AS `salaireMin`,`grillesalaire`.`GradeProfessionnel` AS `idGrad`,`grillesalaire`.`categorie` AS `idcat` from ((`categorieprofessionnel` join `grillesalaire` on(`categorieprofessionnel`.`idcat` = `grillesalaire`.`categorie`)) join `gradeprofessionnel` on(`gradeprofessionnel`.`idGrad` = `grillesalaire`.`GradeProfessionnel`)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `heureenmoins`
 --
 
@@ -1426,6 +1874,25 @@ UNLOCK TABLES;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `listebulletin`
+--
+
+/*!50001 DROP TABLE IF EXISTS `listebulletin`*/;
+/*!50001 DROP VIEW IF EXISTS `listebulletin`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `listebulletin` AS select `e`.`idEmploye` AS `idEmploye`,`p`.`nom` AS `nom`,`p`.`prenom` AS `prenom`,`f`.`idFichePaie` AS `idFichePaie`,`f`.`dateMiseEnPlace` AS `dateMiseEnPlace`,`f`.`net` AS `net` from ((`employe` `e` join `personne` `p` on(`e`.`idPersonne` = `p`.`idPersonne`)) join `fichepaie` `f` on(`e`.`idEmploye` = `f`.`idEmploye`)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1436,4 +1903,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-09 10:11:49
+-- Dump completed on 2021-12-19 17:55:41
