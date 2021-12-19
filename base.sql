@@ -751,3 +751,20 @@ create table attente(
     idPersonne int
 );
 INSERT INTO attente VALUES (null,14),(null,15);
+
+create table Employeur(
+    idEmployeur int not null auto_increment primary key,
+    nom varchar(30),
+    statut varchar(30),
+    adresse varchar(30),
+    identi varchar(30),
+    repre varchar(30)
+);
+
+create table Empemp(
+  id int not null auto_increment primary key,
+  idEmployeur int,
+  idEmploye int,
+  constraint fk_idemployeur foreign key (idEmployeur) references Employeur(idEmployeur) on delete cascade on update cascade,
+  constraint fk_idemploye foreign key (idEmploye) references Employe(idEmploye) on delete cascade on update cascade
+);
