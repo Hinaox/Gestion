@@ -138,6 +138,12 @@ if (empty($view)){
           Liste des admis à l'entretien
         </a>
       </li>
+      <li>
+        <a href="<?php echo site_url('filtreCVController/'); ?>" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+          Formulaire de CV
+        </a>
+      </li>
       <li class="nav-item">
         <a href="<?php echo site_url('RHController/'); ?>" class="nav-link  link-dark" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
