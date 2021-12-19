@@ -49,7 +49,7 @@ class Filtre extends CI_Model{
                         ) as AllLangue
                         from filtre_view where idPersonne not in (select idPersonne from attente) ";
         if($matrimonial!="" || $age!="" || $distance!="" || $titreLangue!="" || $sexe!="" || $nomPosteExperience!="" || $titreDomaine!="" || $titreDiplome!="" || $titreGrade!=""){
-                $query.=" where ";
+                $query.=" and ";
         }
                 if($matrimonial!=""){
                         if($isFirst!=0){

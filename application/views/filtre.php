@@ -17,8 +17,10 @@
 						      	<select id="inputEmail3" class="form-control" name="matrimoniale">
 						      		<option value="">Tous</option>
 						        	<option value="celibataire">Celibataire</option>
-						        	<option value="Mariée">Mariée</option>
-						        	<option value="Marié">Marié</option>
+						        	<option value="Mariee">Mariée</option>
+						        	<option value="Marie">Marié</option>
+						        	<option value="Veuf">Veuf</option>
+						        	<option value="Veuve">Veuve</option>
 						      	</select>
 						    </div>
 					  	</div>
