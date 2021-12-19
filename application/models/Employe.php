@@ -1,105 +1,51 @@
 <?php
-include_once 'BDtable.php';
-include_once 'Personne.php';
+if(! defined('BASEPATH')) exit('NO direct script access allowed');
 
-class Employe Extends Personne {
-  public $idEmploye;
-  public $idSalaire;
-  public $dateEmbauche;
-  public $nom;
-  public $nomDepartement;
-  public $idDepartement;
-  public $descriDepartement;
-  public $montantSalaire;
-  public $dateMiseEnPlace;
-  public $nomPoste;
-  public $idPoste;
-  public $descriPoste;
+class Employe Extends CI_Model {
+ 
+  public function getEmployeFromBase ($bdd ,$matricule = 0, $nom = null, $prenom = null, $departement = 0, $poste = 0) {
+    $retour = array();
+    $requete = ("select * from employe_view where 1<2");
+    if ($matricule > 0) {
+        $requete = $requete." and idEmploye=".$matricule;
+    }
+    if ($nom != null && strlen($nom) > 0) {
+        $requete = $requete." and nom like '%".$nom."%'";
+    }
+    if ($prenom != null && strlen($prenom) > 0) {
+        $requete = $requete." and prenom like '%".$prenom."%'";
+    }
+    if ($departement > 0) {
+        $requete = $requete." and idDepartement=".$departement;
+    }
+    if ($poste > 0) {
+        $requete = $requete." and idPoste=".$poste;
+    }
+    
+    $query  = $bdd->query($requete);
+    foreach($query->result_array() as $row) {
+        array_push($retour, $row);
+    }
 
-  function __construct()
-  {
+    return $retour;
+  }
 
-  }
-  public function getIdemploye(){
-    return $idEmploye;
-  }
-  public function setIdEmploye($id)
-  {
-    $idEmploye = $id;
-  }
-  public function getIdSalaire(){
-    return $idSalaire;
-  }
-  public function setIdSalaire($id){
-    $idSalaire = $id;
-  }
-  public function getDateEmbauche()
-  {
-    return $dateEmbauche;
-  }
-  public function setDateEmbauche($date){
-    $dateEmbauche = $date;
-  }
-  public function getNom(){
-    return $nom;
-  }
-  public function setNom($nom){
-      $this->nom=$nom;
-  }
-  public function getNomDepartement(){
-    return $nomDepartement;
-  }
-  public function setNomDepartement($nom){
-    $nomDepartement = $nom;
-  }
-  public function getIdDepartement(){
-    return $idDepartement;
-  }
-  public function setIdDepartement($id){
-    $idDepartement = $id;
-  }
-  public function getDescriDepartement(){
-    return $descriDepartement;
-  }
-  public function setDescriDepartement($descri)
-  {
-    $descriDepartement = $descri;
-  }
-  public function getMontantSalaire(){
-    return $montantSalaire;
-  }
-  public function setMontantSalaire($s)
-   {
-     $montantSalaire = $s;
-   }
-   public function getDateMiseEnPlace(){
-     return $dateMiseEnPlace;
-   }
-   public function setDateMiseEnPlace($d)
-   {
-     $dateMiseEnPlace = $d ;
-   }
-   public function getNomPoste()
-   {
-     return $nomPoste;
-   }
-   public function setNomPoste($n){
-     $nomPoste = $n;
-   }
+  public function getEmployes ($db, $nom_prenom = null, $department = 0) {
+    $retour = array();
+    $requete = "select * from employe_view where 1<2";
 
-   public function getIdPoste(){
-     return $idPoste;
-   }
-   public function setIdPoste($id){
-     $idPoste = $id;
-   }
-   public function getDescriPoste(){
-     return $descriPoste;
-   }
-   public function setDescriPoste($d)
-   {
-     $descriPoste = $d;
-   }
+    if ($nom_prenom != null & strlen($nom_prenom)>0) {
+        $requete .= " and ( nom like '%".$nom_prenom."%' or prenom like '%".$nom_prenom."%' )";
+    }
+    if ($department > 0) {
+        $requete .= " and idDepartement=".$department;
+    }
+    $stmt = $db -> query($requete);
+    foreach($stmt -> result_array() as $row) {
+        array_push($retour, $row);
+    }
+    return $retour;
+  }
    public function getEmploye($id){
      $query = "select * from employe_view where idEmploye= %s";
      $query = sprintf($query,$id);

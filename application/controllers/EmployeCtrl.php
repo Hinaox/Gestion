@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Employe extends CI_Controller {
+class EmployeCtrl extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,24 +20,20 @@ class Employe extends CI_Controller {
 	 */
 	public function fiche()
 	{
-		$this->load->database();
-		$this->load->helper("employes");
-		$this->load->model('EmployeModel');
+		$this->load->model('Employe');
 		$data = array();
 		$idEmploye = $_GET['idEmploye'];
 		//maka anaty base
 		// $data = $this->Employe->getEmploye($this->input->post('idEmploye'));
-		$data = (getEmployeFromBase($this->db, $idEmploye))[0];
+		$data = ($this->Employe->getEmployeFromBase($this->db, $idEmploye))[0];
 		$this->load->view('fiche',$data);
 	}
 
 	public function liste() {
-		$this->load->helper('employes');
-		$this->load->helper('url');
-		$this->load->helper('departement');
-        $this->load->database();
-        $liste_emp = getEmployes($this->db);
-		$liste_dept = getDepartements($this->db);
+		$this->load->model('Employe');
+		$this->load->model('departement');
+        $liste_emp = $this->Employe->getEmployes($this->db);
+		$liste_dept = $this->departement->getDepartements($this->db);
 
         $data = array(
             "employes" => $liste_emp,
@@ -48,13 +44,12 @@ class Employe extends CI_Controller {
 	}
 
 	public function filtre() {
-		$this->load->helper('employes');
-		$this->load->database();
+		$this->load->model('Employe');
 
 		$nom_prenom = $_GET['nom_prenom'];
 		$departement = $_GET['departement'];
 
-		$liste_emp = getEmployes($this->db, $nom_prenom, $departement);
+		$liste_emp =  $this->Employe->getEmployes($this->db, $nom_prenom, $departement);
 
 		echo json_encode($liste_emp);
 	}

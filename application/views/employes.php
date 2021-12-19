@@ -1,3 +1,14 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
 <form id="form_filtre">
   <label>Recherche : </label>
   <input name="nom_prenom" type="text" id="recherche_tf">
@@ -8,6 +19,7 @@
       <option value="<?php echo $departements[$i]['idDepartement'] ?>"><?php echo $departements[$i]['nom']; ?></option>
     <?php } ?>
   </select>
+  <!-- <input type="submit" value="Filtre" > -->
   <button id="filtre_bt">Filtre</button>
 </form>
 
@@ -33,7 +45,7 @@
     let siteUrl = "<?php echo site_url(); ?>";
     function versFiche(idEmploye) {
         // console.log("Vers fiche "+idEmploye);
-        document.location= siteUrl + "Employe/fiche?idEmploye=" +idEmploye; 
+        document.location= siteUrl + "EmployeCtrl/fiche?idEmploye=" +idEmploye; 
     }
 </script>
 <script>
@@ -51,11 +63,10 @@
 <script>
   $('#filtre_bt').on('click', function() {
     $.ajax({
-      url: siteUrl + "Employe/filtre",
+      url: siteUrl + "EmployeCtrl/filtre",
       type: "get",
       data: $('#form_filtre').serialize(),
       success: function(reponse) {
-          // console.log(reponse);
           liste = JSON.parse(reponse);
 
           replaceTableContent(liste);
@@ -72,3 +83,5 @@
       }
   }
 </script>
+</body>
+</html>
