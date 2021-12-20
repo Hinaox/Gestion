@@ -45,7 +45,8 @@ class Offre extends CI_Controller
         $data=array();
         $data['postenom']=$poste;
         $data['diplomes']= $diplomes;
-        $this->load->view('ajoutOffre',$data);
+        $data['viewRH']='ajoutOffre';
+        $this->load->view('rh',$data);
     }
     // public function pageAjoutOffre(){
     //     // eto no soloina get le izy $_GET['idPoste]

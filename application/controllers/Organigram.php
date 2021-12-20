@@ -28,8 +28,9 @@ class Organigram extends CI_Controller {
 	{
         $data=array();
        $data['Organigram']= $this->Orga->LoadData();
+	   $data['viewRH']='Organigramme';
     //   var_dump($this->Orga->LoadData());
-		 $this->load->view('Organigramme',$data);
+		$this->load->view('rh',$data);
 		
 	}	
     public function index2(){
