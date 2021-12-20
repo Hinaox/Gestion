@@ -1,7 +1,4 @@
 
-    <?php for($i=0; $i<3; $i++){ ?>   
-        </br>
-    <?php } ?>
     <h2>Etat de congé</h2>
 <table class="table table-striped">
   <thead>

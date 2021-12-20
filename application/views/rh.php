@@ -123,7 +123,7 @@ if (empty($viewRH)){
           Module employe
         </a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a href="#" class="nav-link link-dark" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Générer Offre
@@ -134,7 +134,7 @@ if (empty($viewRH)){
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Supprimer Offre
         </a>
-      </li>
+      </li> -->
       <li>
         <a href="<?php echo site_url("filtreCVController/tousCV"); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer"/></svg>
@@ -162,10 +162,10 @@ if (empty($viewRH)){
       <li>
         <a href="<?php echo site_url("demandeCongeCtrl/"); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-            Congé
+            Module congé
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="#" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
             Heures Supplémentaire
@@ -176,7 +176,7 @@ if (empty($viewRH)){
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
             CNAPS
         </a>
-      </li>
+      </li> -->
     </ul>
     <hr>
     <div class="dropdown">

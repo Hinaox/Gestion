@@ -20,7 +20,11 @@ class RHController extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('rh');
-		
+		$this->load->model('Orga');
+        $data=array();
+       $data['Organigram']= $this->Orga->LoadData();
+	   $data['viewRH']='Organigramme';
+    //   var_dump($this->Orga->LoadData());
+		$this->load->view('rh',$data);
 	}		
 }

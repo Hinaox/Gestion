@@ -1,5 +1,3 @@
-
-
     <div>
         <form id="filtreforme">
         <div class="row">
