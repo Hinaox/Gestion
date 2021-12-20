@@ -1052,4 +1052,6 @@ join GradeProfessionnel on GradeProfessionnel.idGrad=GrilleSalaire.GradeProfessi
 
 select * from GrilleSalaireMin;
 
+alter table employe add mdp VARCHAR(50);
+update employe set mdp=sha1('123');
 
