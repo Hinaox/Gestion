@@ -2,6 +2,7 @@
 if (empty($viewRH)){
         $viewRH = 'accueil';
     }
+  $emp = $this->session->userdata('employe');
 ?>
 <!doctype html>
 <html lang="en">
@@ -123,18 +124,6 @@ if (empty($viewRH)){
           Module employe
         </a>
       </li>
-      <!-- <li class="nav-item">
-        <a href="#" class="nav-link link-dark" aria-current="page">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          Générer Offre
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          Supprimer Offre
-        </a>
-      </li> -->
       <li>
         <a href="<?php echo site_url("filtreCVController/tousCV"); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer"/></svg>
@@ -156,13 +145,13 @@ if (empty($viewRH)){
       <li>
         <a href="<?php echo site_url("irsaController/"); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-            Modification IRSA
+          Modification IRSA
         </a>
       </li>
       <li>
         <a href="<?php echo site_url("demandeCongeCtrl/"); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-            Module congé
+          Module congé
         </a>
       </li>
       <!-- <li>
@@ -182,14 +171,14 @@ if (empty($viewRH)){
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
+        <strong><?php echo $emp['nom'].' '.$emp['prenom']; ?></strong>
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <!-- <li><a class="dropdown-item" href="#">New project...</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li> -->
+        <li><a class="dropdown-item" href="#">Profil</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <li><a class="dropdown-item" href="<?php echo site_url('LogoutCtrl/'); ?>">Se deconnecter</a></li>
       </ul>
     </div>
   </div>

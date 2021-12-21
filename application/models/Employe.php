@@ -1,6 +1,24 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 
 class Employe extends CI_Model{
+    public function checkLogin($email, $mdp){
+        $sql="SELECT * FROM employe e 
+        JOIN personne p ON p.idPersonne=e.idPersonne
+        JOIN contact c on c.idContact=p.idContact WHERE c.email='%s' AND e.mdp=sha1('%s')";
+        $sql=sprintf($sql,$email,$mdp);
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        } 
+        return $val;
+    }
 	public function getEmployes1()
 	{
         $sql = "SELECT * FROM employe";
