@@ -32,9 +32,6 @@
                     <td><?php echo $demande[$i]['unite'] ?></td>
                     <td><?php echo $demande[$i]['nom'] ?></td>
                     <td><?php echo $demande[$i]['etat'] ?></td>
-<<<<<<< Updated upstream
-                    <td  class="form-check"><input class="form-check-label" type="checkbox" name="aGrouper[]" value="<?php echo $demande[$i]['id'] ?>" id=""></td>
-=======
                     <td>
                         <a href="<?php echo site_url('DemandeAchatController/refuserDemande?id='.$demande[$i]['id']); ?>" class="btn btn-danger" onclick="confirm('voulez vous vraiment refuser cette demande ?')">refuser</a>
                         <!-- <a href="<?php echo site_url('DemandeAchatController/refuserDemande?id='.$demande[$i]['id']); ?>" class="btn btn-danger" onclick="afficherPopupInformation()">refuser</a> -->
@@ -44,7 +41,6 @@
                     <td  class="form-check">
                         <input class="form-check-label" type="checkbox" name="aGrouper[]" value="<?php echo $demande[$i]['id'] ?>" id="">
                     </td>
->>>>>>> Stashed changes
                 </tr>
             <?php } ?>
         </table>

@@ -8,6 +8,8 @@ create table demande (
     foreign key (idDepartement) references departement(idDepartement)
 );
 
+update demande set etat = 'refuser' where id = '15';
+
 create table categorieFournisseur (
     idCateg int auto_increment primary key,
     label varchar(150)
@@ -65,7 +67,7 @@ create table detailDemandeGrouper(
     foreign key (idDemande) references demande(id)  
 );
 
-insert into detailDemandeGrouper values('','');
+-- insert into detailDemandeGrouper values('','');
 
 
 create table bonDeCommande(

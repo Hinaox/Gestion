@@ -37,7 +37,10 @@ class BonDeCommande extends CI_Model{
                     bon.quantite as quantite,
                     pro.prix as prixProformat,
                     bon.dateCommande as dateCommande,
-                    bon.delaiLivraison as delaiLivraison
+                    bon.delaiLivraison as delaiLivraison,
+                    tel,
+                    mail,
+                    addresse
                 from 
                     bondecommande bon,
                     proformat pro,
@@ -47,7 +50,7 @@ class BonDeCommande extends CI_Model{
                 and
                     pro.idFournisseur = frs.idFournisseur
                 and
-                     id in (select max(id) from bonddecommande)";
+                    idBonDeCommande in (select max(idBonDeCommande) from bondecommande)";
         $query = $this->db->query($sql);
         $val = array();
         $i = 0;

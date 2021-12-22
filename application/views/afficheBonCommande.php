@@ -1,5 +1,5 @@
 <?php
- 
+ var_dump($bonCommande);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,8 +38,8 @@
             </div>
         </div>
         <div class="mb-5">
-            Fournisseur: Pharmacie Havana</br>
-            Tel: +261 34 00 111 11
+            Fournisseur: <?php echo $bonCommande[0]['nomFornisseur']; ?></br>
+            Tel: <?php echo $bonCommande[0]['tel']; ?>
         </div>
         <div class="mb-5">
             <table class="table ">
@@ -54,14 +54,18 @@
                 </tr>
             </thead>
             <tbody>
-                <?php for($i=0; $i<3; $i++){ ?>
+                <?php 
+                $somme = 0;
+                for($i=0; $i<count($bonCommande); $i++){ 
+                    $somme+=$bonCommande[$i]['prixProformat'];
+                    ?>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>5</td>
-                        <td>boite(s)</td>
-                        <td>1000</td>
-                        <td>5000</td>
+                        <th scope="row"><?php echo $i+1; ?></th>
+                        <td><?php echo $bonCommande[$i]['label']; ?></td>
+                        <td><?php echo $bonCommande[$i]['quantite']; ?></td>
+                        <td>piece(s)</td>
+                        <td>-</td>
+                        <td><?php echo $bonCommande[$i]['prixProformat']; ?></td>
                     </tr>
                 <?php } ?>
                 <tr>
@@ -70,21 +74,21 @@
                     <td></td>
                     <td></td>
                     <td>Montant HT</td>
-                    <td>15000</td>
+                    <td><?php echo $somme; ?></td>
                 </tr><tr>
                     <th scope="row"></th>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td>TVA 20%</td>
-                    <td>3000</td>
+                    <td><?php echo $somme*20/100; ?></td>
                 </tr><tr>
                     <th scope="row"></th>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td>Montant TTC</td>
-                    <td>18000</td>
+                    <td><?php echo $somme+$somme*20/100; ?></td>
                 </tr>
             </tbody>
             </table>

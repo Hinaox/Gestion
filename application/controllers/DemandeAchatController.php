@@ -91,8 +91,8 @@ class DemandeAchatController extends CI_Controller {
         $this->load->model('BonDeCommande');
         $this->BonDeCommande->insertBonCommande($idProformat,$quantite,$delaiLivraison);*/
 
-        $data['bonCom']=$this->BonDeCommande->lastInserted();
-        $data['none']=null;
+        $this->load->model('BonDeCommande');
+        $data['bonCommande']=$this->BonDeCommande->lastInserted();
         $this->load->view('afficheBonCommande',$data);
 
     }
