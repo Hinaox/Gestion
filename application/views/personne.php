@@ -1,7 +1,7 @@
 
 	<div class="container">
 		<div class="row">
-			<h1>Formulaire de validation d'un entretien</h1>
+			<h1>Attribution de note à l'entretien</h1>
 			<table class="table table-hover" border="1">
                 <thead class="thead-dark">
                     <tr>

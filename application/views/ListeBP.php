@@ -13,7 +13,7 @@
     <div class="container">
 
         <div class="py-5 text-center">
-            <h2>Liste Bulletin ed Paie de <?php echo $nom?></h2>
+            <h2>Liste Bulletin de Paie de <?php echo $nom?></h2>
         </div>
 
         <?php if($nbPage>=20){ ?>

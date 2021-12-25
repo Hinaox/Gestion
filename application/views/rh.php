@@ -148,7 +148,7 @@ if (empty($viewRH)){
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
+        <a href="<?php echo site_url("BPController/listeBulletin"); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Bulletin de Paie
         </a>
