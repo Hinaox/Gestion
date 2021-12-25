@@ -54,6 +54,7 @@
 }
       
       .flex-container {
+      
   display: flex;
   align-items: stretch;
       }
