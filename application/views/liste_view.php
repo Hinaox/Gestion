@@ -3,7 +3,7 @@
 		<div class="row">
             
 
-			<h1>Liste des admis pour avoir un entretien </h1>
+			<h1>Resultats des entretiens</h1>
 			<table class="table table-hover" border="1">
                 <thead class="thead-dark">
                     <tr>

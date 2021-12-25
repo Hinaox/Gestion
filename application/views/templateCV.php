@@ -249,13 +249,13 @@ if (empty($view)){
       <li>
         <a href="<?php echo site_url('PersonneController/'); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          Formulaire d'admission
+          Note entretien
         </a>
       </li>
       <li>
         <a href="<?php echo site_url('PersonneController/afficheEntretien'); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          Liste des admis à l'entretien
+          Resultats des entretiens
         </a>
       </li>
       <li>
