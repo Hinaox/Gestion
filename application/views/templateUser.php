@@ -126,7 +126,7 @@ if (empty($view)){
         </a>
       </li>
       <li>
-        <a href="<?php echo site_url('EtatCongeCtrl/'); ?>" class="nav-link link-dark">
+        <a href="<?php echo site_url('DemandeCongeCtrl/'); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Consultation etat de congé
         </a>

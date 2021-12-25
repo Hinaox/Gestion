@@ -23,7 +23,7 @@
        
                    <input type="hidden" name="idPersonne" value="<?php echo $personne[$i]['idPersonne'];?>">
                    <td> <input type="submit" value="OK" class="btn btn-primary"></td>
-                   <td><a class="btn btn-danger" href="<?php echo site_url('PersonneController/refuserEntretien?idAttente='.$personne[$i]['idAttente']); ?>">Refuser</a></td>
+                   <!-- <td><a class="btn btn-danger" href="<?php //echo site_url('PersonneController/refuserEntretien?idAttente='.$personne[$i]['idAttente']); ?>">Refuser</a></td> -->
                 </tr>
                 </form>
                 <?php } ?>
