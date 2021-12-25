@@ -174,9 +174,7 @@ if (empty($viewRH)){
         <strong><?php echo $emp['nom'].' '.$emp['prenom']; ?></strong>
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-        <!-- <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li> -->
-        <li><a class="dropdown-item" href="#">Profil</a></li>
+        <li><a class="dropdown-item" href=<?php echo site_url("profilController/"); ?>>Profil</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="<?php echo site_url('LogoutCtrl/'); ?>">Se deconnecter</a></li>
       </ul>
@@ -184,9 +182,7 @@ if (empty($viewRH)){
   </div>
 
   <div class="b-example-divider" ></div>
-  <div>
     <?php include $viewRH.'.php' ; ?>
-  </div>
 </main>
 
     <script src="<?php echo site_url('/assets/dist/js/bootstrap.bundle.min.js');?>"></script>

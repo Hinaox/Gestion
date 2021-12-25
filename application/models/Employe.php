@@ -2,9 +2,9 @@
 
 class Employe extends CI_Model{
     public function checkLogin($email, $mdp){
-        $sql="SELECT * FROM employe e 
-        JOIN personne p ON p.idPersonne=e.idPersonne
-        JOIN contact c on c.idContact=p.idContact WHERE c.email='%s' AND e.mdp=sha1('%s')";
+        $sql="SELECT e.*, c.email, c.autre FROM employe_view e 
+        JOIN employe p ON p.idEmploye=e.idEmploye
+        JOIN contact c on c.idContact=e.idContact WHERE c.email='%s' AND p.mdp=sha1('%s')";
         $sql=sprintf($sql,$email,$mdp);
         $query = $this->db->query($sql);
         $val = array();

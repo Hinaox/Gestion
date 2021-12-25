@@ -218,3 +218,6 @@ on CategorieProfessionnel.idcat=GrilleSalaire.categorie
 join GradeProfessionnel on GradeProfessionnel.idGrad=GrilleSalaire.GradeProfessionnel;
 
 select * from GrilleSalaireMin;
+
+
+select * from employe_view ev join contact c on ev.idContact=c.idContact;
