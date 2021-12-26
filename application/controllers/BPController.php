@@ -53,7 +53,8 @@ class BPController extends CI_Controller {
 			$nbPage=$this->BPModel->nbPagination();
 			$data['nbPage']=$nbPage/20;
 			$data['listeBP']=$this->BPModel->paginationListeBP(1,20);
-			$this->load->view('listeBP',$data);
+			$data['viewRH']='listeBP';
+			$this->load->view('rh',$data);
 		}
 		
 	}

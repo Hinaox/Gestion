@@ -2,7 +2,8 @@
     <div class="container">
 
         <div class="py-5 text-center">
-            <h2>Liste Bulletin de Paie de <?php echo $nom?></h2>
+            <?php if(isset($nom)){ ?><h2>Liste Bulletin de Paie de <?php echo $nom?></h2><?php }
+            else{ ?><h2>Liste Bulletin de Paie Global</h2><?php } ?>
         </div>
 
         <?php if($nbPage>=20){ ?>
