@@ -158,6 +158,7 @@ class DemandeCongeCtrl extends CI_Controller {
         
         
     }
+}
     public function accepterNonDeductible()
     {
         if ($this->session->userdata('inRH')==false){
