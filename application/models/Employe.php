@@ -83,7 +83,7 @@ class Employe extends CI_Model{
      $query = "select * from employe_view where idEmploye= %s";
      $query = sprintf($query,$id);
      $result = $this->db->query($query)->row_array();
-     $query->freeResult();
+     //$query->freeResult();
      return $result;
    }
 }

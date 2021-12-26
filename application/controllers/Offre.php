@@ -29,7 +29,13 @@ class Offre extends CI_Controller
     }
     public function index()
     {
-        $nomPoste=$this->input->get('FormNomEmp');
+        $emp = $this->session->userdata("employe");
+        $this->load->model("GestionUtil");
+        $isRH = $this->GestionUtil->isRH($emp["idEmploye"]);
+
+
+        if (!$isRH) {
+            $nomPoste=$this->input->get('FormNomEmp');
         echo $nomPoste;
         $detailsPoste=$this->Orga->getPosteIdByNomPoste($nomPoste);
         $posteId=$detailsPoste[0]['idPoste'];
@@ -47,6 +53,13 @@ class Offre extends CI_Controller
         $data['diplomes']= $diplomes;
         $data['viewRH']='ajoutOffre';
         $this->load->view('rh',$data);
+        }
+        else
+        {
+            $data=array();
+            $data['viewRH']="denied";
+            $this->load->view('rh',$data);
+        }
     }
     // public function pageAjoutOffre(){
     //     // eto no soloina get le izy $_GET['idPoste]
