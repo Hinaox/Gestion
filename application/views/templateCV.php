@@ -13,7 +13,7 @@ if (empty($view)){
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>Sidebars · Bootstrap v5.0</title>
+    <title>Gestion</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
     <script type="text/javascript" src="<?php echo base_url() ?>assets/js/formulaire.js"></script>
