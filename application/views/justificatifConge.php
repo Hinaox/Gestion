@@ -1,5 +1,7 @@
 
-    
+ <?php
+  $emp = $this->session->userdata('employe');
+?>   
   <div class="container">
       <div class="py-5 text-center">
         <h2>Justificatif de congé</h2>
@@ -9,14 +11,11 @@
       <form action="<?php echo site_url('DemandeCongeCtrl/accepterNonDeductible'); ?>" method="post">
         <div class="row g-3">
           <div class="col-md-7 col-lg-8">
-          <p class="lead">L'employé(e) avec le matricule</p>
-            <div class="row g-3">
-              <div class="col-sm-6">
-                <label for="id" class="form-label">ID</label>
-                <input type="number" min="0" class="form-control" id="id" name="idEmploye">
-              </div>
-            </div>
-            * souhaite justifier son congé</br>
+          <p class="lead">
+            L'employé(e) avec le matricule 
+            <span style="font-weight: bolder;font-size: 150%;"><?php echo $emp['idEmploye']; ?></span>
+            souhaite faire une demande de congé 
+          </p>
             Du <input type="date" class="form-control" id="dateDebut" name="dateDebut"> 
             au <input type="date" class="form-control" id="dateFin" name="dateFin">
           </div>

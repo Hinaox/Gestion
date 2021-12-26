@@ -1,49 +1,5 @@
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>Login</title>
-    <link href="<?php echo site_url('assets/css/all.css');?>" rel="stylesheet">
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
-
-    
-
-    <!-- Bootstrap core CSS -->
-<link href="<?php echo site_url('assets/dist/css/bootstrap.min.css');?>" rel="stylesheet">
-
-    <style>
-        .divider:after,
-        .divider:before {
-        content: "";
-        flex: 1;
-        height: 1px;
-        background: #eee;
-        }
-        .h-custom {
-        height: calc(100% - 73px);
-        }
-        @media (max-width: 450px) {
-        .h-custom {
-            height: 100%;
-        }
-        }
-    </style>
-
-    
-    <!-- Custom styles for this template -->
-    <link href="<?php echo site_url('assets/sidebars.css');?>" rel="stylesheet">
-  </head>
-  <body>
-    
-    <main>
-        <div class="container-fluid">
-            <div class="row">
-        <section class="vh-100">
+        <section>
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
             <center><h1>Login</h1></center>
@@ -98,37 +54,4 @@
             </div>
             </div>
         </div>
-        <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-            <!-- Copyright -->
-            <div class="footer text-white mb-3 mb-md-0">
-            Copyright © 2020. Tout droit reservé.
-            </div>
-            <!-- Copyright -->
-
-            <!-- Right -->
-            <!-- <div>
-            <a href="#!" class="text-white me-4">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#!" class="text-white me-4">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#!" class="text-white me-4">
-                <i class="fab fa-google"></i>
-            </a>
-            <a href="#!" class="text-white">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            </div> -->
-            <!-- Right -->
-        </div>
         </section>
-    </div>
-    </div>
-    </main>
-
-    <script src="<?php echo site_url('/assets/dist/js/bootstrap.bundle.min.js');?>"></script>
-
-      <script src="<?php echo site_url('assets/sidebars.js');?>"></script>
-  </body>
-</html>

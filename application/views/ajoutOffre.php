@@ -1,38 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AjoutOffre</title>
-    <link href="<?php echo base_url("assets/dist/css/bootstrap.min.css"); ?>" rel="stylesheet" meadia="all">
-    <link href="<?php echo base_url("assets/dist/css/bootstrap.css"); ?>" rel="stylesheet" meadia="all">
-</head>
-
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
+    <div class="container-fluid ">
+        
+    <div class="row">
+            <div class="col-md-8">
                 <div class="Jumbotron" style="margin-top:5%">
-                    <h2>Nom de l'entreprise</h2>
                     <h4>Departement:<span class="Nomdepartement" style="color:#0d6efd">Ressources humaines</span></h4>
 
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
                     <ul class="nav nav-pills">
                         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Ajouter Offre</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link ">Listes des Offres</a></li>
+                        <li class="nav-item"><a href="<?php echo site_url("Offre/index2"); ?>" class="nav-link ">Listes des Offres</a></li>
                     </ul>
                 </header>
             </div>
 
         </div>
-
-    </div>
-    <div class="container-fluid ">
         <form action="Offre/insertOffre" method="post">
             <div class="row">
                 <div class="col-md-4 offset-5">
@@ -128,7 +113,3 @@
             </div>
         </form>
     </div>
-
-</body>
-
-</html>

@@ -2,9 +2,9 @@
     <div class="container">
         <div class="py-5 text-center">
 
-            <h2>CONTRAT DE TRAVAIL A DUREE INDETERMINEE</h2>
+            <h2>Contrat de travail a Duree Indeterminee</h2>
         </div>
-        <form method="post" action="<?php echo site_url("AdminCtrl/contrat"); ?>">
+        <form method="post" action="<?php echo site_url("Controlle/contrat"); ?>">
             <p>Entre les contractants ci-dessous,</p>
             <h3>EMPLOYEUR :</h3>
 

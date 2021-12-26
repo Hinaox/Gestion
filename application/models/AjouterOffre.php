@@ -2,23 +2,24 @@
 
 class AjouterOffre extends CI_Model
 {
-    // public function getDiplomesOffre()
-    // {
-    //     $indice = 0;
-    //     $retour = array();
-    //     $query = $this->db->get('DiplomeOffre');
-    //     foreach ($query->result_array() as $row) {
-    //         $tab = array(
-    //             'idDiplomeOffre' => null,
-    //             'nomDiplome' => null
-    //         );
-    //         $tab['idDiplomeOffre'] = $row['idDiplomeOffre'];
-    //         $tab['nomDiplome'] = $row['nomDiplome'];
-    //         $retour[$indice] = $tab;
-    //         $indice++;
-    //     }
-    //     return $retour;
-    // }
+    public function getDiplomesOffre()
+    {
+        $indice = 0;
+        $retour = array();
+        $query = $this->db->get('DiplomeOffre');
+        foreach ($query->result_array() as $row) {
+            $tab = array(
+                'idDiplomeOffre' => null,
+                'nomDiplome' => null
+            );
+            $tab['idDiplomeOffre'] = $row['idDiplomeOffre'];
+            $tab['nomDiplome'] = $row['nomDiplome'];
+            $retour[$indice] = $tab;
+            $indice++;
+        }
+        return $retour;
+    }
+
     public function insertOffre($data)
     {
         $this->db->insert('Offre', $data);
@@ -55,38 +56,38 @@ class AjouterOffre extends CI_Model
         }
         return $retour;
     }
-    // public function getDiplomesPerId($idDiplomes)
-    // {
-    //     $indice = 0;
-    //     $retour = array();
-    //     $idDiplomes = (int)$idDiplomes;
-    //     $query = $this->db->get_where('DiplomeOffre', array('idDiplomeOffre' => $idDiplomes));
-    //     foreach ($query->result_array() as $row) {
-    //         $tab = array(
-    //             'nomDiplome' => null
-    //         );
-    //         $tab['nomDiplome'] = $row['nomDiplome'];
-    //         $retour[$indice] = $tab;
-    //         $indice++;
-    //     }
-    //     return $retour;
-    // }
-    // public function getIdtypes($idTypes)
-    // {
-    //     $indice = 0;
-    //     $retour = array();
-    //     $idTypes = (int)$idTypes;
-    //     $query = $this->db->get_where('TypeEmploi', array('idTypes' => $idTypes));
-    //     foreach ($query->result_array() as $row) {
-    //         $tab = array(
-    //             'Intitule' => null
-    //         );
-    //         $tab['Intitule'] = $row['Intitule'];
-    //         $retour[$indice] = $tab;
-    //         $indice++;
-    //     }
-    //     return $retour;
-    // }
+    public function getDiplomesPerId($idDiplomes)
+    {
+        $indice = 0;
+        $retour = array();
+        $idDiplomes = (int)$idDiplomes;
+        $query = $this->db->get_where('DiplomeOffre', array('idDiplomeOffre' => $idDiplomes));
+        foreach ($query->result_array() as $row) {
+            $tab = array(
+                'nomDiplome' => null
+            );
+            $tab['nomDiplome'] = $row['nomDiplome'];
+            $retour[$indice] = $tab;
+            $indice++;
+        }
+        return $retour;
+    }
+    public function getIdtypes($idTypes)
+    {
+        $indice = 0;
+        $retour = array();
+        $idTypes = (int)$idTypes;
+        $query = $this->db->get_where('TypeEmploi', array('idTypes' => $idTypes));
+        foreach ($query->result_array() as $row) {
+            $tab = array(
+                'Intitule' => null
+            );
+            $tab['Intitule'] = $row['Intitule'];
+            $retour[$indice] = $tab;
+            $indice++;
+        }
+        return $retour;
+    }
     public function getDiplomeByCateg($idOffre)
     {
         $indice = 0;

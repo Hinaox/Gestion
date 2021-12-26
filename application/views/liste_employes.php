@@ -45,8 +45,12 @@
                 <tbody>
                 <!-- bloc resultat -->
                 <?php  for ($i=0; $i<count($liste_emp); $i++) {?>
-                <tr style="text-align : center;" onclick="versFiche( <?php $liste_emp[$i]['idEmploye']; ?>)">
+                <tr style="text-align : center;" >
+                <?php if ($this->session->userdata('inRH')==true){  ?>
+                    <td><a href="<?php echo site_url("EmployeController/fiche?idEmploye=".$liste_emp[$i]['idEmploye']); ?>" ><?php echo $liste_emp[$i]['idEmploye']; ?></a></td>
+                <?php }else{ ?>
                     <td><?php echo $liste_emp[$i]['idEmploye']; ?></td>
+                <?php } ?>
                     <td><?php echo $liste_emp[$i]['nom']; ?></td>
                     <td><?php echo $liste_emp[$i]['prenom']; ?></td>
                     <td><?php echo $liste_emp[$i]['nomDepartement']; ?></td>
@@ -60,15 +64,12 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        let siteUrl = "<?php echo site_url(); ?>";
-            function versFiche(idEmploye) {
-                document.location= siteUrl + "EmployeController/fiche?idEmploye=" +idEmploye; 
-            }
+        
         function replaceTableContent (liste) {
             $tableau = $('#tableau_liste');
             $tableau.html("<thead><tr><th>Matricule</th><th>Nom</th><th>Prénom</th><th>Département</th><th>Poste</th></tr></thead><tbody>");
             for (var i = 0; i<liste.length; i++) {
-                $tableau.html($tableau.html() + "<tr style='text-align : center;' onclick='versFiche("+ liste[i]['idEmploye'] +")' >"+"<td>"+liste[i]['idEmploye'] +"</td>"+"<td>"+liste[i]['nom'] +"</td>"+"<td>"+liste[i]['prenom'] +"</td>"+"<td>"+liste[i]['nomDepartement'] +"</td>"+"<td>"+liste[i]['nomPoste'] +"</td>"+"</tr>")
+                $tableau.html($tableau.html() + "<tr style='text-align : center;' ><?php if ($this->session->userdata('inRH')==true){  ?><td><a href='<?php echo site_url("EmployeController/fiche?idEmploye="); ?>"+liste[i]['idEmploye']+"'>"+liste[i]['idEmploye']+"</a></td><?php }else{ ?><td>"+liste[i]['idEmploye']+"</td><?php } ?>"+"<td>"+liste[i]['nom'] +"</td>"+"<td>"+liste[i]['prenom'] +"</td>"+"<td>"+liste[i]['nomDepartement'] +"</td>"+"<td>"+liste[i]['nomPoste'] +"</td>"+"</tr>")
             }
             $tableau.html($tableau.html() + "</tbody>");
         }

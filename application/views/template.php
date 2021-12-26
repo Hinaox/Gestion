@@ -122,21 +122,9 @@ if (empty($view)){
         </a>
       </li>
       <li>
-        <a href="<?php echo site_url('demandeCongeCtrl/demanderDeductible'); ?>" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          Demande deductible
-        </a>
-      </li>
-      <li>
-        <a href="<?php echo site_url('demandeCongeCtrl/demanderNonDeductible'); ?>" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          Demande non deductible
-        </a>
-      </li>
-      <li>
         <a href="<?php echo site_url('EtatCongeCtrl/'); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          Etat de congé
+          Liste des états de congé
         </a>
       </li>
       <li class="nav-item">

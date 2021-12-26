@@ -6,6 +6,23 @@ class PersonneDao extends CI_Model{
 	{
 		
 	}
+    public function getAdmis()
+    {
+        $sql = "SELECT * FROM personne p join entretien e on p.idPersonne=e.idPersonne where e.note>=50 
+        and p.idPersonne not in (select idPersonne from employe)";
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val;
+    }
     public function insertAttente($idpersonne){
     
         $requete="INSERT INTO attente VALUES (null,'%s')";

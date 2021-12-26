@@ -1,24 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AjoutOffre</title>
-    <link href="<?php echo base_url("assets/dist/css/bootstrap.min.css"); ?>" rel="stylesheet" meadia="all">
-    <link href="<?php echo base_url("assets/dist/css/bootstrap.css"); ?>" rel="stylesheet" meadia="all">
-
-    <link href="<?php echo base_url("assets/dist/css/style_ListeOffre.css"); ?>" rel="stylesheet" meadia="all">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
-<body>
     <div class="container-fluid">
+        
+    <?php if ($this->session->userdata('employe')!=null) { ?>
         <div class="row">
+        
             <div class="col-md-4">
                 <div class="Jumbotron" style="margin-top:5%">
-                    <h2>Company Name</h2>
+                <h4>Departement:<span class="Nomdepartement" style="color:#0d6efd">Ressources humaines</span></h4>
                 </div>
             </div>
             <div class="col-md-8">
@@ -31,9 +19,8 @@
             </div>
 
         </div>
+    <?php } ?>
 
-    </div>
-    <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
                 <form action="" method="GET">
@@ -70,7 +57,7 @@
                 </form>
             </div>
             <div class="col-md-8 col-sm-6">
-                <h2 class="text-center text-uppercase">Listes Offres </h2>
+                <h2 class="text-center text-uppercase">Listes des offres d'emploi </h2>
                 <?php foreach ($listeOffres as $listeOffre) { ?>
                     <div class="job-card">
                         <div class="job-card__content">
@@ -102,9 +89,3 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</body>
-
-</html>

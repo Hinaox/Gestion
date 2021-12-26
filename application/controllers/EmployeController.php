@@ -19,17 +19,26 @@ class EmployeController extends CI_Controller {
 
         $this -> load -> view('rh', $data);
     }	
-	public function fiche()
+	
+    public function fiche()
 	{
+        if ($this->session->userdata('inRH')==false){
+            $data = array (
+                'viewRH' => 'denied'
+            );
+            $this -> load -> view('rh', $data);
+        } 
 		$this->load->model('Employe');
 		$data = array();
 		$idEmploye = $_GET['idEmploye'];
 		//maka anaty base
 		// $data = $this->Employe->getEmploye($this->input->post('idEmploye'));
-		$data = ($this->Employe->getEmployeFromBase($this->db, $idEmploye))[0];
-        $data['view']='fiche';
-		$this->load->view('templateUser',$data);
+		$emp = $this->Employe->getFicheEmploye($idEmploye);
+        $data['viewRH']='profilEmploye';
+        $data['employe']=$emp;
+		$this->load->view('rh',$data);
 	}
+	
 	
     public  function filtrer() {
         $this -> load -> database();

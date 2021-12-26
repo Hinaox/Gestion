@@ -3,6 +3,7 @@ if (empty($viewRH)){
         $viewRH = 'accueil';
     }
   $emp = $this->session->userdata('employe');
+  $js = base_url("assets/js");
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,9 +18,12 @@ if (empty($viewRH)){
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
 
     
+    <link href="<?php echo site_url("assets/css/bootstrap.min.css")?>" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
 <link href="<?php echo site_url('assets/dist/css/bootstrap.min.css');?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/dist/css/style_ListeOffre.css"); ?>" rel="stylesheet" meadia="all">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
       .bd-placeholder-img {
@@ -125,12 +129,13 @@ if (empty($viewRH)){
           Liste des employés
         </a>
       </li>
-      <li>
-        <a href="<?php echo site_url("filtreCVController/tousCV"); ?>" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer"/></svg>
-          Module CV
-        </a>
-      </li>
+      <?php if ($this->session->userdata('inRH')==true){ ?>
+        <li>
+          <a href="<?php echo site_url("filtreCVController/tousCV"); ?>" class="nav-link link-dark">
+            <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer"/></svg>
+            Module CV
+          </a>
+        </li>
       <li>
         <a href="<?php echo site_url("pointage/"); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
@@ -138,7 +143,7 @@ if (empty($viewRH)){
         </a>
       </li>
       <li>
-        <a href="<?php echo site_url("BPController/listeBulletin"); ?>" class="nav-link link-dark">
+        <a href="<?php echo site_url("BPController/"); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Bulletin de Paie
         </a>
@@ -155,18 +160,26 @@ if (empty($viewRH)){
           Module congé
         </a>
       </li>
-      <!-- <li>
-        <a href="#" class="nav-link link-dark">
+      <li>
+        <a href="<?php echo site_url('PersonneController/getAdmis'); ?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-            Heures Supplémentaire
+          Liste des nouveaux recruts
         </a>
       </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-            CNAPS
-        </a>
-      </li> -->
+      <?php } else { ?>
+        <li>
+          <a href="<?php echo site_url('demandeCongeCtrl/demanderDeductible'); ?>" class="nav-link link-dark">
+            <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+            Faire une demande de congé
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo site_url('demandeCongeCtrl/demanderNonDeductible'); ?>" class="nav-link link-dark">
+            <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+            Justifier un congé
+          </a>
+        </li>
+      <?php } ?>
     </ul>
     <hr>
     <?php include 'lienProfil.php' ; ?>
@@ -177,7 +190,35 @@ if (empty($viewRH)){
 </main>
 
     <script src="<?php echo site_url('/assets/dist/js/bootstrap.bundle.min.js');?>"></script>
-
+    <script src="<?php echo site_url("application/bootstrap/js/jquery.js")?>"></script>
+    <script src="<?php echo site_url("application/bootstrap/js/bootstrap.min.js")?>"></script>
       <script src="<?php echo site_url('assets/sidebars.js');?>"></script>
+      <script src="<?php echo site_url('assets/js/ajaxBP.js')?>"></script>
+      
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+  <script src="<?php echo $js; ?>/jquery.min.js"></script>
+  <script src="<?php echo $js; ?>/bootstrap.min.js"></script>
+  
+  <script>
+      $('#button_remove').click(function(){
+          $('#form_remove').trigger("reset");
+      });
+
+      var id = 0;
+        function nouvelChamp() {
+            id++;
+            var container = document.getElementById("container");
+            var input = document.createElement("input");
+            input.setAttribute("type", "date");
+            input.setAttribute("class", "birthday" + id);
+            input.setAttribute("name", "birthday" + id);
+            input.setAttribute("title", "Date de naissance " + id);
+            container.appendChild(input);
+            container.innerHTML += "<br>";
+        }
+  </script>
   </body>
 </html>
