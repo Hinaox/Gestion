@@ -17,7 +17,7 @@ class Employe extends CI_Model{
             }
             $i++;
         } 
-        var_dump($sql);
+        // var_dump($sql);
         return $val;
     }
     public function isInRH($idEmp){
