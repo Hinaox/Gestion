@@ -31,6 +31,7 @@ CREATE TABLE GrilleSalaire(
 	 foreign key (categorie) references CategorieProfessionnel(idcat)
 );
 
+
 INSERT INTO CategorieProfessionnel (Categorie) values ('M1');
 INSERT INTO CategorieProfessionnel (Categorie) values ('M2');
 INSERT INTO CategorieProfessionnel (Categorie) values ('OS1');
@@ -221,3 +222,12 @@ select * from GrilleSalaireMin;
 
 
 select * from employe_view ev join contact c on ev.idContact=c.idContact;
+
+
+CREATE TABLE Notification(
+	idNotif int not null primary key AUTO_INCREMENT,
+    message VARCHAR(255),
+    date date,
+    idEmp int,
+	foreign key (idEmp) references employe(idEmploye)
+);
