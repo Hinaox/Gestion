@@ -1,7 +1,7 @@
 <div class="container">
 
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        <img class="d-block mx-auto mb-4" src="<?php echo site_url('assets/photos/gestion.png');?>" alt="" width="72" height="57">
         <h2>Modification Salaire</h2>
         <p class="lead">Formulaire de modification de salaire</p>
       </div>
