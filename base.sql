@@ -1055,3 +1055,11 @@ select * from GrilleSalaireMin;
 alter table employe add mdp VARCHAR(50);
 update employe set mdp=sha1('123');
 
+
+CREATE TABLE Notification(
+	idNotif int not null primary key AUTO_INCREMENT,
+    message VARCHAR(255),
+    date date,
+    idEmploye int,
+	foreign key (idEmploye) references employe(idEmploye)
+);
