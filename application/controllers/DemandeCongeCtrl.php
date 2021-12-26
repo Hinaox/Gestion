@@ -158,7 +158,7 @@ class DemandeCongeCtrl extends CI_Controller {
         
         
     }
-}
+
     public function accepterNonDeductible()
     {
         if ($this->session->userdata('inRH')==false){
@@ -203,17 +203,20 @@ class DemandeCongeCtrl extends CI_Controller {
                 'viewRH' => 'denied'
             );
             $this -> load -> view('rh', $data);
-        } 
-        $this->load->model('conge');
-        $refus = $this->conge->refuserDemande($this->input->post('idDemande'));
-
-        $demandes = $this->conge->getDemandeEnCours();
-        $data = array(
-            "view" => 'listeDemande',
-            "demandes" =>$demandes,
-            "reponse" =>$refus
-        );
-        $this->load->view ('template',$data);
+        } else{
+            
+            $this->load->model('conge');
+            $this->conge->sendNotificationRefus($this->input->post('idDemande'));
+            $refus = $this->conge->refuserDemande($this->input->post('idDemande'));
+            
+            $demandes = $this->conge->getDemandeEnCours();
+            $data = array(
+                "view" => 'listeDemande',
+                "demandes" =>$demandes,
+                "reponse" =>$refus
+            );
+            $this->load->view ('template',$data);
+        }
     }
     
 }

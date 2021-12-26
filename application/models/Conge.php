@@ -211,6 +211,12 @@ class Conge extends CI_Model{
         $query = "insert into notification values (null,'Votre demande ayant ID ".$demand['id']." pour motif ".$demand['motif']." débutant le ".$demand['dateDebut']." et se finissant le ".$demand['dateFin']." vient d''etre acceptée',NOW(),'".$demand['idEmp']."')";
 		$this->db->query($query);
     }
+    function sendNotificationRefus($idDemande)
+    {
+        $demand = $this->getDemandeCongeById($idDemande);
+        $query = "insert into notification values (null,'Votre demande ayant ID ".$demand['id']." pour motif ".$demand['motif']." débutant le ".$demand['dateDebut']." et se finissant le ".$demand['dateFin']." a été refusé',NOW(),'".$demand['idEmp']."')";
+		$this->db->query($query);
+    }
     function getNotifications($idEmploye)
     {
         $sql = "SELECT * FROM notification where idEmp='%s'";
