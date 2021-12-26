@@ -131,6 +131,7 @@ class DemandeCongeCtrl extends CI_Controller {
             }else{
                 $reponse = $this->conge->accepterDemande($idDemande,$dateDebut,$idDepartement,null);
             }
+        }
 
 
         if ($reponse != "Demande Acceptée"){
@@ -145,7 +146,7 @@ class DemandeCongeCtrl extends CI_Controller {
         }else{
             $demandes = $this->conge->getDemandeEnCours();
 
-            $this->conge->sendNotfication($idDemande);
+            $this->conge->sendNotification($idDemande);
             
             $data = array(
                 "view" => 'listeDemande',
