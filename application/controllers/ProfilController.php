@@ -6,7 +6,6 @@ class ProfilController extends CI_Controller {
 	public function index()
 	{
 	   $data['viewRH']='profilEmploye';
-	   
 		$this->load->view('rh',$data);
 	}		
 }

@@ -1,7 +1,7 @@
 
     <div class="row no-gutters slider-text justify-content-start align-items-center">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
             <div class="text">
                 <div id="searchDiv">
                     <input class="form-control" type="text" name="recherche" id="autocomplete_searchField" size="30px" placeholder="Recherche" style="margin-top:10px;margin-left:60px">
@@ -16,9 +16,9 @@
                 <br>
             </div>
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
-        <a href="<?php echo site_url('FiltreCVController/tousCV'); ?>">Voir tous les CV</a>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+   
 
             <form method="GET" action="<?php echo base_url(); ?>FormulaireInsertionCV/traiteCV" class="request-form ftco-animate">
 

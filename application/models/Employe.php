@@ -97,6 +97,24 @@ class Employe extends CI_Model{
     }
     return $retour;
   }
+  public function getFicheEmploye($id){
+    $sql="SELECT e.*, c.email, c.autre FROM employe_view e 
+    JOIN employe p ON p.idEmploye=e.idEmploye
+    JOIN contact c on c.idContact=e.idContact WHERE e.idEmploye='%s'";
+    $sql=sprintf($sql,$id);
+    $query = $this->db->query($sql);
+    $val = array();
+    $i = 0;
+    foreach($query -> result_array() as $row)
+    {
+        foreach($row as $key => $value)
+        {
+            $val[$i][$key] = $value;  
+        }
+        $i++;
+    } 
+    return $val;
+}
    public function getEmploye($id){
      $query = "select * from employe_view where idEmploye= %s";
      $query = sprintf($query,$id);

@@ -5,13 +5,20 @@ class ModifierSalaire extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-
+        if ($this->session->userdata('inRH')==false){
+            $data = array (
+                'viewRH' => 'denied'
+            );
+            $this -> load -> view('rh', $data);
+        } 
 	}
     public function afficher(){
         $this->load->model('modifierSal');
-
-        $data['employe']= $this->modifierSal->getEmploye($this->session->userdata('idEmploye'));
-        $data['montant']= $this->modifierSal->getSalaire($this->session->userdata('idEmploye'));
+        $idEmploye = $this->input->get('idEmploye');
+        $data = array ();
+        $data['employe']= $this->modifierSal->getEmploye($idEmploye)[0];
+        $data['montant']= $this->modifierSal->getSalaire($idEmploye);
+        
         $data['viewRH']= "modifierSalaire";
         $this->load->view('rh',$data);
     }

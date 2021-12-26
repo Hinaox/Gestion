@@ -1,5 +1,5 @@
-
-    <h2>Etat de congé</h2>
+<div class="container">
+  <h2>Etat de congé</h2>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -26,3 +26,4 @@
     <?php } ?>
   </tbody>
 </table>
+    </div>

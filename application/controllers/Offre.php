@@ -27,52 +27,35 @@ class Offre extends CI_Controller
 
         $this->load->helper('url');
     }
+
+    
+
     public function index()
     {
-        $emp = $this->session->userdata("employe");
-        $this->load->model("GestionUtil");
-        $isRH = $this->GestionUtil->isRH($emp["idEmploye"]);
-
-
-        if (!$isRH) {
+        if ($this->session->userdata('inRH')==true){
             $nomPoste=$this->input->get('FormNomEmp');
-        echo $nomPoste;
-        $detailsPoste=$this->Orga->getPosteIdByNomPoste($nomPoste);
-        $posteId=$detailsPoste[0]['idPoste'];
-        $poste = $this->AjouterOffre->getPosteById($posteId);
-        // eto no soloina le izy $_GET['grade] de lasa diplome
-        $categ=$this->input->get('FormPost');
-        $diplomesInfo=$this->Orga->getDiplomeByidCateg($categ);
-        // var_dump($diplomesInfo);
-        $diplomesId=$diplomesInfo[0]['idcat'];
-        var_dump($diplomesId);
-        $diplomes = $this->AjouterOffre->getDiplomeByCateg($diplomesId);
-        // var_dump($diplomes);
-        $data=array();
-        $data['postenom']=$poste;
-        $data['diplomes']= $diplomes;
-        $data['viewRH']='ajoutOffre';
-        $this->load->view('rh',$data);
-        }
-        else
-        {
+            $detailsPoste=$this->Orga->getPosteIdByNomPoste($nomPoste);
+            $posteId=$detailsPoste[0]['idPoste'];
+            $poste = $this->AjouterOffre->getPosteById($posteId);
+            // eto no soloina le izy $_GET['grade] de lasa diplome
+            $categ=$this->input->get('FormPost');
+            $diplomesInfo=$this->Orga->getDiplomeByidCateg($categ);
+            // var_dump($diplomesInfo);
+            $diplomesId=$diplomesInfo[0]['idcat'];
+            $diplomes = $this->AjouterOffre->getDiplomeByCateg($diplomesId);
+            // var_dump($diplomes);
+            $data=array();
+            $data['postenom']=$poste;
+            $data['diplomes']= $diplomes;
+            $data['viewRH']='ajoutOffre';
+            $this->load->view('rh',$data);
+        } else {
             $data=array();
             $data['viewRH']="denied";
             $this->load->view('rh',$data);
         }
     }
-    // public function pageAjoutOffre(){
-    //     // eto no soloina get le izy $_GET['idPoste]
-    //     $posteId=1;
-    //     $poste = $this->AjouterOffre->getPosteById($posteId);
-    //     // eto no soloina le izy $_GET['grade] de lasa diplome
-    //     $diplomes = $this->AjouterOffre->getDiplomeByCateg(4);
-    //     // var_dump($diplomes);
-    //     $data=array();
-    //     $data['postenom']=$poste;
-    //     $data['diplomes']= $diplomes;
-    //     $this->load->view('ajoutOffre',$data);
-    // }
+
     public function index2()
     {
         $this->load->helper('url');
@@ -82,31 +65,39 @@ class Offre extends CI_Controller
         // $data['diplomes'] = $diplomes;
         // var_dump($listeOffres);
         $data['listeOffres'] = $listeOffres;
-        $this->load->view('ListeOffre', $data);
+        $data['viewRH']='ListeOffre';
+        $this->load->view('rh', $data);
     }
     public function insertOffre()
     {
-        date_default_timezone_set('Indian/Antananarivo');
-        $data = array();
-        $data['Poste']  = $this->input->post('poste');
-        $data['description'] = $this->input->post('Description');
-        $data['responsabilite'] = $this->input->post('responsabilite');
-        $data['ageMin']  = $this->input->post('ageMIn');
-        // $data['']  = $this->input->post('ageMax');
-        $data['idDiplomeOffre']  = $this->input->post('diplomes');
-        $data['Experiences']  = $this->input->post('experience');
-        $data['AutreExperience']  = $this->input->post('AutreExigences');
-        $date = $this->input->post('date');
-        $mysqlDate = date("Y-m-d", strtotime($date));
-        $data['dateLimite'] = $mysqlDate;
-        echo $data['dateLimite'];
-        // echo $post . '</br>' . $responsabilite . '</br>' . $Description . '</br>' . $ageMIn;
-        // echo $ageMax . '</br>' . $diplomes . '</br>' . $experience . '</br>' . $AutreExigences . '</br>' . $date;
-        $response = $this->AjouterOffre->insertOffre($data);
-        if ($response == true) {
-            echo "Records Saved Successfully";
-        } else {
-            echo "Insert error !";
+        if ($this->session->userdata('inRH')==true){
+            date_default_timezone_set('Indian/Antananarivo');
+            $data = array();
+            $data['Poste']  = $this->input->post('poste');
+            $data['description'] = $this->input->post('Description');
+            $data['responsabilite'] = $this->input->post('responsabilite');
+            $data['ageMin']  = $this->input->post('ageMIn');
+            // $data['']  = $this->input->post('ageMax');
+            $data['idDiplomeOffre']  = $this->input->post('diplomes');
+            $data['Experiences']  = $this->input->post('experience');
+            $data['AutreExperience']  = $this->input->post('AutreExigences');
+            $date = $this->input->post('date');
+            $mysqlDate = date("Y-m-d", strtotime($date));
+            $data['dateLimite'] = $mysqlDate;
+            echo $data['dateLimite'];
+            // echo $post . '</br>' . $responsabilite . '</br>' . $Description . '</br>' . $ageMIn;
+            // echo $ageMax . '</br>' . $diplomes . '</br>' . $experience . '</br>' . $AutreExigences . '</br>' . $date;
+            $response = $this->AjouterOffre->insertOffre($data);
+            if ($response == true) {
+                echo "Records Saved Successfully";
+            } else {
+                echo "Insert error !";
+            }
+        } else{
+            $data = array (
+                'viewRH' => 'denied'
+            );
+            $this -> load -> view('rh', $data);
         }
     }
 }

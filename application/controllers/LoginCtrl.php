@@ -5,7 +5,9 @@ class LoginCtrl extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('login');
+        $data=array();
+        $data['view']= 'login';
+        $this->load->view('index',$data);
 	}		
     public function traitement()
     {

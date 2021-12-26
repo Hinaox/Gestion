@@ -43,124 +43,7 @@ if (empty($view)){
     
     <!-- Custom styles for this template -->
     <link href="<?php echo site_url('assets/sidebars.css');?>" rel="stylesheet">
-    <script type="text/javascript">
-        function initialize() {
-            var mapOptions = {
-                center: new google.maps.LatLng(-18.9860306340868, 47.53277682049036),
-                zoom: 16,
-                mapTypeId: google.maps.MapTypeId.RELIEF
-            };
-            // creation de la carte
-            var carte = new google.maps.Map(document.getElementById("carteId"),
-                mapOptions);
-
-            var tabMarqueurDepart = new Array();
-            var tabMarqueurArrive = new Array();
-            distanceMatrixService = new google.maps.DistanceMatrixService();
-
-            // recuperation des coordonnées
-            document.getElementById("lieuRecuperation").value = "-18.9860306340868, 47.53277682049036";
-            coordRecuperation[0] = new google.maps.LatLng(-18.9860306340868, 47.53277682049036);
-            genererHeureDistance();
-
-            //recuperation des coordonnées de recuperation et de livraison
-            google.maps.event.addListener(carte, 'click', function(event) {
-                if (coordSelectionne.localeCompare("") == 0) {
-                    alert("Veuillez appuyer sur le bouton Lieu pour marquer votre emplacement sur la carte s'il vous plaît.");
-                } else {
-                    if (coordSelectionne.localeCompare("lieuRecuperation") == 0) {
-                        while (tabMarqueurDepart[0]) {
-                            tabMarqueurDepart.pop().setMap(null);
-                        }
-                        tabMarqueurDepart.push(new google.maps.Marker({
-                            position: event.latLng, //coordonnée de la position du clic sur la carte
-                            map: carte, //la carte sur laquelle le marqueur doit être affiché
-                            label: {
-                                text: "Depart",
-                                color: "black",
-                                fontSize: "19px"
-                            },
-                            icon: {
-                                url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
-                            }
-                        }));
-
-                    } else {
-                        // placement marqueur
-                        while (tabMarqueurArrive[0]) {
-                            tabMarqueurArrive.pop().setMap(null);
-                        }
-                        tabMarqueurArrive.push(new google.maps.Marker({
-                            position: event.latLng, //coordonnée de la position du clic sur la carte
-                            map: carte, //la carte sur laquelle le marqueur doit être affiché
-                            label: {
-                                text: "Votre Adresse",
-                                color: "black",
-                                fontSize: "19px"
-                            },
-                            icon: {
-                                url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
-                            }
-                        }));
-                        // recuperation des coordonnées
-                        document.getElementById("lieuLivraison").value = event.latLng.lat() + "," + event.latLng.lng();
-                        coordLivraison[0] = event.latLng;
-                        genererHeureDistance();
-                    }
-                }
-            });
-            // champ de recherche avec auto-completition
-            var trajectoireDiv = document.getElementById("trajectoire");
-            carte.controls[google.maps.ControlPosition.LEFT_CENTER].push(trajectoireDiv);
-
-            markers = new Array();
-            popup = new google.maps.InfoWindow();
-            var searchDiv = document.getElementById("searchDiv");
-            carte.controls[google.maps.ControlPosition.TOP_CENTER].push(searchDiv);
-            var searchField = document.getElementById("autocomplete_searchField");
-            var searchOptions = {
-                bounds: new google.maps.LatLngBounds(new google.maps.LatLng(8.54, 17.33), new google.maps.LatLng(39.67, 43.77)),
-                types: new Array()
-            };
-            var autocompleteSearch = new google.maps.places.Autocomplete(searchField, searchOptions);
-            google.maps.event.addListener(autocompleteSearch, 'place_changed', function() {
-                while (markers[0]) {
-                    markers.pop().setMap(null);
-                }
-                var place = autocompleteSearch.getPlace();
-                if (place.geometry) {
-                    pinpointResult(place);
-                }
-
-                function pinpointResult(result) {
-                    var placeIcon = {
-                        url: result.icon,
-                        scaledSize: new google.maps.Size(30, 30)
-                    };
-
-                    var marker = new google.maps.Marker({
-                        map: carte,
-                        position: result.geometry.location,
-                        icon: placeIcon
-                    });
-
-                    carte.setCenter(result.geometry.location);
-                    carte.setZoom(16);
-                    google.maps.event.addListener(marker, 'click',
-                        function() {
-                            var popupContent = '<b>Name: </b> ' + result.name +
-                                '<br/>' + '<b>Vicinity: </b>' + result.vicinity;
-
-                            popup.setContent(popupContent);
-                            popup.open(carte, this);
-                        });
-                    markers.push(marker);
-                }
-            });
-        }
-        // creation de la carte au chargement de la page
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+    
   </head>
   <body>
     
@@ -259,12 +142,6 @@ if (empty($view)){
           Resultats des entretiens
         </a>
       </li>
-      <li>
-        <a href="<?php echo site_url('formulaireInsertionCV/'); ?>" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          Formulaire de CV
-        </a>
-      </li>
       <li class="nav-item">
         <a href="<?php echo site_url('RHController/'); ?>" class="nav-link  link-dark" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
@@ -278,9 +155,9 @@ if (empty($view)){
   </div>
 
   <div class="b-example-divider"></div>
-  <div>
+ 
     <?php include $view.'.php' ; ?>
-  </div>
+  
 </main>
 
     <script src="<?php echo site_url('/assets/dist/js/bootstrap.bundle.min.js');?>"></script>

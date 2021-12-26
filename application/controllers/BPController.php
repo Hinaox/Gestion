@@ -18,10 +18,20 @@ class BPController extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	public function __construct(){
+		parent::__construct();
+		if ($this->session->userdata('inRH')==false){
+			$data = array (
+				'viewRH' => 'denied'
+			);
+	
+			$this -> load -> view('rh', $data);
+		} 
+	}
+
 	public function index()
 	{
-		$this->load->view('welcom_message');
-		
+		$this->listeBulletin();
 	}
 	
 
@@ -39,11 +49,13 @@ class BPController extends CI_Controller {
 		$nbPage=$this->BPModel->nbPagination();
 		$data['nbPage']=$nbPage/20;
 		$data['listeBP']=$this->BPModel->paginationListeBP(1,20);
-		// $this->load->view('listeBP',$data);
+		$this->load->view('listeBP',$data);
 	}
 
-	public function listeBulletinEmploye($idEmploye='',$nom)
+	public function listeBulletinEmploye()
 	{
+		$idEmploye = $this->input->get('idEmploye');
+		$nom = $this->input->get('nom');
 		$this->load->model('BPModel');
 		$data=array();
 		// var_dump($idEmploye);
@@ -52,7 +64,8 @@ class BPController extends CI_Controller {
 		$data['nbPage']=$nbPage/20;
 		$data['nom']=$nom;
 		$data['listeBP']=$this->BPModel->ListeBPEmploye($idEmploye,1,20);
-		$this->load->view('listeBP',$data);
+		$data['viewRH']='listeBP';
+		$this->load->view('rh',$data);
 	}
 
 	public function pagination()

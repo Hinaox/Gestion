@@ -3,6 +3,15 @@
 
 class EtatCongeEmploye extends CI_Controller
 {
+    public function __construct(){
+		parent::__construct();
+        if ($this->session->userdata('inRH')==false){
+            $data = array (
+                'viewRH' => 'denied'
+            );
+            $this -> load -> view('rh', $data);
+        } 
+	}
     public function index()
     {
         $idEmpl=$this->input->get('idEmpl');

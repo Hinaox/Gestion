@@ -95,7 +95,7 @@ class FormulaireInsertionCV extends CI_Controller
         $bdd->close();
         $data["view"]='FormulaireCV';
 
-		$this->load->view('templateCV',$data);
+		$this->load->view('index',$data);
     }
 
     public function traiteCV()
