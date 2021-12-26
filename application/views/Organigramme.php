@@ -92,18 +92,18 @@
       <hr>
       <h2>Fiche Employee</h2>
       <p class="font-weight-bold" id="nom">Nom:<span id="nomEmploye"></span></p>
-    <p class="font-weight-bold" id="poste">Poste:<span id="posteEmploye"></span></p>
-    <p class="font-weight-bold" id="Categorie">Categorie:<span id="CategorieEmp"></span></p>
-   
-
-    <form action="<?php echo base_url('Offre')?>" method="get">
-    <input type="hidden" name="FormPost" id="FormCategorieEmp" value="">
-    <input type="hidden" name="FormNomEmp" id="FormPost" value="">
-    <input type="submit" value="AppelOffre" onclick="AppelOffre()" style="display: block; margin-left: auto;
-  margin-right: auto;
-  width: 50%" id="BouttonAjouterOffre">
-    </form>
+      <p class="font-weight-bold" id="poste">Poste:<span id="posteEmploye"></span></p>
+      <p class="font-weight-bold" id="Categorie">Categorie:<span id="CategorieEmp"></span></p>
     
+      <?php if ($this->session->userdata('inRH')==true){ ?>
+        <form action="<?php echo base_url('Offre')?>" method="get">
+        <input type="hidden" name="FormPost" id="FormCategorieEmp" value="">
+        <input type="hidden" name="FormNomEmp" id="FormPost" value="">
+        <input type="submit" value="AppelOffre" onclick="AppelOffre()" style="display: block; margin-left: auto;
+      margin-right: auto;
+      width: 50%" id="BouttonAjouterOffre">
+        </form>
+    <?php } ?>
   <hr> 
   <h2>Diagram Overview</h2>
     <p><button id="zoomToFit">Zoom to Fit</button> <button id="centerRoot">Center on root</button></p>

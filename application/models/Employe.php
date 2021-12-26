@@ -19,6 +19,24 @@ class Employe extends CI_Model{
         } 
         return $val;
     }
+    public function isInRH($idEmp){
+        $sql="SELECT count(*) FROM employe e join poste p on e.idPoste=p.idPoste
+            WHERE e.idEmploye='%s' AND p.idDepartement='2' ";
+        $sql=sprintf($sql,$idEmp);
+        $query = $this->db->query($sql);
+        $val = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val = $value;  
+            }
+        }
+        if ($val>0){
+            return true;
+        }
+        return false;
+    }
 	public function getEmployes1()
 	{
         $sql = "SELECT * FROM employe";

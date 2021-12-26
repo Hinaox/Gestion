@@ -17,7 +17,12 @@ class LoginCtrl extends CI_Controller {
             if ($this->session->userdata('employe')==null)
             {
                 $this->session->set_userdata('employe',$emp[0]);
+                
+                $bool = $this->emp->isInRH($emp[0]['idEmploye']);
+                $this->session->set_userdata('inRH',$bool);
+                
                 $this->load->model('Orga');
+
                 $data=array();
                 $data['Organigram']= $this->Orga->LoadData();
                 $data['viewRH']='Organigramme';

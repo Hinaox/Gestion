@@ -13,11 +13,11 @@ class EmployeController extends CI_Controller {
 
         $data = array (
             'liste_emp' => $liste_emp,
-            'view' => 'liste_employes',
+            'viewRH' => 'liste_employes',
             'liste_dept' => $liste_dept
         );
 
-        $this -> load -> view('templateUser', $data);
+        $this -> load -> view('rh', $data);
     }	
 	public function fiche()
 	{
