@@ -1,10 +1,10 @@
-<body>
+
     <div class="container">
         <div class="py-5 text-center">
 
-            <h2>Contrat de travail a Duree Indeterminee</h2>
+            <h2>CONTRAT DE TRAVAIL A DUREE INDETERMINEE</h2>
         </div>
-        <form method="post" action="<?php echo site_url("Controlle/contrat"); ?>">
+        <form method="post" action="<?php echo site_url("ContratCtrl/contrat"); ?>">
             <p>Entre les contractants ci-dessous,</p>
             <h3>EMPLOYEUR :</h3>
 
@@ -83,6 +83,3 @@
             <input class="btn btn-primary btn-lg btn-block" type="submit" name="" value="Enregistrer">
         </form>
     </div>
-
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>

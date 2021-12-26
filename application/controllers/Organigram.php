@@ -32,10 +32,4 @@ class Organigram extends CI_Controller {
 		$this->load->view('rh',$data);
 		
 	}	
-    public function index2(){
-        $idPoste=$this->Orga->getDiplomeByidCateg("OS3");
-         $nom=$this->Orga->getPosteIdByNomPoste("Directeur");
-         var_dump($nom);
-        var_dump($idPoste);
-    }	
 }

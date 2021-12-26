@@ -187,6 +187,7 @@
   <nav class="my-2 my-md-0 mr-md-3">
     <a class="p-2 text-dark" href="<?php echo site_url('IndexCtrl/'); ?>">Liste des offres</a>
     <a class="p-2 text-dark" href="<?php echo site_url('formulaireInsertionCV/'); ?>">Envoyer un CV</a>
+    <a class="p-2 text-dark" href="<?php echo site_url('PersonneController/getAdmis'); ?>">Liste des admis à l'entreprise</a>
   </nav>
   <a class="btn btn-outline-primary" href="<?php echo site_url('LoginCtrl/'); ?>">Se connecter</a>
 </div>

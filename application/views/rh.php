@@ -3,6 +3,7 @@ if (empty($viewRH)){
         $viewRH = 'accueil';
     }
   $emp = $this->session->userdata('employe');
+  $js = base_url("assets/js");
 ?>
 <!doctype html>
 <html lang="en">
@@ -159,6 +160,12 @@ if (empty($viewRH)){
           Module congé
         </a>
       </li>
+      <li>
+        <a href="<?php echo site_url('PersonneController/getAdmis'); ?>" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+          Liste des nouveaux recruts
+        </a>
+      </li>
       <?php } else { ?>
         <li>
           <a href="<?php echo site_url('demandeCongeCtrl/demanderDeductible'); ?>" class="nav-link link-dark">
@@ -191,5 +198,27 @@ if (empty($viewRH)){
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+  <script src="<?php echo $js; ?>/jquery.min.js"></script>
+  <script src="<?php echo $js; ?>/bootstrap.min.js"></script>
+  
+  <script>
+      $('#button_remove').click(function(){
+          $('#form_remove').trigger("reset");
+      });
+
+      var id = 0;
+        function nouvelChamp() {
+            id++;
+            var container = document.getElementById("container");
+            var input = document.createElement("input");
+            input.setAttribute("type", "date");
+            input.setAttribute("class", "birthday" + id);
+            input.setAttribute("name", "birthday" + id);
+            input.setAttribute("title", "Date de naissance " + id);
+            container.appendChild(input);
+            container.innerHTML += "<br>";
+        }
+  </script>
   </body>
 </html>

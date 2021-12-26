@@ -21,48 +21,66 @@ class Pointage extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        if ($this->session->userdata('inRH')==false){
-            $data = array (
-                'viewRH' => 'denied'
-            );
-            $this -> load -> view('rh', $data);
-        } 
     }
     public function index(){
-        $data['viewRH']= "pointage";
-        $this->load->view('rh',$data);
+        if ($this->session->userdata('inRH')==false){
+			$data = array (
+				'viewRH' => 'denied'
+			);
+	
+			$this -> load -> view('rh', $data);
+		}else{
+            $data['viewRH']= "pointage";
+            $this->load->view('rh',$data);
+        }
     }
     public function erreur($erreur){
-        $data['erreur']= $erreur;
-        $data['viewRH']= "pointage";
-        $this->load->view('rh',$data);
+        if ($this->session->userdata('inRH')==false){
+			$data = array (
+				'viewRH' => 'denied'
+			);
+	
+			$this -> load -> view('rh', $data);
+		}else{
+            $data['erreur']= $erreur;
+            $data['viewRH']= "pointage";
+            $this->load->view('rh',$data);
+        }
     }
     public function ajouterPointage(){
-        $idEmploye = $this->input->post('idEmploye');
-        $choix = $this->input->post('choix');
-        $this->load->model('PointageModel');
-        // $ret = $this->PointageModel->enregistrerPointage($idEmploye,$choix);
-        
-        $getEmploye = $this->PointageModel->getEmploye($idEmploye);
-        if($getEmploye > 0 ){
-            $existed = $this->PointageModel->DejaPointage($idEmploye,$choix);
-            if($choix == 1){
-                if($existed > 0){
-                    $this->erreur("deja pointé");
-                } else if($existed == -1){
-                    $this->erreur("mauvais choix");
-                }else{
+        if ($this->session->userdata('inRH')==false){
+			$data = array (
+				'viewRH' => 'denied'
+			);
+	
+			$this -> load -> view('rh', $data);
+		}else{
+            $idEmploye = $this->input->post('idEmploye');
+            $choix = $this->input->post('choix');
+            $this->load->model('PointageModel');
+            // $ret = $this->PointageModel->enregistrerPointage($idEmploye,$choix);
+            
+            $getEmploye = $this->PointageModel->getEmploye($idEmploye);
+            if($getEmploye > 0 ){
+                $existed = $this->PointageModel->DejaPointage($idEmploye,$choix);
+                if($choix == 1){
+                    if($existed > 0){
+                        $this->erreur("deja pointé");
+                    } else if($existed == -1){
+                        $this->erreur("mauvais choix");
+                    }else{
+                        $ret = $this->PointageModel->enregistrerPointage($idEmploye,$choix);
+                        $this->erreur("pointage confirmer");
+                    }
+                }
+                else{
                     $ret = $this->PointageModel->enregistrerPointage($idEmploye,$choix);
                     $this->erreur("pointage confirmer");
                 }
+            }else{
+                $this->erreur("Cet matricule n'existe pas");
             }
-            else{
-                $ret = $this->PointageModel->enregistrerPointage($idEmploye,$choix);
-                $this->erreur("pointage confirmer");
-            }
-        }else{
-            $this->erreur("Cet matricule n'existe pas");
+            
         }
-        
     }
 }

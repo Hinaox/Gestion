@@ -58,15 +58,20 @@ class Offre extends CI_Controller
 
     public function index2()
     {
-        $this->load->helper('url');
-        $data = array();
-        $listeOffres = $this->AjouterOffre->getListeOffre();
-        // $diplomes = $this->AjouterOffre->getDiplomesOffre();
-        // $data['diplomes'] = $diplomes;
-        // var_dump($listeOffres);
-        $data['listeOffres'] = $listeOffres;
-        $data['viewRH']='ListeOffre';
-        $this->load->view('rh', $data);
+        if ($this->session->userdata('inRH')==false){
+			$data = array (
+				'viewRH' => 'denied'
+			);
+	
+			$this -> load -> view('rh', $data);
+		}else{
+            $this->load->helper('url');
+            $data = array();
+            $listeOffres = $this->AjouterOffre->getListeOffre();
+            $data['listeOffres'] = $listeOffres;
+            $data['viewRH']='ListeOffre';
+            $this->load->view('rh', $data);
+        }
     }
     public function insertOffre()
     {
