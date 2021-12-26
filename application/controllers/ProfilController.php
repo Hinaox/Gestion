@@ -8,5 +8,14 @@ class ProfilController extends CI_Controller {
 	   $data['viewRH']='profilEmploye';
 	   
 		$this->load->view('rh',$data);
+	}
+	public function notification()
+	{
+		$this->load->model('conge');
+		$notif = $this->conge->getNotifications($this->session->userdata("employe")['idEmploye']);
+
+		$data['notif']=$notif;
+		$data['viewRH']='notification';
+		$this->load->view('rh',$data);
 	}		
 }

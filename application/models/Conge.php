@@ -187,4 +187,45 @@ class Conge extends CI_Model{
         }
         return $val;
     }
+
+    function getDemandeCongeById($idDemande)
+    {
+        $sql = "SELECT * FROM historiqueConge where id='%s'";
+        $sql = sprintf($sql,$idDemande);
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val[0];
+    }
+    function sendNotification($idDemande)
+    {
+        $demand = $this->getDemandeCongeById($idDemande);
+        $query = "insert into notification values (null,'Votre demande ayant ID ".$demand['id']." pour motif ".$demand['motif']." débutant ".$demand['dateDebut']." se finissant ".$demand['dateFin']." vient d'etre acceptée',NOW(),'".$demand['idEmp']."')";
+		$this->db->query($query);
+    }
+    function getNotifications($idEmploye)
+    {
+        $sql = "SELECT * FROM notification where idEmp='%s'";
+        $sql = sprintf($sql,$idEmploye);
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val;
+    }
 }
