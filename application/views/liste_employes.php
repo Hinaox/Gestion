@@ -80,7 +80,7 @@
             $('#filtreforme').on('submit', function(event) {
                 event.preventDefault();
                 var  values = $(this).serialize();
-
+                
                 $.ajax({
                     url: "<?php echo site_url('EmployeController/filtrer'); ?>",
                     type: "post",
