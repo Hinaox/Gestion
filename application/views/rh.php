@@ -166,7 +166,7 @@ if (empty($viewRH)){
           Liste des nouveaux recruts
         </a>
       </li>
-      <?php } else { ?>
+      <?php } ?>
         <li>
           <a href="<?php echo site_url('demandeCongeCtrl/demanderDeductible'); ?>" class="nav-link link-dark">
             <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
@@ -179,7 +179,6 @@ if (empty($viewRH)){
             Justifier un congé
           </a>
         </li>
-      <?php } ?>
     </ul>
     <hr>
     <?php include 'lienProfil.php' ; ?>

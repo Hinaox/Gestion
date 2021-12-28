@@ -131,6 +131,7 @@ class DemandeCongeCtrl extends CI_Controller {
             }else{
                 $reponse = $this->conge->accepterDemande($idDemande,$dateDebut,$idDepartement,null);
             }
+        }
 
 
         if ($reponse != "Demande Acceptée"){
@@ -145,7 +146,7 @@ class DemandeCongeCtrl extends CI_Controller {
         }else{
             $demandes = $this->conge->getDemandeEnCours();
 
-            $this->conge->sendNotfication($idDemande);
+            $this->conge->sendNotification($idDemande);
             
             $data = array(
                 "view" => 'listeDemande',
@@ -157,7 +158,7 @@ class DemandeCongeCtrl extends CI_Controller {
         
         
     }
-}
+
     public function accepterNonDeductible()
     {
         if ($this->session->userdata('inRH')==false){
@@ -202,17 +203,20 @@ class DemandeCongeCtrl extends CI_Controller {
                 'viewRH' => 'denied'
             );
             $this -> load -> view('rh', $data);
-        } 
-        $this->load->model('conge');
-        $refus = $this->conge->refuserDemande($this->input->post('idDemande'));
-
-        $demandes = $this->conge->getDemandeEnCours();
-        $data = array(
-            "view" => 'listeDemande',
-            "demandes" =>$demandes,
-            "reponse" =>$refus
-        );
-        $this->load->view ('template',$data);
+        } else{
+            
+            $this->load->model('conge');
+            $this->conge->sendNotificationRefus($this->input->post('idDemande'));
+            $refus = $this->conge->refuserDemande($this->input->post('idDemande'));
+            
+            $demandes = $this->conge->getDemandeEnCours();
+            $data = array(
+                "view" => 'listeDemande',
+                "demandes" =>$demandes,
+                "reponse" =>$refus
+            );
+            $this->load->view ('template',$data);
+        }
     }
     
 }
