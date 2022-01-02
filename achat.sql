@@ -109,7 +109,7 @@ select
     nom,
     addresse,
     tel,
-    mail,
+    mail, -g
     nif,
     f.idCateg,
     label
