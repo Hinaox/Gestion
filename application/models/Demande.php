@@ -11,7 +11,8 @@ class Demande extends CI_Model{
 	{
         $sql = "SELECT id,dem.idDepartement,label,nom,quantite,unite,etat FROM demande dem 
         join departement dep on dep.idDepartement = dem.idDepartement 
-        WHERE id not in (select idDemande from detailDemandeGrouper) order by etat";
+        WHERE id not in (select idDemande from detailDemandeGrouper)
+         and etat != 'refuser' order by etat";
         //var_dump($sql);
         $query = $this->db->query($sql);
         $val = array();
@@ -85,7 +86,7 @@ class Demande extends CI_Model{
         $this->DemandeGrouper->insert($label,$somme,$liste);
 
         // for($i=0$i<count($dem);)
-        //var_dump($somme);
+        //var_dump(count($liste));
     }
 
     public function findByIdDepartement($idDepartemet)

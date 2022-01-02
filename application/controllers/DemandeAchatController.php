@@ -22,8 +22,9 @@ class DemandeAchatController extends CI_Controller {
     public function grouper(){
        // var_dump($_GET);
         $grouper = $this->input->get('aGrouper');
-        $this->load->model('demande');
-        $this->demande->grouper($grouper);
+        $this->load->model('Demande');
+        $this->Demande->grouper($grouper);
+        $this->getDemande();
     }
 
     public function insererDemande(){

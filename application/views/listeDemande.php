@@ -14,14 +14,14 @@
     <p>
         <h1>liste des demandes d'achat non grouper/valider</h1>
     </p>
-    <form action="<?php /*echo site_url('DemandeAchatController/grouper');*/ ?>" method="get">
+    <form action="<?php echo site_url('DemandeAchatController/grouper'); ?>" method="get">
         <table border='1' class="table table-striped">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">materiel</td>
                     <th scope="col">quantite</td>
                     <th scope="col">unite</td>
-                    <th scope="col">nom departement</td>
+                    <th scope="col">departement</td>
                     <th scope="col">etat</td>
                 </tr>
             <?php for($i=0;$i<count($demande);$i++) { ?>
@@ -46,6 +46,7 @@
         </table>
         <input type="submit" class="btn btn-primary" value="grouper/valider">
     </form>
+    <a href="<?php echo site_url('DemandeAchatController/listeDemendeGrouper') ?>" >liste des demande deja grouper</a>
     <script>
         $(function() {
             $('a[data-confirm]').click(function(ev) {
