@@ -27,13 +27,16 @@ class DemandeAchatController extends CI_Controller {
     }
 
     public function insererDemande(){
-        $this->load->model('demande');
+        $this->load->model('Demande');
         $label = $this->input->get('labelCommande');
         $quantite = $this->input->get('quantite');
         $unite = $this->input->get('unite');
         $idDepartement = $this->input->get('idDepartement');
-        var_dump($_GET);
-        $this->demande->insert($label,$quantite,$unite,$idDepartement);
+        
+        $this->Demande->insert($label,$quantite,$unite,$idDepartement);
+        $data['listeDemande']=$this->Demande->findByIdDepartement($idDepartement);
+        $this->load->view('listeDemandeDept',$data);
+
     }
 
     public function listeDemendeGrouper(){
@@ -46,12 +49,9 @@ class DemandeAchatController extends CI_Controller {
         $this->load->model('DemandeGrouper');
         $id = $this->input->get('id');
         $data['demandeGrouper'] = $this->DemandeGrouper->findOne($id);
-        // var_dump($data);
         $this->load->model('Fournisseur');
         $data['listeFournisseur'] = $this->Fournisseur->find();
-        // var_dump($data);
         $this->load->view('ficheDemandeGrouper',$data);
-        //var_dump($li);
     }
 
     public function insertProformat(){
