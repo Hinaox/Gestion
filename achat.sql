@@ -116,3 +116,10 @@ select
 from fournisseur f
     join categorieFournisseur cf on f.idCateg = cf.idCateg
 
+create table livraison
+(
+	id int not null auto_increment primary key,
+	dateLivraison dateTime,
+	idBonDeCommande int,
+	foreign key(idBonDeCommande) references bonDeCommande(idBonDeCommande)
+);
