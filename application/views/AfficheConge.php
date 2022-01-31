@@ -1,3 +1,4 @@
+<div class="container-fluid ">
 <?php for($i=0; $i<3; $i++){ echo "</br>"; } ?>
 
 <?php if ($congeEmpl != null){ ?>
@@ -58,3 +59,4 @@
 <?php } else{ ?>
     Cet employe n'a pas encore demandé de congé
 <?php } ?>
+</div>
