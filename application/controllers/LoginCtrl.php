@@ -32,9 +32,9 @@ class LoginCtrl extends CI_Controller {
             }       
         }else{
             $data=array(
-                "erreur" => "Mail ou mot de passe incorrect"
+                "erreur" => "Mail ou mot de passe incorrect",
+                "view" => 'login'
             );
-            $data['view']= 'login';
             $this->load->view('index',$data);
         }
     }
