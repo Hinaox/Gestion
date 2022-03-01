@@ -53,7 +53,7 @@ create table proformat(
 
 
 create table demandeGrouper(
-    idDemandeGrouper int auto_increment primary key
+    idDemandeGrouper int auto_increment primary key,
     label varchar(150),
     quantite float
 );
