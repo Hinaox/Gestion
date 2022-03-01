@@ -4,7 +4,7 @@
             <div class="row d-flex justify-content-center align-items-center h-100">
             <center><h1>Login</h1></center>
             <div class="col-md-9 col-lg-6 col-xl-5">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid"
+                <img src="<?php echo base_url('assets/photos/draw2.png'); ?>" class="img-fluid"
                 alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
