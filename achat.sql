@@ -123,3 +123,16 @@ create table livraison
 	idBonDeCommande int,
 	foreign key(idBonDeCommande) references bonDeCommande(idBonDeCommande)
 );
+
+create table produitDemander (
+    id int not null auto_increment primary key,
+    label varchar(100),
+    validation int
+);
+
+delete from proformat;
+delete from detailDemandeGrouper;
+
+insert into produitDemander (null,'stylo',1);
+insert into produitDemander (null,'papier',1);
+insert into produitDemander (null,'cache bouche',1);

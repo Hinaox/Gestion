@@ -9,9 +9,12 @@ class DemandeAchatController extends CI_Controller {
 	}
     public function index(){
         $this->load->model('departement');
+        $this->load->model('ProduitDemander');
+        $data['ProduitDemander'] = $this->ProduitDemander->getProduitValider();
         $data['departement'] = $this->departement->getDepartement();
+        $data['view'] = 'formulaireDemandeAchat.php';
         //var_dump($data);
-        $this->load->view('formulaireDemandeAchat',$data);
+        $this->load->view('template',$data);
     }
     public function getDemande(){
         $this->load->model('demande');
@@ -28,15 +31,31 @@ class DemandeAchatController extends CI_Controller {
     }
 
     public function insererDemande(){
+
+        $new = $this->input->get('new');
+        //var_dump($new);
+        $label;
+        if($new!=""){
+            $this->load->model('ProduitDemander');
+            $label = $this->ProduitDemander->insertProduit($new)[0]['ma'];
+            //var_dump($label);
+        }
+        else{
+            $label = $this->input->get('labelCommande');
+        }
+        
         $this->load->model('Demande');
-        $label = $this->input->get('labelCommande');
+        
         $quantite = $this->input->get('quantite');
         $unite = $this->input->get('unite');
         $idDepartement = $this->input->get('idDepartement');
         
         $this->Demande->insert($label,$quantite,$unite,$idDepartement);
+
         $data['listeDemande']=$this->Demande->findByIdDepartement($idDepartement);
+
         $this->load->view('listeDemandeDept',$data);
+        //$this.index();
 
     }
 
