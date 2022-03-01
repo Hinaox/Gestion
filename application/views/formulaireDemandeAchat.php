@@ -1,4 +1,3 @@
-<?php var_dump(site_url('DemandeAchatController/insererDemande')) ?>
 <div class="container">
   <div class="row">
     <div class="col">

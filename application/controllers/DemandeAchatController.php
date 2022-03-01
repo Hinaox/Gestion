@@ -54,7 +54,10 @@ class DemandeAchatController extends CI_Controller {
 
         $data['listeDemande']=$this->Demande->findByIdDepartement($idDepartement);
 
-        $this->load->view('listeDemandeDept',$data);
+        //$this->load->view('listeDemandeDept',$data);
+        $data['view'] = 'listeDemandeDept.php';
+        //var_dump($data);
+        $this->load->view('template',$data);
         //$this.index();
 
     }
