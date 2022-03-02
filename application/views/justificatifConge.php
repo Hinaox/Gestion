@@ -8,7 +8,7 @@
         <h3>non deductible sur congé</h3>
       </div>
 
-      <form action="<?php echo site_url('DemandeCongeCtrl/accepterNonDeductible'); ?>" method="post">
+      <form action="<?php echo site_url('DemandeCongeCtrl/envoyerDemandeNonDeductible'); ?>" method="post">
         <div class="row g-3">
           <div class="col-md-7 col-lg-8">
           <p class="lead">
