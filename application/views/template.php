@@ -116,7 +116,7 @@ if (empty($view)){
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="<?php echo site_url('demandeCongeCtrl/'); ?>" class="nav-link active" aria-current="page">
+        <a href="<?php echo site_url('demandeCongeCtrl/'); ?>" class="nav-link link-dark" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Liste des demandes
         </a>

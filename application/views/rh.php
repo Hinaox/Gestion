@@ -118,7 +118,7 @@ if (empty($viewRH)){
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li>
-        <a href="<?php echo site_url("Organigram/index");?>" class="nav-link active">
+        <a href="<?php echo site_url("Organigram/index");?>" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Organigramme
         </a>
