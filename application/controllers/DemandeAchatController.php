@@ -29,16 +29,16 @@ class DemandeAchatController extends CI_Controller {
         $this->Demande->grouper($grouper);
         $this->getDemande();
     }
-
+    
     public function insererDemande(){
 
         $new = $this->input->get('new');
-        //var_dump($new);
+        var_dump($new);
         $label;
         if($new!=""){
             $this->load->model('ProduitDemander');
-            $label = $this->ProduitDemander->insertProduit($new)[0]['ma'];
-            //var_dump($label);
+            // $label = $this->ProduitDemander->insertProduit($new)[0]['ma'];
+            // var_dump($label);
         }
         else{
             $label = $this->input->get('labelCommande');
@@ -61,7 +61,7 @@ class DemandeAchatController extends CI_Controller {
         //$this.index();
 
     }
-
+    
     public function listeDemendeGrouper(){
         $this->load->model('DemandeGrouper');
         $data['demandeGrouper'] = $this->DemandeGrouper->findDemandeGrouper();
