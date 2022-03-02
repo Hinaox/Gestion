@@ -114,14 +114,14 @@ create table poste(
     nom varchar(50),
     descri text,
     constraint fk_poste_idDepartement foreign key (idDepartement) references departement(idDepartement)on delete cascade on update cascade
-);
-INSERT INTO `poste` (`idPoste`,`idDepartement`,`nom`,`descri`)
-VALUES
-  (1,1,"DG","rutrum lorem ac risus. Morbi metus. Vivamus euismod urna. Nullam"),
-  (2,2,"DRH","Aenean gravida nunc sed pede. Cum sociis natoque penatibus et"),
-  (3,3,"Agent de conditionnement","mattis semper, dui lectus rutrum urna, nec luctus felis purus"),
-  (4,4,"Directeur de la relation client","sem, consequat nec, mollis vitae, posuere at, velit. Cras lorem"),
-  (5,5,"Comptable","magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna.");
+  );
+  INSERT INTO `poste` (`idPoste`,`idDepartement`,`nom`,`descri`)
+  VALUES
+    (1,1,"DG","rutrum lorem ac risus. Morbi metus. Vivamus euismod urna. Nullam"),
+    (2,2,"DRH","Aenean gravida nunc sed pede. Cum sociis natoque penatibus et"),
+    (3,3,"Agent de conditionnement","mattis semper, dui lectus rutrum urna, nec luctus felis purus"),
+    (4,4,"Directeur de la relation client","sem, consequat nec, mollis vitae, posuere at, velit. Cras lorem"),
+    (5,5,"Comptable","magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna.");
 
 ---------------------
 --------------------- MIDITRA CV TSIKA ETO

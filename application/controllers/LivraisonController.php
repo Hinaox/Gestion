@@ -5,6 +5,7 @@ class LivraisonController extends CI_Controller {
     public function index(){
         $this->load->model('livraison');
         $data['bdc'] = $this->livraison->getAllBonDeCommande();
+        $data['bdcNonLivre'] = $this->livraison->getAllBonDeCommandeNonLivre();
         //var_dump($data);
         $this->load->view('listeBonDeCommande',$data);
     }

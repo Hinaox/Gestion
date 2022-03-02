@@ -8,7 +8,7 @@ create table demande (
     foreign key (idDepartement) references departement(idDepartement)
 );
 
-update demande set etat = 'refuser' where id = '15';
+-- update demande set etat = 'refuser' where id = '15';
 
 create table categorieFournisseur (
     idCateg int auto_increment primary key,
@@ -53,12 +53,11 @@ create table proformat(
 
 
 create table demandeGrouper(
-    idDemandeGrouper int auto_increment primary key
+    idDemandeGrouper int auto_increment primary key,
     label varchar(150),
     quantite float
 );
 
-insert into demandeGrouper values (null,'',)
 
 create table detailDemandeGrouper(
     idDemandeGrouper int,
