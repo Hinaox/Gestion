@@ -133,6 +133,16 @@ create table produitDemander (
 delete from proformat;
 delete from detailDemandeGrouper;
 
-insert into produitDemander (null,'stylo',1);
-insert into produitDemander (null,'papier',1);
-insert into produitDemander (null,'cache bouche',1);
+insert into produitDemander values (null,'stylo',1);
+insert into produitDemander values (null,'papier',1);
+insert into produitDemander values (null,'cache bouche',1);
+
+alter table demande add column imobilisation int;
+
+ALTER TABLE demande CHANGE imobilisation immobilisation int;
+
+select d.id,prd.label as label,quantite,unite,etat,immobilisation,validation,idDepartement,d.id as idProduitDemander from 
+demande d join produitDemander prd on prd.id=d.label
+
+create view infoDemande as (select d.id,prd.label as label,quantite,unite,etat,immobilisation,validation,idDepartement,d.id as idProduitDemander from 
+demande d join produitDemander prd on prd.id=d.label);

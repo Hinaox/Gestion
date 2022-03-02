@@ -45,12 +45,12 @@ class DemandeAchatController extends CI_Controller {
         }
         
         $this->load->model('Demande');
-        
+        $immobilisation = $this->input->get('immobilisation');
         $quantite = $this->input->get('quantite');
         $unite = $this->input->get('unite');
         $idDepartement = $this->input->get('idDepartement');
         
-        $this->Demande->insert($label,$quantite,$unite,$idDepartement);
+        $this->Demande->insert($label,$quantite,$unite,$idDepartement,$immobilisation);
 
         $data['listeDemande']=$this->Demande->findByIdDepartement($idDepartement);
 

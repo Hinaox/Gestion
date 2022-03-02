@@ -30,6 +30,23 @@ class ProduitDemander  extends CI_Model{
         $this->validation=$descri;
     }
 
+    public function getProduitNonValider()
+	{
+        $sql = "SELECT * FROM produitDemander where validation='0'";
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val;
+	}
+
     public function getProduitValider()
 	{
         $sql = "SELECT * FROM produitDemander where validation='1'";
@@ -68,5 +85,8 @@ class ProduitDemander  extends CI_Model{
         return $this->getMax();
     }
 
-    
+    public function valider($id){
+        $query = "update produitDemander set validation='1' where id='".$id."'";
+        $this->db->query($query);
+    }
 }
