@@ -159,14 +159,8 @@ class DemandeCongeCtrl extends CI_Controller {
         
     }
 
-    public function accepterNonDeductible()
+    public function envoyerDemandeNonDeductible()
     {
-        if ($this->session->userdata('inRH')==false){
-            $data = array (
-                'viewRH' => 'denied'
-            );
-            $this -> load -> view('rh', $data);
-        } 
         $emp = $this->session->userdata('employe');
         $idEmp = $emp['idEmploye'];
         $dateDebut = $this->input->post('dateDebut');
@@ -175,25 +169,26 @@ class DemandeCongeCtrl extends CI_Controller {
         $this->load->model('conge');
         
         $controleDate = $this->conge->controleDate($dateDebut,$dateFin);
+
         if ($controleDate!="Date Conge Valide"){
             $motifs = $this->conge->getMotifsNonDeductible();
             $data = array(
-                "view" => 'justificatifConge',
+                "viewRH" => 'justificatifConge',
                 "motif" => $motifs,
                 "erreur" => $controleDate
             );
-            $this->load->view('template',$data);
+            $this->load->view('rh',$data);
         }else{
 
             $this->conge->accepterND($idEmp,$idMotif,$dateDebut,$dateFin);
 
             $motifs = $this->conge->getMotifsNonDeductible();
             $data = array(
-                "view" => 'justificatifConge',
+                "viewRH" => 'justificatifConge',
                 "motif" => $motifs,
                 "send" => "Demande prise en compte"
             );
-            $this->load->view('template',$data);
+            $this->load->view('rh',$data);
         }
     }
     public function refuser()
