@@ -1,5 +1,5 @@
 <?php
- var_dump($bonCommande);
+ //var_dump($bonCommande);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,15 +57,15 @@
                 <?php 
                 $somme = 0;
                 for($i=0; $i<count($bonCommande); $i++){ 
-                    $somme+=$bonCommande[$i]['prixProformat'];
+                    $somme+=$bonCommande[$i]['prixProformat']*$bonCommande[$i]['quantite'];
                     ?>
                     <tr>
                         <th scope="row"><?php echo $i+1; ?></th>
                         <td><?php echo $bonCommande[$i]['label']; ?></td>
                         <td><?php echo $bonCommande[$i]['quantite']; ?></td>
                         <td>piece(s)</td>
-                        <td>-</td>
-                        <td><?php echo $bonCommande[$i]['prixProformat']; ?></td>
+                        <td><?php echo $bonCommande[$i]['prixProformat'] ?></td>
+                        <td><?php echo $bonCommande[$i]['prixProformat']*$bonCommande[$i]['quantite']; ?></td>
                     </tr>
                 <?php } ?>
                 <tr>

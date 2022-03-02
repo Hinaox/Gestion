@@ -45,15 +45,13 @@ create table proformat(
     quantité float,
     prix float,
     idFournisseur int,
-    idDemandeGrouper int,
-    foreign key (idDemandeGrouper) references demandeGrouper(idDemandeGrouper),
     foreign key (idFournisseur) references Fournisseur(idFournisseur) 
 );
 
 
 
 create table demandeGrouper(
-    idDemandeGrouper int auto_increment primary key,
+    idDemandeGrouper int auto_increment primary key
     label varchar(150),
     quantite float
 );
@@ -146,3 +144,31 @@ demande d join produitDemander prd on prd.id=d.label
 
 create view infoDemande as (select d.id,prd.label as label,quantite,unite,etat,immobilisation,validation,idDepartement,d.id as idProduitDemander from 
 demande d join produitDemander prd on prd.id=d.label);
+
+select id,label,sum(quantite) as quantite,unite,etat,immobilisation,idProduitDemander 
+from infoDemande 
+where validation='1' and etat='envoyer' group by label,etat; 
+
+
+create or replace view demandeACommander as (select id,label,sum(quantite) as quantite,unite,etat,immobilisation,idProduitDemander 
+from infoDemande 
+where validation='1' and etat='envoye' group by label,etat);
+
+create table immobilisation (
+    id int not null auto_increment primary key,
+    label varchar(150),
+    dateAquisition date,
+    ammortissement float,
+    valeur float
+);
+
+insert into immobilisation values (null,'nissan l200','2020-01-01',5,5000000);
+insert into immobilisation values (null,'imprimante','2020-01-01',5,2000000);
+
+
+
+select *,valeur-valeur*(DATEDIFF( now(), dateAquisition )/365.25)/ammortissement as valeurActuelle from immobilisation i
+
+
+create view valeurImmobilisation as (select *,valeur-valeur*(DATEDIFF( now(), dateAquisition )/365.25)/ammortissement as valeurActuelle,DATEDIFF( now(), dateAquisition )/365.25 as dureExpirer from immobilisation i);
+select floor(DATEDIFF( now(), dateAquisition )/365.25) from immobilisation

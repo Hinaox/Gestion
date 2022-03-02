@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="<?php echo base_url() ?>assets/css/bootstrap.css" rel="stylesheet">
-    </link>
-    <title>Document</title>
-</head>
-<body>
+
     
     <div class="row justify-content-md-center">
         <div class="col col-lg-2">
@@ -31,8 +21,8 @@
                         <td scope="row"><?php echo $i+1; ?></td>
                         <td><?php echo $demandeGrouper[$i]['label'] ?></td>
                         <td><?php echo $demandeGrouper[$i]['quantite'] ?></td>
-                        <td><a class="btn btn-info"  href="<?php echo site_url('DemandeAchatController/ficheDemandeGrouer'); ?>?id=<?php echo $demandeGrouper[$i]['idDemandeGrouper'] ?>">ajout proformats</a></td>
-                        <td><a class="btn btn-info"  href="<?php echo site_url('DemandeAchatController/listeProformat'); ?>?id=<?php echo $demandeGrouper[$i]['idDemandeGrouper'] ?>">lister proformats</a></td>
+                        <td><a class="btn btn-info"  href="<?php echo site_url('ControllerAchat/addProformat'); ?>?id=<?php echo $demandeGrouper[$i]['id'] ?>">ajout proformats</a></td>
+                        <td><a class="btn btn-info"  href="<?php echo site_url('ControllerAchat/listeProformat?label='.$demandeGrouper[$i]['label'].'&quantite='.$demandeGrouper[$i]['quantite']) ?>">lister proformats</a></td>
                     </tr>
                     </div>
                 <?php } ?>
@@ -44,5 +34,3 @@
            
         </div>
     </div>
-</body>
-</html>

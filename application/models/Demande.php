@@ -105,6 +105,40 @@ class Demande extends CI_Model{
         }
         return $val;
 	}
+    
+    public function findDemande()
+	{
+        $sql = "SELECT * FROM demandeACommander";
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val;
+	}
 
+    
+    public function findGrouperById($id)
+	{
+        $sql = "SELECT * FROM demandeACommander where id ='".$id."'";
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val;
+	}
     
 }

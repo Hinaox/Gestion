@@ -2,8 +2,8 @@
 
 class Proformat extends CI_Model{
 
-    public function insertProformat($dateValiditer,$label,$quantite,$prix,$idDemandeGrouper,$idFournisseur){
-        $query = "insert into proformat values(null,'".$dateValiditer."','".$label."',".$quantite.",".$prix.",".$idFournisseur.",".$idDemandeGrouper.")";
+    public function insertProformat($dateValiditer,$label,$quantite,$prix,$idFournisseur){
+        $query = "insert into proformat values(null,'".$dateValiditer."','".$label."',".$quantite.",".$prix.",".$idFournisseur.")";
         $this->db->query($query);
     }
     public function findProformat($idProformat){
@@ -12,14 +12,10 @@ class Proformat extends CI_Model{
             pro.label as labelProformat,
             pro.quantité as quantitePro,
             pro.prix as prix,
-            fou.*,
-            dem.quantite as quantite,
-            dem.label as  label 
+            fou.*
             from proformat pro,
-                fournisseur fou, 
-                demandeGrouper dem 
+                fournisseur fou
             where pro.idFournisseur=fou.idFournisseur 
-                and dem.idDemandeGrouper = pro.idDemandeGrouper 
                 and pro.id =".$idProformat;
         $query = $this->db->query($sql);
         $val = array();
@@ -36,6 +32,23 @@ class Proformat extends CI_Model{
     }
     public function allProformat($idDemandeGroupe){
         $sql = "select * from proformat where idDemandeGrouper =".$idDemandeGroupe;
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val;
+    }
+
+    public function findProformatBylabelQuantite($label,$quantite){
+        $sql = "select * from proformat where label ='".$label."' and quantité=".$quantite;
+        var_dump($sql);
         $query = $this->db->query($sql);
         $val = array();
         $i = 0;
