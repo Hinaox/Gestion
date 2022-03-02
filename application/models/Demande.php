@@ -2,8 +2,8 @@
 
 class Demande extends CI_Model{
 
-    public function insert($label,$quatite,$unite,$idDepartement){
-        $query = "insert into demande values (null,'".$label."',".$quatite.",'".$unite."','".$idDepartement."','envoye')";
+    public function insert($label,$quatite,$unite,$idDepartement,$immobilisation){
+        $query = "insert into demande values (null,'".$label."',".$quatite.",'".$unite."','".$idDepartement."','envoye','".$immobilisation."')";
 		$this->db->query($query);
     }
 
@@ -91,7 +91,24 @@ class Demande extends CI_Model{
 
     public function findByIdDepartement($idDepartemet)
 	{
-        $sql = "SELECT * from demande where idDepartement = '".$idDepartemet."' order by id DESC";
+        $sql = "SELECT * from infoDemande where idDepartement = '".$idDepartemet."' order by id DESC";
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val;
+	}
+    
+    public function findDemande()
+	{
+        $sql = "SELECT * FROM demandeACommander";
         $query = $this->db->query($sql);
         $val = array();
         $i = 0;
@@ -106,5 +123,22 @@ class Demande extends CI_Model{
         return $val;
 	}
 
+    
+    public function findGrouperById($id)
+	{
+        $sql = "SELECT * FROM demandeACommander where id ='".$id."'";
+        $query = $this->db->query($sql);
+        $val = array();
+        $i = 0;
+        foreach($query -> result_array() as $row)
+        {
+            foreach($row as $key => $value)
+            {
+                $val[$i][$key] = $value;  
+            }
+            $i++;
+        }
+        return $val;
+	}
     
 }

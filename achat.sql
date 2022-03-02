@@ -45,8 +45,6 @@ create table proformat(
     quantité float,
     prix float,
     idFournisseur int,
-    idDemandeGrouper int,
-    foreign key (idDemandeGrouper) references demandeGrouper(idDemandeGrouper),
     foreign key (idFournisseur) references Fournisseur(idFournisseur) 
 );
 
@@ -122,3 +120,54 @@ create table livraison
 	idBonDeCommande int,
 	foreign key(idBonDeCommande) references bonDeCommande(idBonDeCommande)
 );
+
+create table produitDemander (
+    id int not null auto_increment primary key,
+    label varchar(100),
+    validation int
+);
+
+delete from proformat;
+delete from detailDemandeGrouper;
+
+insert into produitDemander values (null,'stylo',1);
+insert into produitDemander values (null,'papier',1);
+insert into produitDemander values (null,'cache bouche',1);
+
+alter table demande add column imobilisation int;
+
+ALTER TABLE demande CHANGE imobilisation immobilisation int;
+
+select d.id,prd.label as label,quantite,unite,etat,immobilisation,validation,idDepartement,d.id as idProduitDemander from 
+demande d join produitDemander prd on prd.id=d.label
+
+create view infoDemande as (select d.id,prd.label as label,quantite,unite,etat,immobilisation,validation,idDepartement,d.id as idProduitDemander from 
+demande d join produitDemander prd on prd.id=d.label);
+
+select id,label,sum(quantite) as quantite,unite,etat,immobilisation,idProduitDemander 
+from infoDemande 
+where validation='1' and etat='envoyer' group by label,etat; 
+
+
+create or replace view demandeACommander as (select id,label,sum(quantite) as quantite,unite,etat,immobilisation,idProduitDemander 
+from infoDemande 
+where validation='1' and etat='envoye' group by label,etat);
+
+create table immobilisation (
+    id int not null auto_increment primary key,
+    label varchar(150),
+    dateAquisition date,
+    ammortissement float,
+    valeur float
+);
+
+insert into immobilisation values (null,'nissan l200','2020-01-01',5,5000000);
+insert into immobilisation values (null,'imprimante','2020-01-01',5,2000000);
+
+
+
+select *,valeur-valeur*(DATEDIFF( now(), dateAquisition )/365.25)/ammortissement as valeurActuelle from immobilisation i
+
+
+create view valeurImmobilisation as (select *,valeur-valeur*(DATEDIFF( now(), dateAquisition )/365.25)/ammortissement as valeurActuelle,DATEDIFF( now(), dateAquisition )/365.25 as dureExpirer from immobilisation i);
+select floor(DATEDIFF( now(), dateAquisition )/365.25) from immobilisation
